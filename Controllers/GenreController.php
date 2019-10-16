@@ -1,0 +1,60 @@
+<?php
+    namespace Controllers;
+
+    use DAO\GenreDAO as GenreDAO;
+    use DAO\ApiDAO as ApiDAO;
+    use Models\Genre as Genre;
+    
+
+    class GenreController
+    {
+        private $genreDAO;
+        private $apiDAO;
+
+        public function __construct()
+        {
+            $this->genreDAO = new GenreDAO();
+            $this->apiDAO = new ApiDAO();
+
+        }
+
+        public function ShowDefaultView()
+        {
+            $genreList = $this->genreDAO->Get("name");
+
+            require_once(VIEWS_PATH."genre-list.php");
+        }
+
+        public function Get($ordered)
+        {
+            $genreList = $this->genreDAO->Get($ordered);
+            require_once(VIEWS_PATH."genre-list.php");
+        }
+
+        public function Truncate()
+        {
+            $this->genreDAO->Truncate();
+            $this->ShowListView();
+        }
+
+        public function Update()
+        {
+            $array = $this->apiDAO->UpdateGenres();
+         
+            //DEBERIA VERIFICAR PREVIO A VACIAR LA TABLA QUE ESTE TRAYENDO AL MENOS UN GENERO NUEVO DE LA API!!
+
+            $this->genreDAO->Truncate(); //AGREGO ESTA FUNCION PARA VACIAR LA TABLA ANTES DE ACTUALIZAR!! (en prueba)
+
+            foreach($array['genres'] as $row)
+            {
+                $genre = new Genre();
+
+                $genre->setId($row["id"]);
+                $genre->setName($row["name"]);
+
+                $this->genreDAO->Add($genre);
+            }
+            $this->ShowDefaultView();
+        }
+    }
+?>
