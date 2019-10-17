@@ -21,7 +21,7 @@
   </div>
 </div>
 
-<div class="wrapper row3">
+<div class="wrapper row3" style="background-color: #EAEDED;">
   <main class="hoc container clear"> 
     <!-- main body -->
     <div class="content"> 
@@ -47,17 +47,17 @@
                     <td><?php echo "$" . $cinema->getPrice(); ?></td>
                     <td>
                       <form action="<?php echo FRONT_ROOT ?>Cinema/Get" method="get">
-                        <button type="submit" class="btn" name="id" value="<?php echo $cinema->getId();?>">Ver</button>
-                      </form>
-                    </td>
-                    <td>
-                      <form action="<?php echo FRONT_ROOT ?>Cinema/Remove" method="post">
-                        <button type="submit" class="btn" name="id" value="<?php echo $cinema->getId();?>">Remover</button>
+                        <button type="submit" class="btn" name="id" style="background-color:GREEN;color:white;" value="<?php echo $cinema->getId();?>">Ver</button>
                       </form>
                     </td>
                     <td>
                       <form action="<?php echo FRONT_ROOT ?>Cinema/Edit" method="post">
-                      <button type="submit" class="btn" name="id" value="<?php echo $cinema->getId();?>">Editar</button>
+                      <button type="submit" class="btn" name="id" style="background-color:#DC8E47;color:white;" value="<?php echo $cinema->getId();?>">Editar</button>
+                      </form>
+                    </td>
+                    <td>
+                      <form action="<?php echo FRONT_ROOT ?>Cinema/Remove" method="post">
+                        <button type="submit" class="btn" name="id" style="background-color:RED;color:white;" value="<?php echo $cinema->getId();?>">Remover</button>
                       </form>
                     </td>
                   </tr>

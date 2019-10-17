@@ -20,7 +20,7 @@
   </div>
 </div>
 
-<div class="wrapper row3">
+<div class="wrapper row3" style="background-color: #EAEDED;">
   <main class="hoc container clear"> 
     <!-- main body -->
     <div class="content"> 
@@ -44,17 +44,17 @@
                     <td><?php foreach($cinemaList as $cinema){ if($cinema->getId() == $room->getIdCinema())echo $cinema->getName();} ?></td>
                     <td>
                       <form action="<?php echo FRONT_ROOT ?>Room/Get" method="get">
-                        <button type="submit" class="btn" name="id" value="<?php echo $room->getId();?>">Ver</button>
-                      </form>
-                    </td>
-                    <td>
-                      <form action="<?php echo FRONT_ROOT ?>Room/Remove" method="post">
-                        <button type="submit" class="btn" name="id" value="<?php echo $room->getId();?>">Remover</button>
+                        <button type="submit" class="btn" name="id" style="background-color:GREEN;color:white;" value="<?php echo $room->getId();?>">Ver</button>
                       </form>
                     </td>
                     <td>
                       <form action="<?php echo FRONT_ROOT ?>Room/Edit" method="post">
-                      <button type="submit" class="btn" name="id" value="<?php echo $room->getId();?>">Editar</button>
+                      <button type="submit" class="btn" name="id" style="background-color:#DC8E47;color:white;" value="<?php echo $room->getId();?>">Editar</button>
+                      </form>
+                    </td>
+                    <td>
+                      <form action="<?php echo FRONT_ROOT ?>Room/Remove" method="post">
+                        <button type="submit" class="btn" style="background-color:RED;color:white;" name="id" value="<?php echo $room->getId();?>">Remover</button>
                       </form>
                     </td>
                   </tr>

@@ -8,7 +8,7 @@
       </div>
       <nav id="mainav" class="fl_right">
         <ul class="clear">
-            <li class="active"><a href="<?php echo FRONT_ROOT ?>">Menu Principal</a></li>
+            <li class="active"><a href="<?php echo FRONT_ROOT ?>User/ShowLoginView">INGRESAR</a></li>
             <li><a class="drop" >Actualizar/Agregar</a>
               <ul>
                 <li><a href="<?php echo FRONT_ROOT ?>Movie/Update">Peliculas</a></li>

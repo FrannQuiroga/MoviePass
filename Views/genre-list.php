@@ -19,7 +19,7 @@
   </div>
 </div>
 
-<div >
+<div style="background-color: #EAEDED;padding: 2rem !important;">
   <main class="hoc container clear"> 
     <!-- main body -->
     <div class="content"> 

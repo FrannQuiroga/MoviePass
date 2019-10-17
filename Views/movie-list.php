@@ -22,9 +22,9 @@ include_once('nav-bar.php');
     </div>
   </div>
 </div>
-<br>
 
-<div class="row" >
+
+<div class="row" style="background-color: #EAEDED;padding: 2rem !important;" >
   <div class="col-md-6 hoc" style="align-items:center;">
     <?php foreach($movieList as $movie){?>
       <div class="card flex-md-row mb-4 shadow-sm h-md-250" >

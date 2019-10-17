@@ -12,7 +12,7 @@
   </div>
 </footer>-->
 
-<div class="right   " style="background-image:url('<?php echo IMG_PATH; ?>Logo.jpg');" >
+<div class="right"  >
   <div id="copyright" class="hoc"> 
     <p >Copyright &copy; <?php echo date('Y'); ?> - All Rights Reserved - UTN Mar del Plata</p>
   </div>
