@@ -48,13 +48,13 @@
 
         }
 
-        public function Get($ordered)
+        public function Get($orderedBy)
         {
             try
             {
                 $genreList = array();
 
-                $query = "SELECT * FROM .$this->tableName ORDER BY " .$ordered;
+                $query = "SELECT * FROM .$this->tableName ORDER BY " .$orderedBy;
 
                 $this->connection = Connection::GetInstance();
 

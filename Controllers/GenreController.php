@@ -18,16 +18,15 @@
 
         }
 
-        public function ShowDefaultView()
+        public function ShowSuccessfulView()
         {
-            $genreList = $this->genreDAO->Get("name");
-
-            require_once(VIEWS_PATH."genre-list.php");
+            require_once(VIEWS_PATH."genre-successful.php");
         }
 
-        public function Get($ordered)
+        public function ShowListView($orderedBy = "name asc") //DEFAULT PARA UNIFICAR
         {
-            $genreList = $this->genreDAO->Get($ordered);
+            $genreList = $this->genreDAO->Get($orderedBy);
+
             require_once(VIEWS_PATH."genre-list.php");
         }
 
@@ -40,21 +39,26 @@
         public function Update()
         {
             $array = $this->apiDAO->UpdateGenres();
-         
-            //DEBERIA VERIFICAR PREVIO A VACIAR LA TABLA QUE ESTE TRAYENDO AL MENOS UN GENERO NUEVO DE LA API!!
-
-            $this->genreDAO->Truncate(); //AGREGO ESTA FUNCION PARA VACIAR LA TABLA ANTES DE ACTUALIZAR!! (en prueba)
-
-            foreach($array['genres'] as $row)
+         //DEBERIA VERIFICAR PREVIO A VACIAR LA TABLA QUE ESTE TRAYENDO AL MENOS UN GENERO NUEVO DE LA API!!
+            if($array != null)
             {
-                $genre = new Genre();
+                $this->genreDAO->Truncate(); //AGREGO ESTA FUNCION PARA VACIAR LA TABLA ANTES DE ACTUALIZAR!! (en prueba)
 
-                $genre->setId($row["id"]);
-                $genre->setName($row["name"]);
-
-                $this->genreDAO->Add($genre);
+                foreach($array['genres'] as $row)
+                {
+                    $genre = new Genre();
+    
+                    $genre->setId($row["id"]);
+                    $genre->setName($row["name"]);
+    
+                    $this->genreDAO->Add($genre);
+                }
+                $this->ShowSuccessfulView();
             }
-            $this->ShowDefaultView();
+            else
+            {
+                //MOSTRAR MENSAJE DE ERROR EN LA ACTUALIZACION DE BD!!
+            }
         }
     }
 ?>

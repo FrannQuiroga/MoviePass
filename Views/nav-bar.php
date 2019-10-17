@@ -14,13 +14,15 @@
                 <li><a href="<?php echo FRONT_ROOT ?>Movie/Update">Peliculas</a></li>
                 <li><a href="<?php echo FRONT_ROOT ?>Genre/Update">Generos</a></li>
                 <li><a href="<?php echo FRONT_ROOT ?>Cinema/ShowAddView">Cines</a></li>
+                <li><a href="<?php echo FRONT_ROOT ?>Room/ShowAddView">Salas</a></li>
               </ul>
             </li>
             <li><a class="drop" >Listados</a>
               <ul>
-                <li><a href="<?php echo FRONT_ROOT ?>Movie/ShowDefaultView">Peliculas</a></li>
-                <li><a href="<?php echo FRONT_ROOT ?>Genre/ShowDefaultView">Generos</a></li>
-                <li><a href="<?php echo FRONT_ROOT ?>Cinema/ShowDefaultView">Cines</a></li>
+                <li><a href="<?php echo FRONT_ROOT ?>Movie/ShowListView">Peliculas</a></li>
+                <li><a href="<?php echo FRONT_ROOT ?>Genre/ShowListView">Generos</a></li>
+                <li><a href="<?php echo FRONT_ROOT ?>Cinema/ShowListView">Cines</a></li>
+                <li><a href="<?php echo FRONT_ROOT ?>Room/ShowListView">Salas</a></li>
               </ul>
             </li>
         </ul>

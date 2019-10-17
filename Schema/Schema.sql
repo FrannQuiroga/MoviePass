@@ -30,3 +30,23 @@ CREATE table genre_by_movie(
     constraint fk_genre_id foreign key (genre_id) references genres(id),
     constraint fk_movie_id foreign key (movie_id) references movies(id)
 );
+
+--SIN CREAR--
+CREATE table rooms(
+    id int primary key auto_increment,
+    cinema_id int,
+    name varchar(30),
+    isAvailable TINYINT default 1,
+    constraint fk_cinema_id foreign key (cinema_id) references cinemas (id)
+);
+
+--SIN CREAR--
+CREATE table functions(
+    id int primary key auto_increment,
+    room_id int,
+    movie_id int,
+    day date,
+    time string,
+    constraint fk_room_id foreign key (room_id) references rooms (id),
+    constraint fk_movie_id foreign key (movie_id) references movies (id)
+);

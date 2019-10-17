@@ -11,9 +11,9 @@
 <div class="center card shadow-sm " >   
     <div class="form-group nospace inline  ">
       <h6 class= "mb-1 text-muted small"><br>Ordenar por</h6>
-      <form action="<?php echo FRONT_ROOT ?>Genre/Get" method="get">
-        <input type="radio" name="ordered" value="name asc" onclick="this.form.submit()" checked ><h6 class= "mb-1 text-muted small">Nombre [A-Z]</h6>
-        <input type="radio" name="ordered" value="name desc" onclick="this.form.submit()"><h6 class= "mb-1 text-muted small">Nombre [Z-A]</h6>
+      <form action="<?php echo FRONT_ROOT ?>Genre/ShowListView" method="get">
+        <input type="radio" name="orderedBy" value="name asc" onclick="this.form.submit()" <?php if($orderedBy =="name asc") {echo "checked";}?> ><h6 class= "mb-1 text-muted small">Nombre [A-Z]</h6>
+        <input type="radio" name="orderedBy" value="name desc" onclick="this.form.submit()" <?php if($orderedBy =="name desc") {echo "checked";}?>><h6 class= "mb-1 text-muted small">Nombre [Z-A]</h6>
       </form>
     </div>
   </div>

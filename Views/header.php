@@ -8,7 +8,6 @@
   
   <!------ AGREGADO ACA PARA PROBAR TARJETA PELICULA ---------->
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-  
 
 </head>
 <body id="top" styles="font-family: 'Montserrat', sans-serif">
