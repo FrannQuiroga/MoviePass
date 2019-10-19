@@ -12,7 +12,6 @@ File: Layout CSS
 @import url("fontawesome-free/css/fontawesome-all.min.css");
 @import url("framework.css");
 
-
 /* Rows
 --------------------------------------------------------------------------------------------------------------- */
 .row0{padding:80px 0 0 0;}
@@ -86,8 +85,6 @@ File: Layout CSS
 .figures > li > figure figcaption a{display:block; position:relative; width:100%; padding:15px; border:solid; border-width:1px 0 0 1px; text-transform:uppercase;}
 .figures.latest > li > figure figcaption a{min-height:39px; padding:8px 40px 8px 15px; border-width:1px 0 0 0;}
 .figures.latest > li > figure figcaption a::after{position:absolute; top:0; right:0; line-height:38px; height:100%; padding:0 15px; font-family:"Font Awesome\ 5 Free"; font-weight:900; content:"\f105"; border-left:1px solid;}
-
-
 
 /* Comments */
 #comments ul{margin:0 0 40px 0; padding:0; list-style:none;}

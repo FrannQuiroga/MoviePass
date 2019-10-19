@@ -4,23 +4,25 @@
   include_once('nav-bar.php');
 ?>
 
-  <div id="breadcrumb" class="hoc clear" style="background-image:url('<?php echo IMG_PATH; ?>MoviePassButacas.png');"> 
-    <h6 class="heading">Listado de Salas</h6>
+      <div id="breadcrumb" class="hoc clear" > 
+        <h6 class="heading">Listado de Salas</h6>
+      </div>
+    </header>
   </div>
 </div>
 
 <div class="center card shadow-sm " >   
-    <div class="form-group nospace inline  ">
-      <h6 class= "mb-1 text-muted small"><br>Ordenar por</h6>
-      <form action="<?php echo FRONT_ROOT ?>Room/ShowListView" method="get">
-        <input type="radio" name="orderedBy" value="name" onclick="this.form.submit()" <?php if($orderedBy =="name") {echo "checked";}?>><h6 class= "mb-1 text-muted small">Nombre</h6>
-        <input type="radio" name="orderedBy" value="capacity" onclick="this.form.submit()" <?php if($orderedBy =="capacity") {echo "checked";}?>><h6 class= "mb-1 text-muted small">Capacidad</h6>
-      </form>
-    </div>
+  <div class="form-group nospace inline  ">
+    <h6 class= "mb-1 text-muted small"><br>Ordenar por</h6>
+    <form action="<?php echo FRONT_ROOT ?>Room/ShowListView" method="get">
+      <input type="radio" name="orderedBy" value="name" onclick="this.form.submit()" <?php if($orderedBy =="name") {echo "checked";}?>><h6 class= "mb-1 text-muted small">Nombre</h6>
+      <input type="radio" name="orderedBy" value="capacity" onclick="this.form.submit()" <?php if($orderedBy =="capacity") {echo "checked";}?>><h6 class= "mb-1 text-muted small">Capacidad</h6>
+    </form>
   </div>
 </div>
 
-<div class="wrapper row3" style="background-color: #EAEDED;">
+
+<div style="background-color: #EAEDED;padding: 2rem !important;">
   <main class="hoc container clear"> 
     <!-- main body -->
     <div class="content"> 

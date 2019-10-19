@@ -10,4 +10,4 @@
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 
 </head>
-<body id="top" styles="font-family: 'Montserrat', sans-serif; background-image:url('<?php echo IMG_PATH; ?>MoviePassTheatre.png');">
+<body id="top" styles="font-family: 'Montserrat', sans-serif;">

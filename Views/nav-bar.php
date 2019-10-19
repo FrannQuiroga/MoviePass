@@ -1,7 +1,7 @@
 
-<div class="bgded overlay" style="background-image:url('<?php echo IMG_PATH; ?>MoviePassTheatre.png');">
+<div class="bgded overlay" style="background-image:url(<?php echo IMG_PATH; ?>butacas.jpg)">
 
-  <div >
+  <div class="wrapper">
     <header id="header" class="hoc clear" > 
       <div id="logo" class="fl_left">
         <h1><a href="<?php echo FRONT_ROOT ?>">Movie Pass</a></h1>
