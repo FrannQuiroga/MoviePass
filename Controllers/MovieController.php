@@ -27,7 +27,7 @@
             require_once(VIEWS_PATH."movie-successful.php");
         }
 
-        public function ShowListView($orderedBy = "original_title")
+        public function ShowListView($orderedBy = "title")
         {
             $movieList = $this->movieDAO->Get($orderedBy);
             
@@ -50,7 +50,7 @@
 
                     $movie->setPosterPath($row["poster_path"]);
                     $movie->setId($row["id"]);
-                    $movie->setOriginalTitle($row["original_title"]);
+                    $movie->setTitle($row["title"]);
                     $movie->setVoteAverage($row["vote_average"]);
                     $movie->setOverview($row["overview"]);
 

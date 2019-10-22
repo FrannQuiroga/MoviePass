@@ -9,5 +9,9 @@
   <!------ AGREGADO ACA PARA PROBAR TARJETA PELICULA ------>
   <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 
+  <!------ AGREGADO ACA PARA PROBAR SHOPPING CART
+  <link href="//netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+ ------>
+ 
 </head>
 <body id="top" styles="font-family: 'Montserrat', sans-serif;">

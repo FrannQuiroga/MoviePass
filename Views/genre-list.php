@@ -8,7 +8,7 @@
   </div>
 </div>
 
-<div class="center card shadow-sm " >   
+  <div class="center card shadow-sm " >   
     <div class="form-group nospace inline  ">
       <h6 class= "mb-1 text-muted small"><br>Ordenar por</h6>
       <form action="<?php echo FRONT_ROOT ?>Genre/ShowListView" method="get">
@@ -17,39 +17,39 @@
       </form>
     </div>
   </div>
-</div>
 
-<div style="background-color: #EAEDED;padding: 2rem !important;">
-  <main class="hoc container clear"> 
-    <!-- main body -->
-    <div class="content"> 
-      <div >
-            <table style="text-align:center;">
-              <thead>
-                <tr>
-                  <th style="width: 80px;">Id</th>
-                  <th style="width: 250px;">Nombre</th>
-                  <th style="width: 250px;">Cantidad de peliculas actuales</th>
-                  
-                </tr>
-              </thead>
-              <tbody>
-                <?php foreach($genreList as $genre){?>
+  <div style="background-color: #EAEDED;padding: 2rem !important;">
+    <main class="hoc container clear"> 
+      <!-- main body -->
+      <div class="content"> 
+        <div >
+              <table style="text-align:center;">
+                <thead>
                   <tr>
-                      <td><?php echo $genre->getId(); ?></td>
-                      <td><?php echo $genre->getName(); ?></td>
-                      <td>¡Ni idea!</td>
+                    <th style="width: 80px;">Id</th>
+                    <th style="width: 250px;">Nombre</th>
+                    <th style="width: 250px;">Cantidad de peliculas actuales</th>
+                    
                   </tr>
-                <?php } ?>
-              </tbody>
-          </table>
+                </thead>
+                <tbody>
+                  <?php foreach($genreList as $genre){?>
+                    <tr>
+                        <td><?php echo $genre->getId(); ?></td>
+                        <td><?php echo $genre->getName(); ?></td>
+                        <td>¡Ni idea!</td>
+                    </tr>
+                  <?php } ?>
+                </tbody>
+            </table>
+        </div>
       </div>
-    </div>
-    <!-- / main body -->
-    <div class="clear"></div>
-  </main>
-</div>
+      <!-- / main body -->
+      <div class="clear"></div>
+    </main>
+  </div>
 
+  <div class="bgded overlay" style="background-image:url('https://media.wired.com/photos/5c086b7d1554ed7f00412f8c/125:94/w_2375,h_1786,c_limit/Moviepass-746083947.jpg');">
 <?php 
   include_once('footer.php');
 ?>

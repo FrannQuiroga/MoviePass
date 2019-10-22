@@ -15,11 +15,11 @@
         {
             try
             {
-                $query = "INSERT INTO ".$this->tableName." (id,poster_path,original_title,vote_average,overview) VALUES (:id,:poster_path,:original_title,:vote_average,:overview);";
+                $query = "INSERT INTO ".$this->tableName." (id,poster_path,title,vote_average,overview) VALUES (:id,:poster_path,:title,:vote_average,:overview);";
 
                 $parameters["id"] = $movie->getId();
                 $parameters["poster_path"] = $movie->getPosterPath();
-                $parameters["original_title"] = $movie->getOriginalTitle();
+                $parameters["title"] = $movie->getTitle();
                 $parameters["vote_average"] = $movie->getVoteAverage();
                 $parameters["overview"] = $movie->getOverview();
                 
@@ -76,7 +76,7 @@
                     
                     $movie->setId($row["id"]);
                     $movie->setPosterPath($row["poster_path"]);
-                    $movie->setOriginalTitle($row["original_title"]);
+                    $movie->setTitle($row["title"]);
                     $movie->setVoteAverage($row["vote_average"]);
                     $movie->setOverview($row["overview"]);
                     //funcion auxiliar para cargar los generos de la pelicula a un arreglo

@@ -5,7 +5,7 @@
     {
         private $posterPath;
         private $id;
-        private $originalTitle;
+        private $title;
         private $genres = array();
         private $voteAverage;
         private $overview;
@@ -34,14 +34,14 @@
                 return $this;
         }
 
-        public function getOriginalTitle()
+        public function getTitle()
         {
-                return $this->originalTitle;
+                return $this->title;
         }
 
-        public function setOriginalTitle($originalTitle)
+        public function setTitle($title)
         {
-                $this->originalTitle = $originalTitle;
+                $this->title = $title;
 
                 return $this;
         }

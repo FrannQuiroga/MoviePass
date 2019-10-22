@@ -6,7 +6,11 @@
         private $id;
         private $email;
         private $password;
-        private $profile;
+        private $name;
+        private $surname;
+        private $document;
+        private $isAdmin;
+        private $isAvailable;
 
         public function getId()
         {
@@ -41,14 +45,58 @@
             return $this;
         }
 
-        public function getProfile()
+        public function getName()
         {
-            return $this->profile;
+            return $this->name;
         }
 
-        public function setProfile($profile)
+        public function setName($name)
         {
-            $this->profile = $profile;
+            $this->name = $name;
+            return $this;
+        }
+ 
+        public function getSurname()
+        {
+            return $this->surname;
+        }
+
+        public function setSurname($surname)
+        {
+            $this->surname = $surname;
+            return $this;
+        }
+
+        public function getDocument()
+        {
+            return $this->document;
+        }
+
+        public function setDocument($document)
+        {
+            $this->document = $document;
+            return $this;
+        }
+
+        public function getIsAdmin()
+        {
+            return $this->isAdmin;
+        }
+
+        public function setIsAdmin($isAdmin)
+        {
+            $this->isAdmin = $isAdmin;
+            return $this;
+        }
+
+        public function getIsAvailable()
+        {
+            return $this->isAvailable;
+        }
+
+        public function setIsAvailable($isAvailable)
+        {
+            $this->isAvailable = $isAvailable;
             return $this;
         }
     }

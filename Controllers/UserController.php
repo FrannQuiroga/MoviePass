@@ -1,8 +1,8 @@
 <?php
     namespace Controllers;
 
-    /*use DAO\UserDAO as UserDAO;
-    use Models\User as User;*/
+    use DAO\UserDAO as UserDAO;
+    use Models\User as User;
 
     class UserController
     {
@@ -10,7 +10,7 @@
 
         public function __construct()
         {
-            /*$this->userDAO = new UserDAO();*/
+            $this->userDAO = new UserDAO();
         }
 
         public function ShowLoginView()
@@ -23,24 +23,24 @@
             require_once(VIEWS_PATH."add-user.php");
         }
 
-        /*public function ShowListView($orderedBy = "name") //AGREGAR UN VALOR EN DEFAULT SI NO HAY GET PARA PODER UNIFICAR LAS FUNCIONES!!
+        public function ShowListView($orderedBy = "id") 
         {
-            $cinemaList = $this->cinemaDAO->Get($orderedBy);
+            $userList = $this->userDAO->Get($orderedBy);
 
-            require_once(VIEWS_PATH."cinema-list.php");
+            require_once(VIEWS_PATH."user-list.php");
         }
 
 
-        public function Add($name,$capacity,$address,$price)
+        public function Add($name,$surname,$document,$email,$password)
         {
-            $cinema = new Cinema();
-    
-            $cinema->setName($name);
-            $cinema->setCapacity($capacity);
-            $cinema->setAddress($address);
-            $cinema->setPrice($price);
+            $user = new User();
+            $user->setName($name);
+            $user->setSurname($surname);
+            $user->setDocument($document);
+            $user->setEmail($email);
+            $user->setPassword($password);
 
-            $this->cinemaDAO->Add($cinema);
+            $this->userDAO->Add($user);
 
             $this->ShowAddView();
         }
@@ -48,12 +48,12 @@
         public function Remove($id)
         {
             //Trabajamos con baja logica para seguir teniendo persistencia de todo
-            $this->cinemaDAO->Remove($id);
+            $this->userDAO->Remove($id);
 
             $this->ShowListView();
         }
 
-        public function Edit($id)
+        /*public function Edit($id)
         {
             //Deberia mostrarme una vista con los campos que tengo actualmente y la opcion de modificar cuantos quiera
 

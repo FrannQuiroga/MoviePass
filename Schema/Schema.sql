@@ -31,7 +31,6 @@ CREATE table genre_by_movie(
     constraint fk_movie_id foreign key (movie_id) references movies(id)
 );
 
---SIN CREAR--
 CREATE table rooms(
     id int primary key auto_increment,
     cinema_id int,
@@ -49,4 +48,15 @@ CREATE table functions(
     time string,
     constraint fk_room_id foreign key (room_id) references rooms (id),
     constraint fk_movie_id foreign key (movie_id) references movies (id)
+);
+
+CREATE table users(
+    id int primary key auto_increment,
+    name varchar(30),
+    surname varchar(30),
+    document int,
+    email varchar(30),
+    password varchar(30),
+    isAdmin TINYINT default 0, 
+    isAvailable TINYINT default 1
 );
