@@ -1,5 +1,5 @@
 
-<div class="bgded overlay" style="background-image:url('https://media.wired.com/photos/5c086b7d1554ed7f00412f8c/125:94/w_2375,h_1786,c_limit/Moviepass-746083947.jpg');">
+<div class="bgded overlay" style="background-image:url('https://media.wired.com/photos/5c086b7d1554ed7f00412f8c/125:94/w_2375,h_1786,c_limit/Moviepass-746083947.jpg');"><!--style="background-image:url('<?php echo IMG_PATH?>butacas.jpg');"-->
 
   <div class="wrapper">
     <header id="header" class="hoc clear" > 
@@ -8,12 +8,12 @@
       </div>
       <nav id="mainav" class="fl_right">
         <ul class="clear">
-            <li>
-              <input type="search" style="color:grey" placeholder="Buscar pelicula..." required >
-            </li>
-            <li>
-              <a href="<?php echo FRONT_ROOT ?>"><i class="fa fa-search"></i></a>
-            </li>
+            <!--<li>
+              <div class="inline">
+                <input type="search" name="searched" style="color:grey" placeholder="Buscar pelicula..." required >
+                <button href="<?php echo FRONT_ROOT ?>Movie/Search" type="submit"style= "background-color:transparent;border:0px"><i class="fa fa-search"></i></button>
+              </div>
+            </li>-->
             <li>
             <a class="drop" ><i class="fa fa-cogs"></i></a>
               <ul>
@@ -52,12 +52,12 @@
         </nav>
     </header>
     <br>
-    <!--<form class="py-2" action="<?php echo FRONT_ROOT ?>" method="get">
-			<div class="input-group"style="margin-right:120px;width:180px;color:black;float:right">
-			  <input type="text" class="form-control" placeholder="Buscar pelicula...">
+    <form class="py-2" action="<?php echo FRONT_ROOT ?>Movie/Search" method="get">
+			<div class="input-group">
+			  <input type="text" class="form-control" name="searched" placeholder="Buscar pelicula...">
 			  <div class="input-group-append">
-			    <button class="btn btn-primary" type="button" style="background-color:#DC8E47;color:white;"><i class="fa fa-search"></i></button>
+			    <button class="" type="submit" style= "background-color:transparent;border:0px" ><i class="fa fa-search"></i></button>
 			  </div>
 			</div>
-		</form>-->
+		</form>
   </div>

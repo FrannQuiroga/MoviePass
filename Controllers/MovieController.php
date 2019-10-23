@@ -34,6 +34,23 @@
             require_once(VIEWS_PATH."movie-list.php");
         } 
 
+        public function ShowMovieView()
+        {
+            require_once(VIEWS_PATH."movie-details.php");
+        }
+
+        public function ShowSearchView()
+        {
+            require_once(VIEWS_PATH."search-list.php");
+        }
+
+        public function Search($searched)
+        {
+            
+            $searchList = $this->movieDAO->GetSearchList($searched);
+            $this->ShowSearchView();
+        }
+
         public function Update()
         {
             $array = $this->apiDAO->UpdateMovies();
