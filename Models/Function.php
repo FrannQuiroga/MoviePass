@@ -7,8 +7,12 @@
         private $day;
         private $time;
         private $movie;
+        //-------------faltaba el cine
+        private $cine;
+        //------------
         private $ticketsList = array();
 
+        
         public function getId()
         {
             return $this->id;
@@ -62,6 +66,20 @@
         {
             $this->ticketsList = $ticketsList;
             return $this;
+        }
+
+       
+        public function getCine()
+        {
+                return $this->cine;
+        }
+
+       
+        public function setCine($cine)
+        {
+                $this->cine = $cine;
+
+                return $this;
         }
     }
 ?>

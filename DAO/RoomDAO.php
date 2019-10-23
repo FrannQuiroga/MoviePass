@@ -3,7 +3,8 @@
 
     use \Exception as Exception;
     //use DAO\IRoomDAO as IRoomDAO;
-    use Models\Room as Room;    
+    use Models\Room as Room;
+    use Cinema\Cinema as Cinema;    
     use DAO\Connection as Connection;
 
     class RoomDAO /*implements IRoomDAO*/
@@ -19,7 +20,7 @@
                 
                 $parameters["name"] = $room->getName();
                 $parameters["capacity"] = $room->getCapacity();
-                $parameters["cinema_id"] = $room->getIdCinema();
+                $parameters["cinema_id"] = $room->getCinema()->getId();
                 
                 $this->connection = Connection::GetInstance();
 
@@ -31,13 +32,15 @@
             }
         }
 
-        public function Get($orderedBy)
+        public function Get($orderedBy,$cinema)
         {
             try
             {
                 $roomList = array();
 
-                $query = "SELECT * FROM .$this->tableName WHERE isAvailable = 1 ORDER BY ". $orderedBy;
+                $query = "SELECT * FROM .$this->tableName 
+                WHERE isAvailable = 1 AND cinema_id =".$cinema->getId(). 
+                 " ORDER BY ". $orderedBy;
 
                 $this->connection = Connection::GetInstance();
 
@@ -49,7 +52,7 @@
                     $room->setId($row["id"]);
                     $room->setName($row["name"]);
                     $room->setCapacity($row["capacity"]);
-                    $room->setIdCinema($row["cinema_id"]);
+                    $room->setCinema($cinema);
                     $room->setIsAvailable($row["isAvailable"]);
 
                     array_push($roomList, $room);

@@ -64,6 +64,36 @@
             }
         }
 
+        public function GetById($id)
+        {
+            try
+            {
+                $cinema= null;
+
+                $query = "SELECT * FROM .$this->tableName WHERE isAvailable = 1 AND id =".$id;
+
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->Execute($query);
+                
+                foreach ($resultSet as $row)
+                {                
+                    $cinema = new Cinema();
+                    $cinema->setId($row["id"]);
+                    $cinema->setName($row["name"]);
+                    $cinema->setCapacity($row["capacity"]);
+                    $cinema->setAddress($row["address"]);
+                    $cinema->setPrice($row["price"]);
+                    $cinema->setIsAvailable($row["isAvailable"]);
+                }
+                return $cinema;
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+        }
+
         public function remove($id)
         {
             try

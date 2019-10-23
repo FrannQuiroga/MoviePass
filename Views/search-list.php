@@ -10,7 +10,7 @@ include_once('nav-bar.php');
 
   <div class="center card shadow-sm ">   
     <div class="form-group nospace inline  ">
-      <h6 class= "mb-1 text-muted small"><br>Se han encontrado <?php echo 1?> resultados para su búsqueda.</h6>   
+      <h6 class= "mb-1 text-muted small"><br>Se han encontrado <?php echo count($searchList);?> resultados que contengan <?php echo "'" .$searched ."'."?></h6>   
     </div>
   </div>
 </div>

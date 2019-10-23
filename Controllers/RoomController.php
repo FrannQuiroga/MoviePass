@@ -4,6 +4,8 @@
     use DAO\RoomDAO as RoomDAO;
     use DAO\CinemaDAO as CinemaDAO;
     use Models\Room as Room;
+    use Models\Cinema as Cinema;
+    //use Models\Function as Function;
 
     class RoomController
     {
@@ -22,10 +24,10 @@
             require_once(VIEWS_PATH."add-room.php");
         }
 
-        public function ShowListView($orderedBy = "name") //AGREGAR UN VALOR EN DEFAULT SI NO HAY GET PARA PODER UNIFICAR LAS FUNCIONES!!
+        public function ShowListView($idCinema, $orderedBy = "name") //AGREGAR UN VALOR EN DEFAULT SI NO HAY GET PARA PODER UNIFICAR LAS FUNCIONES!!
         {
-            $cinemaList = $this->cinemaDAO->Get("name");
-            $roomList = $this->roomDAO->Get($orderedBy);
+            $cinema = $this->cinemaDAO->GetById($idCinema);
+            $roomList = $this->roomDAO->Get($orderedBy,$cinema);
 
             require_once(VIEWS_PATH."room-list.php");
         }
@@ -36,7 +38,10 @@
     
             $room->setName($name);
             $room->setCapacity($capacity);
-            $room->setIdCinema($idCinema);
+            $room->setCinema($this->cinemaDAO->GetById($idCinema)); //MODIFICADO
+
+            //AGREGAR LAS FUNCIONES A LA SALA 
+
             //QUE HAGO CON EL ID DEL CINE? SE GUARDA EN EL OBJETO O UN CAMPO SEPARADO PARA LA BD??
 
             $this->roomDAO->Add($room);

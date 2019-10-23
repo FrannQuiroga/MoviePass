@@ -6,7 +6,7 @@
         private $id;
         private $name;
         private $capacity;
-        private $idCinema;
+        private $cinema; //no va , pasar el cine
         private $isAvailable;
         private $functionsList = array();
 
@@ -43,14 +43,14 @@
             return $this;
         }
             
-        public function getIdCinema()
+        public function getCinema()
         {
-            return $this->idCinema;
+            return $this->cinema;
         }
 
-        public function setIdCinema($idCinema)
+        public function setCinema($cinema)
         {
-            $this->idCinema = $idCinema;
+            $this->cinema = $cinema;
             return $this;
         }
 

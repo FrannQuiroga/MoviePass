@@ -45,8 +45,8 @@
                       <td><?php echo $cinema->getAddress(); ?></td>
                       <td><?php echo "$" . $cinema->getPrice(); ?></td>
                       <td>
-                        <form action="<?php echo FRONT_ROOT ?>Cinema/Get" method="get">
-                          <button type="submit" class="btn" name="id" style="background-color:GREEN;color:white;" value="<?php echo $cinema->getId();?>">Salas</button>
+                        <form action="<?php echo FRONT_ROOT ?>Room/ShowListView" method="get">
+                          <button type="submit" class="btn" name="idCinema" style="background-color:GREEN;color:white;" value="<?php echo $cinema->getId();?>">Salas</button>
                         </form>
                       </td>
                       <td>

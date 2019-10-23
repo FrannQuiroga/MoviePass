@@ -99,9 +99,8 @@
             {
                 $searchList = array();
 
-                $query = "SELECT * FROM .$this->tableName. WHERE title =" .$searched;
+                $query = "SELECT * FROM ".$this->tableName." WHERE title LIKE '%" .$searched."%';";
                 
-
                 $this->connection = Connection::GetInstance();
 
                 $resultSet = $this->connection->Execute($query);
@@ -120,7 +119,6 @@
 
                     array_push($searchList, $movie);
                 }
-
                 return $searchList;
             }
             catch(Exception $ex)
@@ -135,7 +133,7 @@
             {
                 $movie= null;
 
-                $query = "SELECT * FROM .$this->tableName. WHERE id =".$id;
+                $query = "SELECT * FROM ".$this->tableName." WHERE id =".$id;
 
                 
                 /*$query = "SELECT m.id, m.original_title, m.poster_path, m.vote_average, m.overview, g.name as genre_ids
