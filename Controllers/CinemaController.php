@@ -48,10 +48,30 @@
             $this->ShowListView();
         }
 
-        public function Edit($id)
+        public function ShowEditView($id)
         {
             //Deberia mostrarme una vista con los campos que tengo actualmente y la opcion de modificar cuantos quiera
+            $cinema=$this->cinemaDAO->GetById($id);
+
+            require_once(VIEWS_PATH."edit-cinema.php");
 
         }
+
+        public function Edit($name,$capacity,$address,$price,$id)
+        {
+            $cinema = new Cinema();
+            
+            $cinema->setId($id);
+            $cinema->setName($name);
+            $cinema->setCapacity($capacity);
+            $cinema->setAddress($address);
+            $cinema->setPrice($price);
+
+            $this->cinemaDAO->edit($cinema);
+
+            $this->ShowListView();
+        }
+
+
     }
 ?>

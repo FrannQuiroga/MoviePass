@@ -109,5 +109,22 @@
                 throw $ex;
             }
         }
+        public function edit(Cinema $cinema){
+
+            try
+            {
+                $query = "UPDATE " .$this->tableName." SET  name = '".$cinema->getName()."' , capacity = ".$cinema->getCapacity(). ", address = '".$cinema->getAddress(). "', price =" .$cinema->getPrice(). " where id=" .$cinema->getId();
+                
+                $this->connection = Connection::GetInstance();
+
+                $this->connection->ExecuteNonQuery($query);
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+
+
+        }
     }
 ?>

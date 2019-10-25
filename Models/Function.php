@@ -7,8 +7,8 @@
         private $day;
         private $time;
         private $movie;
-        //-------------faltaba el cine
-        private $cine;
+        //-------------faltaba
+        private $room;
         //------------
         private $ticketsList = array();
 
@@ -69,15 +69,15 @@
         }
 
        
-        public function getCine()
+        public function getRoom()
         {
-                return $this->cine;
+                return $this->room;
         }
 
        
-        public function setCine($cine)
+        public function setRoom($room)
         {
-                $this->cine = $cine;
+                $this->room = $room;
 
                 return $this;
         }
