@@ -104,6 +104,7 @@
                     $user->setSurname($row["surname"]);
                     $user->setDocument($row["document"]);
                     $user->setIsAdmin($row["isAdmin"]);
+                    $user->setIsAvailable($row["isAvailable"]);
                 }
                 return $user;
             }

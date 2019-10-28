@@ -57,7 +57,6 @@
             
             $user=$this->userDAO->GetById($id);
             
-
             require_once(VIEWS_PATH."edit-user.php");
 
         }
@@ -79,7 +78,11 @@
         }
 
         public function ShowAllInformationView($id){
-                
+
+            $user=$this->userDAO->GetById($id);
+            
+            require_once(VIEWS_PATH."user-information.php");
+
         }
 
     }

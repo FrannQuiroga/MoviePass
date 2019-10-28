@@ -44,7 +44,7 @@
                       <td><?php echo $user->getPassword(); ?></td>
                       <td><?php if($user->getIsAdmin()) echo "Si";else echo "No"; ?></td>
                       <td>
-                        <form action="<?php echo FRONT_ROOT ?>User/Get" method="get">
+                        <form action="<?php echo FRONT_ROOT ?>User/ShowAllInformationView" method="get">
                           <button type="submit" class="btn" name="id" style="background-color:GREEN;color:white;" value="<?php echo $user->getId();?>">Ver</button>
                         </form>
                       </td>
