@@ -15,13 +15,14 @@
         {
             try
             {
-                $query = "INSERT INTO ".$this->tableName." (id,poster_path,title,vote_average,overview) VALUES (:id,:poster_path,:title,:vote_average,:overview);";
+                $query = "INSERT INTO ".$this->tableName." (id,poster_path,title,vote_average,overview,backdrop_path) VALUES (:id,:poster_path,:title,:vote_average,:overview,:backdrop_path);";
 
                 $parameters["id"] = $movie->getId();
                 $parameters["poster_path"] = $movie->getPosterPath();
                 $parameters["title"] = $movie->getTitle();
                 $parameters["vote_average"] = $movie->getVoteAverage();
                 $parameters["overview"] = $movie->getOverview();
+                $parameters["backdrop_path"] = $movie->getBackdropPath();
                 
                 $this->connection = Connection::GetInstance();
 
@@ -79,6 +80,7 @@
                     $movie->setTitle($row["title"]);
                     $movie->setVoteAverage($row["vote_average"]);
                     $movie->setOverview($row["overview"]);
+                    $movie->setBackdropPath($row["backdrop_path"]);
                     //funcion auxiliar para cargar los generos de la pelicula a un arreglo
                     $movie->setGenres($this->GetGenreListByMovie($movie->getId()));
 
@@ -114,6 +116,7 @@
                     $movie->setTitle($row["title"]);
                     $movie->setVoteAverage($row["vote_average"]);
                     $movie->setOverview($row["overview"]);
+                    $movie->setBackdropPath($row["backdrop_path"]);
                     //funcion auxiliar para cargar los generos de la pelicula a un arreglo
                     $movie->setGenres($this->GetGenreListByMovie($movie->getId()));
 
@@ -131,11 +134,10 @@
         {
             try
             {
-                $movie= null;
 
                 $query = "SELECT * FROM ".$this->tableName." WHERE id =".$id;
 
-                
+
                 /*$query = "SELECT m.id, m.original_title, m.poster_path, m.vote_average, m.overview, g.name as genre_ids
                 FROM genre_by_movie as gbm
                 INNER JOIN movies as m on gbm.movie_id = m.id
@@ -156,10 +158,9 @@
                     $movie->setTitle($row["title"]);
                     $movie->setVoteAverage($row["vote_average"]);
                     $movie->setOverview($row["overview"]);
+                    $movie->setBackdropPath($row["backdrop_path"]);
                     //funcion auxiliar para cargar los generos de la pelicula a un arreglo
                     $movie->setGenres($this->GetGenreListByMovie($movie->getId()));
-
-                    array_push($movieList, $movie);
                 }
 
                 return $movie;

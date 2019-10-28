@@ -7,6 +7,8 @@
         
         public function Add(Cinema $cinema);
         public function Get($orderedBy);
+        public function GetById($id);
+        public function remove($id);
     }
 
 ?>

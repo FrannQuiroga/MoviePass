@@ -9,6 +9,7 @@
         private $genres = array();
         private $voteAverage;
         private $overview;
+        private $backdropPath;
   
         public function getPosterPath()
         {
@@ -78,6 +79,18 @@
         public function setOverview($overview)
         {
                 $this->overview = $overview;
+
+                return $this;
+        }
+
+        public function getBackdropPath()
+        {
+                return $this->backdropPath;
+        }
+
+        public function setBackdropPath($backdropPath)
+        {
+                $this->backdropPath = $backdropPath;
 
                 return $this;
         }

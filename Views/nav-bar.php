@@ -4,7 +4,7 @@
   <div class="wrapper">
     <header id="header" class="hoc clear" > 
       <div id="logo" class="fl_left">
-        <h1><a href="<?php echo FRONT_ROOT ?>">Movie Pass</a></h1>
+        <h1><a href="<?php echo FRONT_ROOT ?>"><strong>Movie Pass</strong></a></h1>
       </div>
       <nav id="mainav" class="fl_right">
         <ul class="clear">

@@ -34,8 +34,9 @@
             require_once(VIEWS_PATH."movie-list.php");
         } 
 
-        public function ShowMovieView()
+        public function ShowMovieView($id)
         {
+            $movie = $this->movieDAO->GetMovie($id);
             require_once(VIEWS_PATH."movie-details.php");
         }
 
@@ -64,6 +65,7 @@
                     $movie->setTitle($row["title"]);
                     $movie->setVoteAverage($row["vote_average"]);
                     $movie->setOverview($row["overview"]);
+                    $movie->setBackdropPath($row["backdrop_path"]);
 
                     $this->movieDAO->Add($movie);
                     

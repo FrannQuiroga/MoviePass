@@ -7,6 +7,7 @@
         
         public function Add(Genre $genre);
         public function Get($ordered);
+        public function Truncate();
     }
 
 ?>

@@ -27,8 +27,11 @@ include_once('nav-bar.php');
             </div>
             <strong class="d-inline-block mb-2 text-primary"><?php echo $movie->getTitle(); ?></strong>
             <div class="mb-1 text-muted small">Puntuacion: [ <?php echo $movie->getVoteAverage(); ?> / 10 ]</div>
-            <p class="card-text mb-auto"><?php echo $movie->getOverview(); ?></p>
-            <a class="btn" style="background-color:#DC8E47;color:white;" role="button" href="">Ver disponibilidad</a>
+            <!--<p class="card-text mb-auto"><?php echo $movie->getOverview(); ?></p>--><br><br><br><br><br>
+            <form action="<?php echo FRONT_ROOT ?>Movie/SHowMovieView" method="get">
+              <button class="btn" style="background-color:#DC8E47;color:white;" type="submit" name="id" value="<?php echo $movie->getId(); ?>">Ver disponibilidad</button>
+            </form>
+            <!--<a class="btn" style="background-color:#DC8E47;color:white;" role="button" href="">Ver disponibilidad</a>-->
           </div>
           <img class="card-img-right flex-auto d-none d-lg-block" alt="Movie_Poster_[180x250]" src="<?php echo IMAGE_URL . $movie->getPosterPath();?>" style="width: 180px; height: 250px;">
         </div>
