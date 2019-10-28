@@ -9,7 +9,8 @@
   </div>
 </div>
 
-  <div class="center card shadow-sm " >   
+  <div class="center card shadow-sm " > 
+     
     <div class="form-group nospace inline  ">
       <h6 class= "mb-1 text-muted small"><br>Ordenar por</h6>
       <form action="<?php echo FRONT_ROOT ?>Cinema/ShowListView" method="get">
@@ -38,7 +39,7 @@
                   </tr>
                 </thead>
                 <tbody>
-                  <?php foreach($cinemaList as $cinema){?>
+                  <?php if(!empty($cinemaList)) { foreach($cinemaList as $cinema){ ?>
                     <tr>
                       <td><?php echo $cinema->getName(); ?></td>
                       <td><?php echo $cinema->getCapacity(); ?></td>
@@ -51,19 +52,20 @@
                       </td>
                       <td>
                         <form action="<?php echo FRONT_ROOT ?>Cinema/Edit" method="post">
-                        <button type="submit" class="btn" name="id" style="background-color:#DC8E47;color:white;" value="<?php echo $cinema->getId();?>">Editar</button>
+                        <button type="submit" class="btn" name="idCinema" style="background-color:#DC8E47;color:white;" value="<?php echo $cinema->getId();?>">Editar</button>
                         </form>
                       </td>
                       <td>
                         <form action="<?php echo FRONT_ROOT ?>Cinema/Remove" method="post">
-                          <button type="submit" class="btn" name="id" style="background-color:RED;color:white;" value="<?php echo $cinema->getId();?>">Remover</button>
+                          <button type="submit" class="btn" name="idCinema" style="background-color:RED;color:white;" value="<?php echo $cinema->getId();?>">Remover</button>
                         </form>
                       </td>
                     </tr>
-                  <?php } ?>
+                  <?php } } ?>
                 </tbody>
-            </table>
-          </form>
+              </table>
+
+              <a href="<?php echo FRONT_ROOT ?>Cinema/ShowAddView"  class="btn" style="background-color:GREEN;color:white;" >Agregar Cine</a>
         </div>
       </div>
       <!-- / main body -->
@@ -71,7 +73,7 @@
     </main>
   </div>
 
-  <div class="bgded overlay" style="background-image:url('https://media.wired.com/photos/5c086b7d1554ed7f00412f8c/125:94/w_2375,h_1786,c_limit/Moviepass-746083947.jpg');">
+<div class="bgded overlay" style="background-image:url('<?php echo FRONT_ROOT.IMG_PATH?>butacas.jpg');">
 <?php 
   include_once('footer.php');
 ?>

@@ -8,7 +8,7 @@
         private $capacity;
         private $address;
         private $price;
-        private $isAvailable;
+        private $roomList=array();            
 
         public function getId()
         {
@@ -65,14 +65,14 @@
             return $this;
         }
 
-        public function getIsAvailable()
+        public function getRoomList()
         {
-            return $this->isAvailable;
+            return $this->roomList;
         }
 
-        public function setIsAvailable($isAvailable)
+        public function setRoomList($roomList)
         {
-            $this->isAvailable = $isAvailable;
+            $this->roomList = $roomList;
             return $this;
         }
     }

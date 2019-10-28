@@ -38,7 +38,7 @@
             {
                 $cinemaList = array();
 
-                $query = "SELECT * FROM .$this->tableName WHERE isAvailable = 1 ORDER BY ". $orderedBy;
+                $query = "SELECT * FROM ".$this->tableName." WHERE isAvailable = 1 ORDER BY ". $orderedBy;
 
                 $this->connection = Connection::GetInstance();
 
@@ -52,7 +52,6 @@
                     $cinema->setCapacity($row["capacity"]);
                     $cinema->setAddress($row["address"]);
                     $cinema->setPrice($row["price"]);
-                    $cinema->setIsAvailable($row["isAvailable"]);
 
                     array_push($cinemaList, $cinema);
                 }
@@ -70,7 +69,7 @@
             {
                 $cinema= null;
 
-                $query = "SELECT * FROM .$this->tableName WHERE isAvailable = 1 AND id =".$id;
+                $query = "SELECT * FROM ".$this->tableName." WHERE isAvailable = 1 AND id =".$id;
 
                 $this->connection = Connection::GetInstance();
 
@@ -84,7 +83,6 @@
                     $cinema->setCapacity($row["capacity"]);
                     $cinema->setAddress($row["address"]);
                     $cinema->setPrice($row["price"]);
-                    $cinema->setIsAvailable($row["isAvailable"]);
                 }
                 return $cinema;
             }

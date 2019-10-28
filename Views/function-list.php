@@ -1,0 +1,69 @@
+<?php 
+  include_once('header.php');
+  include_once('nav-bar.php');
+?>
+
+  <div id="breadcrumb" class="hoc clear" > 
+    <h6 class="heading">Sala: <?php echo $room->getName();?></h6>
+  </div>
+</div>
+
+  <div class="center card shadow-sm " >   
+    <div class="form-group nospace inline  ">
+      <h6 class= "mb-1 text-muted small"><br><!--Ordenar por--></h6>
+      <form action="<?php echo FRONT_ROOT ?>Function/ShowListView" method="get">
+        <!--<input type="radio" name="orderedBy" value="name" onclick="this.form.submit()" <?php if($orderedBy =="movie") {echo "checked";}?>><h6 class= "mb-1 text-muted small">Nombre</h6>
+        <input type="radio" name="orderedBy" value="capacity" onclick="this.form.submit()" <?php if($orderedBy =="time") {echo "checked";}?>><h6 class= "mb-1 text-muted small">Capacidad</h6>
+      </form>-->
+    </div>
+  </div>
+
+  <div class="wrapper row3" style="background-color: #EAEDED;">
+    <main class="hoc container clear"> 
+      <!-- main body -->
+      <div class="content"> 
+        <div class="scrollable">
+          <h6 class="heading" style="float:left">Listado de Funciones</h6>
+              <table style="text-align:center;">
+                <thead>
+                  <tr>
+                    <th style="width: 300px;">Hora</th>
+                    <th style="width: 100px;">Pelicula</th>
+                    <th style="width: 200px;" colspan=2>Acccion </th>
+                    <!--<th style="width: 100px;">Acccion </th>-->
+                  </tr>
+                </thead>
+                <tbody>
+                    <?php if(!empty($functionList)) { foreach($functionList as $function) {?>
+                    <tr>
+                      <td><?php echo $function->getTime(); ?></td>
+                      <td><?php echo $function->getMovie()->getTitle(); ?></td>
+                      <td>
+                        <form action="<?php echo FRONT_ROOT ?>Function/Edit" method="post">
+                        <button type="submit" class="btn" name="idFunction" style="background-color:#DC8E47;color:white;" value="<?php echo $function->getId();?>">Editar</button>
+                        </form>
+                      </td>
+                      <td>
+                        <form action="<?php echo FRONT_ROOT ?>Function/Remove" method="post"><!-- SOLUCIONAR REDIRECCION AL BORRAR!! FALTA ID PARA MOSTRAR-->
+                          <button type="submit" class="btn" style="background-color:RED;color:white;" name="idFunction" value="<?php echo $function->getId();?>">Remover</button>
+                        </form>
+                      </td>
+                    </tr>
+                  <?php } } ?>
+                </tbody>
+            </table>
+            <form action="<?php echo FRONT_ROOT ?>Function/ShowAddView" method="get">
+              <button type="submit" class="btn" style="background-color:GREEN;color:white;" name="idRoom" value="<?php echo $room->getId();?>">Agregar Sala</button>
+            </form>
+        </div>
+      </div>
+      <!-- / main body -->
+      <div class="clear"></div>
+    </main>
+  </div>
+
+<div class="bgded overlay" style="background-image:url('<?php echo FRONT_ROOT.IMG_PATH?>butacas.jpg');">
+<?php 
+  include_once('footer.php');
+?>
+  

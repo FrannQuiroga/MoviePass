@@ -18,9 +18,9 @@
             $this->cinemaDAO = new CinemaDAO();
         }
 
-        public function ShowAddView()
+        public function ShowAddView($idCinema)
         {
-            $cinemaList = $this->cinemaDAO->Get("name");
+            $cinema = $this->cinemaDAO->GetById($idCinema);
             require_once(VIEWS_PATH."add-room.php");
         }
 
@@ -46,18 +46,18 @@
 
             $this->roomDAO->Add($room);
             
-            $this->ShowAddView();
+            $this->ShowAddView($room->getCinema()->getId());
         }
 
-        public function Remove($id)
+        public function Remove($idRoom)
         {
             //Trabajamos con baja logica para seguir teniendo persistencia de todo
-            $this->roomDAO->Remove($id);
+            $this->roomDAO->Remove($idRoom);
 
-            $this->ShowListView();
+            //$this->ShowListView();
         }
 
-        public function Edit($id)
+        public function Edit($idRoom)
         {
             //Deberia mostrarme una vista con los campos que tengo actualmente y la opcion de modificar cuantos quiera
 

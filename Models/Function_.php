@@ -1,14 +1,14 @@
 <?php
     namespace Models;
 
-    class Function
+    class Function_
     {
         private $id;
         private $day;
         private $time;
         private $movie;
         //-------------faltaba el cine
-        private $cine;
+        private $room;
         //------------
         private $ticketsList = array();
 
@@ -69,15 +69,15 @@
         }
 
        
-        public function getCine()
+        public function getRoom()
         {
-                return $this->cine;
+                return $this->room;
         }
 
        
-        public function setCine($cine)
+        public function setRoom($room)
         {
-                $this->cine = $cine;
+                $this->room = $room;
 
                 return $this;
         }

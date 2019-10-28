@@ -32,9 +32,7 @@ include_once('nav-bar.php');
                   </td>
                   <td>
                     <select name="idCinema" style="margin-right:3px;height:43px;width:420px;" required>
-                    <?php foreach ($cinemaList as $cinema){ ?>
-                      <option value="<?php echo $cinema->getId()?>"><?php echo $cinema->getName();?></option>
-                    <?php } ?>      
+                      <option value="<?php echo $cinema->getId()?>"><?php echo $cinema->getName();?></option>      
                     </select>
                   </td>      
                 </tr>

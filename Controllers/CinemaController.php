@@ -40,15 +40,15 @@
             $this->ShowAddView();
         }
 
-        public function Remove($id)
+        public function Remove($idCinema)
         {
             //Trabajamos con baja logica para seguir teniendo persistencia de todo
-            $this->cinemaDAO->Remove($id);
+            $this->cinemaDAO->Remove($idCinema);
 
             $this->ShowListView();
         }
 
-        public function Edit($id)
+        public function Edit($idCinema)
         {
             //Deberia mostrarme una vista con los campos que tengo actualmente y la opcion de modificar cuantos quiera
 

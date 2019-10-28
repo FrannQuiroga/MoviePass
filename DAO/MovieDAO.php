@@ -170,7 +170,7 @@
             }
         }
 
-        public function GetGenreListByMovie($id)
+        private function GetGenreListByMovie($id)
         {
             try
             {

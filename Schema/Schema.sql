@@ -42,10 +42,10 @@ CREATE table rooms(
 --SIN CREAR--
 CREATE table functions(
     id int primary key auto_increment,
-    room_id int,
+    day varchar(30),
+    time varchar(30),
     movie_id int,
-    day date,
-    time string,
+    room_id int,
     constraint fk_room_id foreign key (room_id) references rooms (id),
     constraint fk_movie_id foreign key (movie_id) references movies (id)
 );

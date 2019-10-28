@@ -1,5 +1,5 @@
 
-<div class="bgded overlay" style="background-image:url('<?php echo FRONT_ROOT.IMG_PATH?>butacas.jpg');"><!---->
+<div class="bgded overlay" style="background-image:url('<?php echo FRONT_ROOT.IMG_PATH?>butacas.jpg');">
 
   <div class="wrapper">
     <header id="header" class="hoc clear" > 
@@ -9,7 +9,7 @@
       <nav id="mainav" class="fl_right">
         <ul class="clear">
             <li>
-              <form style="display:inline" action="<?php echo FRONT_ROOT ?>Movie/SHowSearchView" method="get">
+              <form style="display:inline;" action="<?php echo FRONT_ROOT ?>Movie/SHowSearchView" method="get">
                 <div class="inline">
                   <input type="search" name="searched" style="color:grey" placeholder="Buscar..." required >
                   <button href="<?php echo FRONT_ROOT ?>Movie/Search" type="submit"style= "background-color:transparent;border:0px"><i class="fa fa-search"></i></button>
@@ -23,6 +23,7 @@
                 <li><a href="<?php echo FRONT_ROOT ?>Genre/Update">Generos</a></li>
                 <li><a href="<?php echo FRONT_ROOT ?>Cinema/ShowAddView">Cines</a></li>
                 <li><a href="<?php echo FRONT_ROOT ?>Room/ShowAddView">Salas</a></li>
+                <li><a href="<?php echo FRONT_ROOT ?>Function/ShowAddView">Funciones</a></li>
                 <li><a href="<?php echo FRONT_ROOT ?>User/ShowAddView">Usuarios</a></li>
               </ul>
             </li>
