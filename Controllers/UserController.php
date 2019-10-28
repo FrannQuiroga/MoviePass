@@ -30,7 +30,6 @@
             require_once(VIEWS_PATH."user-list.php");
         }
 
-
         public function Add($name,$surname,$document,$email,$password)
         {
             $user = new User();
@@ -53,10 +52,35 @@
             $this->ShowListView();
         }
 
-        /*public function Edit($id)
+        public function ShowEditView($id)
         {
-            //Deberia mostrarme una vista con los campos que tengo actualmente y la opcion de modificar cuantos quiera
+            
+            $user=$this->userDAO->GetById($id);
+            
 
-        }*/
+            require_once(VIEWS_PATH."edit-user.php");
+
+        }
+
+        public function Edit($name,$surname,$document,$email,$password,$id)
+        {
+           
+            $user = new User();
+            $user->setId($id);
+            $user->setEmail($email);
+            $user->setPassword($password);
+            $user->setName($name);
+            $user->setSurname($surname);
+            $user->setDocument($document);
+
+            $this->userDAO->edit($user);
+
+            $this->ShowListView();
+        }
+
+        public function ShowAllInformationView($id){
+                
+        }
+
     }
 ?>

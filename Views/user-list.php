@@ -49,7 +49,7 @@
                         </form>
                       </td>
                       <td>
-                        <form action="<?php echo FRONT_ROOT ?>User/Edit" method="post">
+                        <form action="<?php echo FRONT_ROOT ?>User/ShowEditView" method="post">
                         <button type="submit" class="btn" name="id" style="background-color:#DC8E47;color:white;" value="<?php echo $user->getId();?>">Editar</button>
                         </form>
                       </td>

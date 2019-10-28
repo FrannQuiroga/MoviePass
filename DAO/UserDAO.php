@@ -81,5 +81,55 @@
                 throw $ex;
             }
         }
+
+        public function GetById($id)
+        {
+            try
+            {
+                $user= null;
+
+                $query = "SELECT * FROM .$this->tableName WHERE id =".$id;
+
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->Execute($query);
+                
+                foreach ($resultSet as $row)
+                {                
+                    $user = new User();
+                    $user->setId($row["id"]);
+                    $user->setEmail($row["email"]);
+                    $user->setPassword($row["password"]);
+                    $user->setName($row["name"]);
+                    $user->setSurname($row["surname"]);
+                    $user->setDocument($row["document"]);
+                    $user->setIsAdmin($row["isAdmin"]);
+                }
+                return $user;
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+        }
+
+        public function edit(User $user){
+
+            try
+            {
+                $query = "UPDATE " .$this->tableName." SET  name = '".$user->getName()."' , surname = '".$user->getSurname(). "', document = '".$user->getDocument(). "', email ='" .$user->getEmail(). "', password = '".$user->getPassword()."', isAdmin = 0  where id=" .$user->getId();
+                
+                echo $query;
+                $this->connection = Connection::GetInstance();
+
+                $this->connection->ExecuteNonQuery($query);
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+
+
+        }
     }
 ?>
