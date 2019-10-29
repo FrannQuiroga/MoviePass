@@ -18,10 +18,10 @@ include_once('nav-bar.php');
                 </div>
                 <strong class="d-inline-block mb-2 text-primary"><?php echo $movie->getTitle(); ?></strong>
                 <div class="mb-1 text-muted small">Puntuacion: [ <?php echo $movie->getVoteAverage(); ?> / 10 ]</div>
-                <p class="card-text mb-auto"><?php echo $movie->getOverview(); ?></p>
+                <p class="card-text mb-auto"><?php if($movie->getOverview() != null) echo $movie->getOverview(); else echo "Sinopsis no disponible." ?></p>
             </div>     
     </div>
-    <div  class="center card flex-md-row mb-4 shadow-sm h-md-250" style="align-items:center;width:300px;margin-left:auto;margin-right:100px;">
+    <div  class="center card flex-md-row mb-4 shadow-sm h-md-250" style="align-items:center;width:300px;margin-left:auto;margin-right:150px;">
         <div class="card-body align-items-start center" style="text-align:center"> 
             <p><strong><u>Funciones:</u></strong><br><br><u>Cine 1:</u><br>16:00 - 18:30 - 21:00 - 23:30<br><br>
                 <u>Cine 2:</u><br>16:00 - 18:30 - 21:00 - 23:30<br><br><!--FORZADO PARA MOSTRAR ALGO!! ARMAR BIEN-->
