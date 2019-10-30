@@ -5,6 +5,9 @@
 
   <div id="breadcrumb" class="hoc clear" > 
     <h6 class="heading">Sala: <?php echo $room->getName();?></h6>
+    <form action="<?php echo FRONT_ROOT ?>Function/ShowAddView" method="get">
+              <button type="submit" class="btn" style="background-color:GREEN;color:white;" name="idRoom" value="<?php echo $room->getId();?>">Agregar Funcion</button>
+            </form>
   </div>
 </div>
 
@@ -27,15 +30,17 @@
               <table style="text-align:center;">
                 <thead>
                   <tr>
-                    <th style="width: 300px;">Hora</th>
-                    <th style="width: 100px;">Pelicula</th>
-                    <th style="width: 200px;" colspan=2>Acccion </th>
+                    <th style="width: 100px;">Dia</th>
+                    <th style="width: 100px;">Hora</th>
+                    <th style="width: 600px;">Pelicula</th>
+                    <th style="width: 100px;" colspan=2>Acccion </th>
                     <!--<th style="width: 100px;">Acccion </th>-->
                   </tr>
                 </thead>
                 <tbody>
                     <?php if(!empty($functionList)) { foreach($functionList as $function) {?>
                     <tr>
+                      <td><?php echo $function->getDay(); ?></td>
                       <td><?php echo $function->getTime(); ?></td>
                       <td><?php echo $function->getMovie()->getTitle(); ?></td>
                       <td>
@@ -49,12 +54,12 @@
                         </form>
                       </td>
                     </tr>
-                  <?php } } ?>
+                    <?php } } else {?><tr><td colspan=6;><?php echo "No hay funciones disponibles para esta sala";}?></td></tr>
                 </tbody>
             </table>
-            <form action="<?php echo FRONT_ROOT ?>Function/ShowAddView" method="get">
+            <!--<form action="<?php echo FRONT_ROOT ?>Function/ShowAddView" method="get">
               <button type="submit" class="btn" style="background-color:GREEN;color:white;" name="idRoom" value="<?php echo $room->getId();?>">Agregar Sala</button>
-            </form>
+            </form>-->
         </div>
       </div>
       <!-- / main body -->

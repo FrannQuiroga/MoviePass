@@ -3,22 +3,26 @@
 
     use DAO\RoomDAO as RoomDAO;
     use DAO\FunctionDAO as FunctionDAO;
+    use DAO\CinemaDAO as CinemaDAO;
     use DAO\MovieDAO as MovieDAO;
     use Models\Room as Room;
     use Models\Movie as Movie;
     use Models\Function_ as Function_;
+    use Models\Cinema as Cinema;
 
     class FunctionController
     {
         private $roomDAO;
         private $movieDAO;
         private $functionDAO;
+        private $cinemaDAO;
 
         public function __construct()
         {
             $this->roomDAO = new RoomDAO();
             $this->functionDAO = new FunctionDAO();
             $this->movieDAO = new MovieDAO();
+            $this->cinemaDAO = new CinemaDAO();
         }
 
         public function ShowAddView($idRoom)
@@ -32,8 +36,15 @@
             require_once(VIEWS_PATH."add-function.php");
         }
 
-        public function ShowListView() //AGREGAR UN VALOR EN DEFAULT SI NO HAY GET PARA PODER UNIFICAR LAS FUNCIONES!!
+        public function ShowListView($idRoom) //AGREGAR UN VALOR EN DEFAULT SI NO HAY GET PARA PODER UNIFICAR LAS FUNCIONES!!
         {
+            $room = $this->roomDAO->getById($idRoom);
+            $room->setCinema($this->cinemaDAO->GetById($room->getCinema()->getId())); ///mmmm...
+            $functionList= $this->functionDAO->Get($room);
+            foreach($functionList as $function)
+            {
+                $function->setMovie($this->movieDAO->GetMovie($function->getMovie()->getId()));
+            }
             /*Voy a mostrar las funciones que hay por sala, me tendria que llegar de arriba su id!! 
              Ahi deberia traer el objeto cine que va dentro del objeto sala, necesito los dos DAO*/
             require_once(VIEWS_PATH."function-list.php");
@@ -54,7 +65,7 @@
 
             $this->functionDAO->Add($function);
             
-
+            $this->ShowAddView($idRoom);
         }
 
         public function Remove($id)

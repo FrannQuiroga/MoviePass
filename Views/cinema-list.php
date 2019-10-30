@@ -6,6 +6,7 @@
 
   <div id="breadcrumb" class="hoc clear"> 
     <h6 class="heading">Listado de Cines</h6>
+    <a href="<?php echo FRONT_ROOT ?>Cinema/ShowAddView"  class="btn" style="background-color:GREEN;color:white;" >Agregar Cine</a>
   </div>
 </div>
 
@@ -61,11 +62,11 @@
                         </form>
                       </td>
                     </tr>
-                  <?php } } ?>
+                  <?php } } else {?><tr><td colspan=6;><?php echo "No hay cines disponibles.";}?></td></tr>
                 </tbody>
               </table>
 
-              <a href="<?php echo FRONT_ROOT ?>Cinema/ShowAddView"  class="btn" style="background-color:GREEN;color:white;" >Agregar Cine</a>
+              <!--<a href="<?php echo FRONT_ROOT ?>Cinema/ShowAddView"  class="btn" style="background-color:GREEN;color:white;" >Agregar Cine</a>-->
         </div>
       </div>
       <!-- / main body -->

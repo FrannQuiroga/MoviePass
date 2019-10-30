@@ -6,6 +6,9 @@
 
   <div id="breadcrumb" class="hoc clear" > 
     <h6 class="heading">Cine: <?php echo $cinema->getName();?></h6>
+    <form action="<?php echo FRONT_ROOT; ?>Room/ShowAddView" method="get">
+            <button class="btn" type="submit" name="idCinema" style="background-color:GREEN;color:white;" value="<?php echo $cinema->getId();?>">Agregar Salas</button>
+          </form>
   </div>
 </div>
 
@@ -25,47 +28,44 @@
       <div class="content"> 
         <div class="scrollable">
           <h6 class="heading" style="float:left">Listado de Salas</h6>
-              <table style="text-align:center;">
-                <thead>
+            <table style="text-align:center;">
+              <thead>
+                <tr>
+                  <th style="width: 300px;">Nombre</th>
+                  <th style="width: 100px;">Capacidad</th>
+                  <th style="width: 300px;">Cine</th>
+                  <th style="width: 200px;" colspan=3>Acccion </th>
+                  <!--<th style="width: 100px;">Acccion </th>-->
+                </tr>
+              </thead>
+              <tbody>
+                  <?php if(!empty($roomList)) { foreach($roomList as $room) { ?>
                   <tr>
-                    <th style="width: 300px;">Nombre</th>
-                    <th style="width: 100px;">Capacidad</th>
-                    <th style="width: 300px;">Cine</th>
-                    <th style="width: 200px;" colspan=3>Acccion </th>
-                    <!--<th style="width: 100px;">Acccion </th>-->
+                    <td><?php echo $room->getName(); ?></td>
+                    <td><?php echo $room->getCapacity(); ?></td>
+                    <td><?php echo $room->getCinema()->getName(); ?></td> <!--MODIFICADO(OBJETO CINE)-->
+                    <td>
+                      <form action="<?php echo FRONT_ROOT; ?>Function/ShowListView" method="get">
+                        <button type="submit" class="btn" name="idRoom" style="background-color:GREEN;color:white;" value="<?php echo $room->getId();?>">Funciones</button>
+                      </form>
+                    </td>
+                    <td>
+                      <form action="<?php echo FRONT_ROOT; ?>Room/Edit" method="post">
+                      <button type="submit" class="btn" name="idRoom" style="background-color:#DC8E47;color:white;" value="<?php echo $room->getId();?>">Editar</button>
+                      </form>
+                    </td>
+                    <td>
+                      <form action="<?php echo FRONT_ROOT; ?>Room/Remove" method="post">
+                        <button type="submit" class="btn" style="background-color:RED;color:white;" name="idRoom" value="<?php echo $room->getId();?>">Remover</button>
+                      </form>
+                    </td>
                   </tr>
-                </thead>
-                <tbody>
-                    <?php if(!empty($roomList)) { foreach($roomList as $room) {?>
-                    <tr>
-                      <td><?php echo $room->getName(); ?></td>
-                      <td><?php echo $room->getCapacity(); ?></td>
-                      <td><?php echo $room->getCinema()->getName(); ?></td> <!--MODIFICADO(OBJETO CINE)-->
-                      <td>
-                        <form action="<?php echo FRONT_ROOT ?>Function/ShowListView" method="get">
-                          <button type="submit" class="btn" name="idRoom" style="background-color:GREEN;color:white;" value="<?php echo $room->getId();?>">Funciones</button>
-                        </form>
-                      </td>
-                      <td>
-                        <form action="<?php echo FRONT_ROOT ?>Room/Edit" method="post">
-                        <button type="submit" class="btn" name="idRoom" style="background-color:#DC8E47;color:white;" value="<?php echo $room->getId();?>">Editar</button>
-                        </form>
-                      </td>
-                      <td>
-                        <form action="<?php echo FRONT_ROOT ?>Room/Remove" method="post"><!-- SOLUCIONAR REDIRECCION AL BORRAR!! FALTA ID PARA MOSTRAR-->
-                          <button type="submit" class="btn" style="background-color:RED;color:white;" name="idRoom" value="<?php echo $room->getId();?>">Remover</button>
-                        </form>
-                      </td>
-                    </tr>
-                  <?php } } ?>
-                </tbody>
-            </table>
-            <form action="<?php echo FRONT_ROOT ?>Room/ShowAddView" method="get">
-              <button type="submit" class="btn" style="background-color:GREEN;color:white;" name="idCinema" value="<?php echo $cinema->getId();?>">Agregar Sala</button>
-            </form>
-            <form action="<?php echo FRONT_ROOT ?>Function/ShowAddView" method="get">
-              <button type="submit" class="btn" style="background-color:GREEN;color:white;" name="idCinema" value="3">Agregar Funcion</button>
-            </form>
+                <?php } } else {?><tr><td colspan=6;><?php echo "No hay salas disponibles para este cine";}?></td></tr>
+              </tbody>
+          </table>
+          <!--<form action="<?php echo FRONT_ROOT; ?>Room/ShowAddView" method="get">
+            <button class="btn" type="submit" name="idCinema" style="background-color:GREEN;color:white;" value="<?php echo $cinema->getId();?>">Agregar Salas</button>
+          </form>-->
         </div>
       </div>
       <!-- / main body -->

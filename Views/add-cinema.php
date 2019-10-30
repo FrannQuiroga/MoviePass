@@ -6,6 +6,7 @@ include_once('nav-bar.php');
 
   <div id="breadcrumb" class="hoc clear"> 
       <h6 class="heading">Ingreso de Cines</h6>
+      <a href="<?php echo FRONT_ROOT ?>Cinema/ShowListView"  class="btn" style="background-color:GREEN;color:white;" >Ver Listado</a>
   </div>
 
   <div class="wrapper row3" style="background-color:#EAEDED;">
@@ -45,6 +46,7 @@ include_once('nav-bar.php');
               <input type="submit" class="btn" value="Agregar" style="background-color:#DC8E47;color:white;"/>
             </div>
           </form>
+          
         </div>
       </div>
       <!-- / main body -->

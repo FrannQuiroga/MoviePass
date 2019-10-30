@@ -82,6 +82,9 @@
                     $room->setId($row["id"]);
                     $room->setName($row["name"]);
                     $room->setCapacity($row["capacity"]);
+                    $cinema = new Cinema();
+                    $cinema->setId($row["cinema_id"]);
+                    $room->setCinema($cinema);
                 }
                 return $room;
             }

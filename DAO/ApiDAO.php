@@ -20,8 +20,8 @@
         {
             $genresURL = BASE_API_URL."genre/movie/list?api_key=ff8c41b01da7a16f7b4ca8af1f16f284&language=es-ES";
            
-            $moviesJSON = file_get_contents($genresURL);
-            $genres = json_decode($moviesJSON,true);
+            $genresJSON = file_get_contents($genresURL);
+            $genres = json_decode($genresJSON,true);
 
             return $genres;
         }

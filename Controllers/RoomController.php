@@ -51,10 +51,11 @@
 
         public function Remove($idRoom)
         {
+            $room = $this->roomDAO->GetById($idRoom);//LO HAGO PARA PODERTENER EL ID DEL CINE Y VOLVER A MOSTRAR LA LISTA
             //Trabajamos con baja logica para seguir teniendo persistencia de todo
-            $this->roomDAO->Remove($idRoom);
-
-            //$this->ShowListView();
+            $this->roomDAO->Remove($idRoom);//VER SI PASO EL ROOM O SOLO ID
+            
+            $this->ShowListView($room->getCinema()->getId());
         }
 
         public function Edit($idRoom)

@@ -30,11 +30,11 @@
             require_once(VIEWS_PATH."genre-list.php");
         }
 
-        public function Truncate()
+        /*public function Truncate()
         {
             $this->genreDAO->Truncate();
             $this->ShowListView();
-        }
+        }*/
 
         public function Update()
         {

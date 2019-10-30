@@ -5,6 +5,9 @@ include_once('nav-bar.php');
 
   <div id="breadcrumb" class="hoc clear"> 
       <h6 class="heading">Ingreso de Funciones</h6>
+      <form action="<?php echo FRONT_ROOT; ?>Function/ShowListView" method="get">
+            <button class="btn" type="submit" name="idRoom" style="background-color:GREEN;color:white;" value="<?php echo $room->getId();?>">Ver Listado</button>
+          </form>
   </div>
 
   <div class="wrapper row3" style="background-color: #EAEDED;">

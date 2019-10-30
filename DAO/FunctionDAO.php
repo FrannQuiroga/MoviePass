@@ -41,7 +41,7 @@
 
                 $query = "SELECT * FROM ". $this->tableName.
                 " WHERE isAvailable = 1 AND room_id =" .$room->getId(). 
-                 " ORDER BY day";
+                 " ORDER BY day";//VER CON QUE ORDENAMOS; DAY ESTA FORZADO.
 
                 $this->connection = Connection::GetInstance();
 
@@ -53,25 +53,11 @@
                     $function->setId($row["id"]);
                     $function->setDay($row["day"]);
                     $function->setTime($row["time"]);
-
-                    //traigo la pelicula de la bd  
-                    $query = "SELECT * FROM movies WHERE id =".$row["movie_id"];
-                    $this->connection = Connection::GetInstance();
-                    $resultSet = $this->connection->Execute($query);
-                    $movie =new Movie();
-                    $movie->setId($resultSet["id"]);
-                    $movie->setPosterPath($resultSet["poster_path"]);
-                    $movie->setOriginalTitle($resultSet["original_title"]);
-                    $movie->setVoteAverage($resultSet["vote_average"]);
-                    $movie->setOverview($resultSet["overview"]);
-                    $movie->setGenres($movie->GetGenreListByMovie($movie->getId()));
+                    $function->setRoom($room);
                     
+                    $movie = new Movie();
+                    $movie->setId($row["movie_id"]);
                     $function->setMovie($movie);
-
-                    //traigo el cine de la bd  
-                    $function->setCine($row["cinema_id"]);
-
-
 
                     array_push($functionList, $function);
                 }

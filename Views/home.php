@@ -8,7 +8,7 @@
       <h3 class="heading underline">Movie Pass</h3>
       <p>Somos los creadores del sistema de gestion para cines mas flamante del Condado.</p>
       <footer>
-        <button type="submit" class="btn" style="background-color:#DC8E47;color:white;" href="#">Conocer más</button>
+      <a href="<?php echo FRONT_ROOT ?>Home/AboutUs"  class="btn" style="background-color:#DC8E47;color:white;" >Sobre nosotros</a>
       </footer>
     </article>
   </div>
