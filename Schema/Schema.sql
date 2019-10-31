@@ -6,7 +6,8 @@ create table movies(
     poster_path varchar(50),
     original_title varchar(50),
     vote_average float,
-    overview text
+    overview text,
+    backdrop_path varchar (50)
 );
 
 create table cinemas(
@@ -46,17 +47,24 @@ CREATE table functions(
     time varchar(30),
     movie_id int,
     room_id int,
+    isAvailable TINYINT default 1,
     constraint fk_room_id foreign key (room_id) references rooms (id),
     constraint fk_movie_id foreign key (movie_id) references movies (id)
 );
 
 CREATE table users(
     id int primary key auto_increment,
-    name varchar(30),
-    surname varchar(30),
-    document int,
     email varchar(30),
     password varchar(30),
     isAdmin TINYINT default 0, 
-    isAvailable TINYINT default 1
+    isAvailable TINYINT default 1,
+    userProfile_id int,
+    constraint fk_userProfile_id foreign key (userProfile_id) references userProfile (id)
+);
+
+create table userProfiles(
+    id int primary key auto_increment,
+    name varchar(30),
+    surname varchar(30),
+    document int
 );

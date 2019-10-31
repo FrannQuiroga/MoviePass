@@ -6,11 +6,9 @@
         private $id;
         private $email;
         private $password;
-        private $name;
-        private $surname;
-        private $document;
-        private $isAdmin;
-        private $isAvailable;
+        private $userProfile; //agregado objeto  
+        private $isAdmin; //ROLE. 1=Admin; 0=Common User
+        private $isAvailable; //SACAR de todos los models!!
 
         public function getId()
         {
@@ -78,17 +76,6 @@
             return $this;
         }
 
-        public function getIsAdmin()
-        {
-            return $this->isAdmin;
-        }
-
-        public function setIsAdmin($isAdmin)
-        {
-            $this->isAdmin = $isAdmin;
-            return $this;
-        }
-
         public function getIsAvailable()
         {
             return $this->isAvailable;
@@ -98,6 +85,30 @@
         {
             $this->isAvailable = $isAvailable;
             return $this;
+        }
+
+        public function getUserProfile()
+        {
+                return $this->UserProfile;
+        }
+
+        public function setUserProfile(UserProfile $UserProfile)
+        {
+                $this->UserProfile = $UserProfile;
+
+                return $this;
+        }
+
+        public function getIsAdmin()
+        {
+                return $this->isAdmin;
+        }
+
+        public function setIsAdmin($isAdmin)
+        {
+                $this->isAdmin = $isAdmin;
+
+                return $this;
         }
     }
 ?>

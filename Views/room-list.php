@@ -18,7 +18,7 @@
       <form action="<?php echo FRONT_ROOT ?>Room/ShowListView" method="get">
         <!--<input type="radio" name="orderedBy" value="name" onclick="this.form.submit()" <?php if($orderedBy =="name") {echo "checked";}?>><h6 class= "mb-1 text-muted small">Nombre</h6>
         <input type="radio" name="orderedBy" value="capacity" onclick="this.form.submit()" <?php if($orderedBy =="capacity") {echo "checked";}?>><h6 class= "mb-1 text-muted small">Capacidad</h6>
-      </form>-->
+      --></form>
     </div>
   </div>
 
