@@ -40,10 +40,11 @@
             
             $loginUser=$this->userDAO->GetUser($email,$password);
             if(!empty($loginUser)){
-                echo "<script> if(confirm('Usuario registrado!!'));
+                echo "<script> if(confirm('El usuario ya está registrado!!'));
                 </script>";
-                $this->ShowLoginView(); //entra pero igual crea el usuario
+                $this->ShowAddView(); //entra pero igual crea el usuario
             }
+            else{
 
             $userProfile= new UserProfile();
             $userProfile->setName($name);
@@ -59,7 +60,7 @@
             $this->userDAO->Add($user);
 
             //cambiar la ruta 
-            require_once(VIEWS_PATH."About-us.php");
+            require_once(VIEWS_PATH."About-us.php");}
         }
 
         public function Login($email,$password)
