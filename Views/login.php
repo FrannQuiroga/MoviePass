@@ -16,7 +16,7 @@ include_once('nav-bar.php');
         Ó
       </p><hr>
       <p class="text-center"style="color:grey">Ingrese su usuario y contraseña</p>
-      <form action="<?php echo FRONT_ROOT ?>" method="post">
+      <form action="<?php echo FRONT_ROOT ?>User/Login" method="post">
         <div class="input-group">
           <div class="input-group-prepend">
             <span class="input-group-text"> <i class="fa fa-user"></i> </span>
