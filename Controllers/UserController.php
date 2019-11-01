@@ -15,7 +15,12 @@
         public function __construct()
         {
             $this->userDAO = new UserDAO();
-            $this->userProfileDAO =new UserProfileDAO;
+            $this->userProfileDAO =new UserProfileDAO();
+        }
+
+        public function ShowloggedView() //QUEDA DUPLICADO CON HOME CONTROLLER: ESTA BIEN??
+        {
+            require_once(VIEWS_PATH."home.php");
         }
 
         public function ShowLoginView()
@@ -38,44 +43,77 @@
         public function Add($name,$surname,$document,$email,$password)
         {
             
-            $loginUser=$this->userDAO->GetUser($email,$password);
-            if(!empty($loginUser)){
-                echo "<script> if(confirm('El usuario ya está registrado!!'));
+            $loggedUser = $this->userDAO->GetByEmail($email);
+            if(!empty($loggedUser))
+            {
+                echo "<script> if(confirm('El usuario ya está registrado, por favor utilice otro email!!'));
                 </script>";
-                $this->ShowAddView(); //entra pero igual crea el usuario
+                $this->ShowAddView(); //Vuelve a la vista de registro
             }
-            else{
+            else
+            {
+                $loggedProfile = $this->userProfileDAO->GetByDocument($document);
 
-            $userProfile= new UserProfile();
-            $userProfile->setName($name);
-            $userProfile->setSurname($surname);
-            $userProfile->setDocument($document);
-            $this->userProfileDAO->Add($userProfile);
+                if(!is_null($loggedProfile))
+                {
+                    echo "<script> if(confirm('El documento ingresado ya pertenece a un usuario en sistema, vuelva a intentarlo!!'));
+                    </script>";
+                    $this->ShowAddView(); //Vuelve a la vista de registro
+                }
+                else
+                {
+                    $userProfile= new UserProfile();
+                    $userProfile->setName($name);
+                    $userProfile->setSurname($surname);
+                    $userProfile->setDocument($document);
+                    $this->userProfileDAO->Add($userProfile);
 
-            $user = new User();
-            $user->setUserProfile($this->userProfileDAO->getbyDocument($document)); //no se si esta bien asi pero funciona
-            $user->setEmail($email);
-            $user->setPassword($password);
+                    $user = new User();
+                    $user->setUserProfile($this->userProfileDAO->GetbyDocument($document)); //Lo tengo que traer del DAO despues que lo agrego para poder tener un id asociado
+                    $user->setEmail($email);
+                    $user->setPassword($password);
 
-            $this->userDAO->Add($user);
+                    $this->userDAO->Add($user);
 
-            //cambiar la ruta 
-            require_once(VIEWS_PATH."About-us.php");}
+                    echo "<script> if(confirm('Usuario registrado con exito!! Ya puede ingresar.'));
+                    </script>"; 
+                    $this->ShowLoginView();
+                }
+            }
         }
 
         public function Login($email,$password)
         {
-            $loginUser=$this->userDAO->GetUser($email,$password);
+            $loginUser=$this->userDAO->GetByEmail($email);
 
             if(empty($loginUser)){
-                echo "<script> if(confirm('datos incorrectos!!'));
-                </script>";
-                $this->ShowLoginView(); 
+                echo "<script> if(confirm('Datos incorrectos, vuelva a intentarlo !'));";  
+                echo "window.location = './login.php'; </script>";
+                //$this->ShowLoginView(); 
             }
-            else{
-                //cambiar al home del usuario registrado
-                require_once(VIEWS_PATH."home.php");
+            else
+            {
+                if($password === $loginUser->getPassword())
+                {
+                    //DATOS CORRECTOS; SE LOGEA CON EXITO E INICIA LA SESSION!!
+                    $_SESSION["loggedUser"] = $loginUser;
+                    $this->ShowloggedView();
+                }
+                else
+                {
+                    //PASSWORD NO COINCIDE! Vuelve a login View
+                    echo "<script> if(confirm('Datos incorrectos, la contraseña ingresada no es válida!!'));
+                    </script>";
+                    $this->ShowLoginView(); 
+                }
             }
+        }
+
+        public function Logout()
+        {
+            session_destroy();
+            echo "<script> if(confirm('Sesion cerrada con exito!'));";  
+            echo "window.location = '../'; </script>";
         }
 
         public function Remove($id)

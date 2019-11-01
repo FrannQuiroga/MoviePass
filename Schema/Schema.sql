@@ -52,19 +52,20 @@ CREATE table functions(
     constraint fk_movie_id foreign key (movie_id) references movies (id)
 );
 
+create table user_profiles(
+    id int primary key auto_increment,
+    name varchar(30),
+    surname varchar(30),
+    document int
+);
+
 CREATE table users(
     id int primary key auto_increment,
     email varchar(30),
     password varchar(30),
     isAdmin TINYINT default 0, 
     isAvailable TINYINT default 1,
-    userProfile_id int,
-    constraint fk_userProfile_id foreign key (userProfile_id) references userProfile (id)
+    user_profile_id int,
+    constraint fk_user_profile_id foreign key (user_profile_id) references user_profiles (id)
 );
 
-create table userProfiles(
-    id int primary key auto_increment,
-    name varchar(30),
-    surname varchar(30),
-    document int
-);

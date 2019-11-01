@@ -31,7 +31,7 @@ include_once('nav-bar.php');
         </div>
         <br><br>                                   
         <input type="submit" class="btn btn-block" value="Login" style="background-color:#DC8E47;color:white;"/>
-        <br><a class=" small" href="#">Olvidaste tu contraseña?</a>                                                                
+        <br><a class=" small" href="#">Olvidaste tu contraseña? JODETE</a>                                                                
     </form>
     </article>
   </div> <!-- card.// -->

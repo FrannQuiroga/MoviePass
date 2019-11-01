@@ -2,14 +2,14 @@
     namespace DAO;
 
     use \Exception as Exception;
-    use DAO\IUserProfileDAO as IUserProfileDAO;
+    //use DAO\IUserProfileDAO as IUserProfileDAO;
     use Models\UserProfile as UserProfile;    
     use DAO\Connection as Connection;
 
-    class UserProfileDAO implements IUserProfileDAO
+    class UserProfileDAO /*implements IUserProfileDAO*/
     {
         private $connection;
-        private $tableName = "userProfiles";
+        private $tableName = "user_profiles";
 
         public function Add(UserProfile $userProfile)
         {
@@ -66,22 +66,21 @@
             try
             {
                 $userProfile= null;
-
                 $query = "SELECT * FROM ".$this->tableName." WHERE document =".$document;
 
                 $this->connection = Connection::GetInstance();
 
                 $resultSet = $this->connection->Execute($query);
                 
-                foreach ($resultSet as $row)
-                {                
+                foreach($resultSet as $row)
+                {
                     $userProfile=new UserProfile();
                     $userProfile->setId($row["id"]);
                     $userProfile->setName($row["name"]);
                     $userProfile->setSurname($row["surname"]);
                     $userProfile->setDocument($row["document"]);
-
                 }
+            
                 return $userProfile;
             }
             catch(Exception $ex)

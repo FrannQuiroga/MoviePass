@@ -92,7 +92,7 @@
             }
         }
 
-        public function remove($id)
+        public function Remove($id)
         {
             try
             {
@@ -100,6 +100,21 @@
 
                 $this->connection = Connection::GetInstance();
 
+                $this->connection->ExecuteNonQuery($query);
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+        }
+
+        public function Edit(Cinema $cinema)
+        {
+            try
+            {
+                $query = "UPDATE " .$this->tableName." SET name = '".$cinema->getName()."' , capacity = ".$cinema->getCapacity(). ", address = '".$cinema->getAddress(). "', price =" .$cinema->getPrice(). " where id=" .$cinema->getId();
+                
+                $this->connection = Connection::GetInstance();
                 $this->connection->ExecuteNonQuery($query);
             }
             catch(Exception $ex)

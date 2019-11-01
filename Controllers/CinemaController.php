@@ -25,6 +25,13 @@
             require_once(VIEWS_PATH."cinema-list.php");
         }
 
+        public function ShowEditView($id)
+        {
+            //Deberia mostrarme una vista con los campos que tengo actualmente y la opcion de modificar cuantos quiera
+            $cinema = $this->cinemaDAO->GetById($id);
+            require_once(VIEWS_PATH."edit-cinema.php");
+        }
+
 
         public function Add($name,$capacity,$address,$price)
         {
@@ -48,10 +55,18 @@
             $this->ShowListView();
         }
 
-        public function Edit($idCinema)
+        public function Edit($name,$capacity,$address,$price,$id)
         {
-            //Deberia mostrarme una vista con los campos que tengo actualmente y la opcion de modificar cuantos quiera
+            $cinema = new Cinema();
+            
+            $cinema->setId($id);
+            $cinema->setName($name);
+            $cinema->setCapacity($capacity);
+            $cinema->setAddress($address);
+            $cinema->setPrice($price);
 
+            $this->cinemaDAO->Edit($cinema);
+            $this->ShowListView();
         }
     }
 ?>

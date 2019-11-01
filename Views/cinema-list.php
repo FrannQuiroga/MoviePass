@@ -2,6 +2,7 @@
 <?php 
   include_once('header.php');
   include_once('nav-bar.php');
+  require_once("validate-admin.php");
 ?>
 
   <div id="breadcrumb" class="hoc clear"> 
@@ -52,7 +53,7 @@
                         </form>
                       </td>
                       <td>
-                        <form action="<?php echo FRONT_ROOT ?>Cinema/Edit" method="post">
+                        <form action="<?php echo FRONT_ROOT ?>Cinema/ShowEditView" method="post">
                         <button type="submit" class="btn" name="idCinema" style="background-color:#DC8E47;color:white;" value="<?php echo $cinema->getId();?>">Editar</button>
                         </form>
                       </td>

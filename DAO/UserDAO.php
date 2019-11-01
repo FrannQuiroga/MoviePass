@@ -3,9 +3,9 @@
 
     use \Exception as Exception;
     //use DAO\IUserDAO as IUserDAO;
-    use Models\User as User;   
+    use Models\User as User;
+    use Models\UserProfile as UserProfile;
     use DAO\Connection as Connection;
-    use DAO\UserProfileDAO as UserProfileDAO;
 
     class UserDAO /*implements IUserDAO*/
     {
@@ -17,11 +17,11 @@
             try
             {
 
-                $query = "INSERT INTO ".$this->tableName." (email,password,userProfile_id) VALUES (:email,:password,:userProfile_id);";
+                $query = "INSERT INTO ".$this->tableName." (email,password,user_profile_id) VALUES (:email,:password,:user_profile_id);";
                 
                 $parameters["email"] = $user->getEmail();
                 $parameters["password"] = $user->getPassword();
-                $parameters["userProfile_id"]=$user->getUserProfile()->getId();
+                $parameters["user_profile_id"]=$user->getUserProfile()->getId();
 
                 $this->connection = Connection::GetInstance();
 
@@ -33,36 +33,57 @@
             }
         }
 
-        public function GetUser($email,$password)
+        public function GetByEmail($email)
         {
             try
             {
-                $userList = array();
-                $userProfileDAO=new UserProfileDAO();
+                $user= null;;
+                
 
-                $query = "SELECT * FROM $this->tableName WHERE email = '".$email."' AND  password= '".$password."'";
+                $query = "SELECT * FROM ".$this->tableName." WHERE email LIKE '%" .$email."' AND isAvailable = 1";
 
                 $this->connection = Connection::GetInstance();
 
                 $resultSet = $this->connection->Execute($query);
-                
-                foreach ($resultSet as $row)
+        
+                foreach($resultSet as $row)
                 {                
                     $user = new User();
                     $user->setId($row["id"]);
                     $user->setEmail($row["email"]);
                     $user->setPassword($row["password"]);
-                    $user->setUserProfile($userProfileDAO->GetById($row["userProfile_id"]));//pasar el objeto
                     $user->setIsAdmin($row["isAdmin"]);
-                    $user->setIsAvailable($row["isAvailable"]);
-                    array_push($userList, $user);
+
+                    //CONSULTA PARA TRAER EL USER PROFILE!!
+
+                    $user->setUserProfile($this->GetProfile($row["user_profile_id"]));
                 }
-                return $userList;
+                return $user;
             }
             catch(Exception $ex)
             {
                 throw $ex;
             }
+        }
+
+        private function GetProfile($profileId)
+        {
+            $userProfile = null;
+            $query = "SELECT * FROM user_profiles WHERE id = " .$profileId;
+            $this->connection = Connection::GetInstance();
+
+            $resultSet = $this->connection->Execute($query);
+
+            foreach($resultSet as $row)
+            {
+                $userProfile = new UserProfile();
+                $userProfile->setId($row["id"]);
+                $userProfile->setName($row["name"]);
+                $userProfile->setSurname($row["surname"]);
+                $userProfile->setDocument($row["document"]);
+            }
+
+            return $userProfile;
         }
 
 
@@ -85,9 +106,21 @@
                     $user->setId($row["id"]);
                     $user->setEmail($row["email"]);
                     $user->setPassword($row["password"]);
-                    $user->setUserProfile($userProfileDAO->GetById($row["userProfile_id"]));//pasar el objeto
                     $user->setIsAdmin($row["isAdmin"]);
-                    $user->setIsAvailable($row["isAvailable"]);
+
+                    //CONSULTA PARA TRAER EL USER PROFILE!!
+                    $query = "SELECT * FROM user_profiles WHERE id = " .$row["id"];
+                    $this->connection = Connection::GetInstance();
+
+                    $profile = $this->connection->Execute($query);
+                    $userProfile = new UserProfile();
+                    $userProfile->setId($profile["id"]);
+                    $userProfile->setName($profile["name"]);
+                    $userProfile->setSurname($profile["surname"]);
+                    $userProfile->setDocument($profile["document"]);
+
+                    $user->setUserProfile($userProfile);
+
                     array_push($userList, $user);
                 }
                 return $userList;

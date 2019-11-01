@@ -6,7 +6,40 @@
       <div id="logo" class="fl_left">
         <h1><a href="<?php echo FRONT_ROOT ?>"><strong>Movie Pass</strong></a></h1>
       </div>
+      <?php if(isset($_SESSION["loggedUser"])) { 
+                $loggedUser = $_SESSION["loggedUser"]; 
+                if($loggedUser->getIsAdmin() == 1) { //Si es ADMIN muestro una navbar
+                  ?>
       <nav id="mainav" class="fl_right">
+        <ul class="clear">
+            <li>
+            <a class="drop" ><i class="fa fa-cogs"></i></a>
+              <ul>
+                <li><a href="<?php echo FRONT_ROOT ?>Movie/Update">Peliculas</a></li>
+                <li><a href="<?php echo FRONT_ROOT ?>Genre/Update">Generos</a></li>
+                <li><a href="<?php echo FRONT_ROOT ?>Cinema/ShowAddView">Cines</a></li>
+              </ul>
+            </li>
+            <li>
+            <a class="drop" ><i class="fa fa-film"></i></a>
+              <ul>
+                <li><a href="<?php echo FRONT_ROOT ?>Movie/ShowListView">Peliculas</a></li>
+                <li><a href="<?php echo FRONT_ROOT ?>Genre/ShowListView">Generos</a></li>
+                <li><a href="<?php echo FRONT_ROOT ?>Cinema/ShowListView">Cines</a></li>
+                <li><a href="<?php echo FRONT_ROOT ?>User/ShowListView">Usuarios</a></li>
+              </ul>
+            </li>
+            <li>
+              <a class="drop "><i class="fa fa-user"></i></a>
+              <ul>
+                <li><a href="<?php echo FRONT_ROOT ?>">Ver mi perfil</a></li>
+                <li><a href="<?php echo FRONT_ROOT ?>User/Logout">Salir</a></li>
+              </ul>
+            </li>
+        </ul>
+        </nav>
+      <?php } else { //Muestro navbar de usuario normal?> 
+        <nav id="mainav" class="fl_right">
         <ul class="clear">
             <li>
               <form style="display:inline;" action="<?php echo FRONT_ROOT ?>Movie/SHowSearchView" method="get">
@@ -17,31 +50,9 @@
               </form>
             </li>
             <li>
-            <a class="drop" ><i class="fa fa-cogs"></i></a>
-              <ul>
-                <li><a href="<?php echo FRONT_ROOT ?>Movie/Update">Peliculas</a></li>
-                <li><a href="<?php echo FRONT_ROOT ?>Genre/Update">Generos</a></li>
-                <li><a href="<?php echo FRONT_ROOT ?>Cinema/ShowAddView">Cines</a></li>
-                <li><a href="<?php echo FRONT_ROOT ?>Room/ShowAddView">Salas</a></li>
-                <li><a href="<?php echo FRONT_ROOT ?>Function/ShowAddView">Funciones</a></li>
-                <li><a href="<?php echo FRONT_ROOT ?>User/ShowAddView">Usuarios</a></li>
-              </ul>
-            </li>
-            <li>
             <a class="drop" ><i class="fa fa-film"></i></a>
               <ul>
-                <li><a href="<?php echo FRONT_ROOT ?>Movie/ShowListView">Peliculas</a></li>
-                <li><a href="<?php echo FRONT_ROOT ?>Genre/ShowListView">Generos</a></li>
-                <li><a href="<?php echo FRONT_ROOT ?>Cinema/ShowListView">Cines</a></li>
-                <!--<li><a href="<?php echo FRONT_ROOT ?>Room/ShowListView">Salas</a></li>-->
-                <li><a href="<?php echo FRONT_ROOT ?>User/ShowListView">Usuarios</a></li>
-              </ul>
-            </li>
-            <li>
-              <a class="drop "><i class="fa fa-user"></i></a>
-              <ul>
-                <li><a href="<?php echo FRONT_ROOT ?>User/ShowLoginView">Ingresar</a></li>
-                <li><a href="<?php echo FRONT_ROOT ?>User/ShowAddView">Registrarse</a></li>
+                <li><a href="<?php echo FRONT_ROOT ?>Movie/ShowListView">Ver Cartelera</a></li>
               </ul>
             </li>
             <li>
@@ -51,16 +62,29 @@
                 <li><a href="<?php echo FRONT_ROOT ?>">Comprar</a></li>
               </ul>
             </li>
+            <li>
+              <a class="drop "><i class="fa fa-user"></i></a>
+              <ul>
+                <li><a href="<?php echo FRONT_ROOT ?>">Ver mi perfil</a></li>
+                <li><a href="<?php echo FRONT_ROOT ?>User/Logout">Salir</a></li>
+              </ul>
+            </li>
         </ul>
-        </nav>
+        </nav> 
+      <?php } } else { //No hay session iniciada, navbar solo con login registro?>
+      <nav id="mainav" class="fl_right">
+        <ul class="clear">
+          <li>
+            <a class="drop "><i class="fa fa-user"></i></a>
+            <ul>
+              <li><a href="<?php echo FRONT_ROOT ?>User/ShowLoginView">Ingresar</a></li>
+              <li><a href="<?php echo FRONT_ROOT ?>User/ShowAddView">Registrarse</a></li>
+            </ul>
+          </li>
+        </ul>
+      </nav>
+      <?php } ?>      
     </header>
     <br>
-    <!--<form class="py-2" action="<?php echo FRONT_ROOT ?>Movie/Search" method="get">
-			<div class="input-group">
-			  <input type="text" class="form-control" name="searched" placeholder="Buscar pelicula...">
-			  <div class="input-group-append">
-			    <button class="" type="submit" style= "background-color:transparent;border:0px" ><i class="fa fa-search"></i></button>
-			  </div>
-			</div>
-		</form>-->
+    
   </div>
