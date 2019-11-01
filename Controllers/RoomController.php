@@ -20,7 +20,7 @@
 
         public function ShowAddView($idCinema)
         {
-            $cinema = $this->cinemaDAO->GetById($idCinema);
+            $room = $this->cinemaDAO->GetById($idCinema);
             require_once(VIEWS_PATH."add-room.php");
         }
 
@@ -28,7 +28,7 @@
         {
             $cinema = $this->cinemaDAO->GetById($idCinema);
             $roomList = $this->roomDAO->Get($orderedBy,$cinema);
-
+            
             require_once(VIEWS_PATH."room-list.php");
         }
 
@@ -58,10 +58,28 @@
             $this->ShowListView($room->getCinema()->getId());
         }
 
-        public function Edit($idRoom)
+        public function ShowEditView($id)
         {
             //Deberia mostrarme una vista con los campos que tengo actualmente y la opcion de modificar cuantos quiera
-
+            $room=$this->roomDAO->GetById($id);
+            $cinema=$this->cinemaDAO->GetById($room->getCinema()->getId());
+            require_once(VIEWS_PATH."edit-room.php");
         }
+        public function Edit($name,$capacity,$idCinema,$id)
+        {
+            $room = new Room();
+            
+            $room->setId($id);
+            $room->setName($name);
+            $room->setCapacity($capacity);
+
+            $this->roomDAO->edit($room);
+
+            echo "<script> if(confirm('Sala Modificado con Exito!!'));
+                </script>";
+            $this->ShowListView($idCinema);
+        }
+
+
     }
 ?>

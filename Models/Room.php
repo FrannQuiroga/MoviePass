@@ -7,7 +7,7 @@
         private $name;
         private $capacity;
         private $cinema; //no va , pasar el cine
-        private $isAvailable;
+        private $isAvailable;//no va
         private $functionsList = array();
 
         public function getId()

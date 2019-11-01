@@ -50,7 +50,7 @@
                       </form>
                     </td>
                     <td>
-                      <form action="<?php echo FRONT_ROOT; ?>Room/Edit" method="post">
+                      <form action="<?php echo FRONT_ROOT; ?>Room/ShowEditView" method="post">
                       <button type="submit" class="btn" name="idRoom" style="background-color:#DC8E47;color:white;" value="<?php echo $room->getId();?>">Editar</button>
                       </form>
                     </td>

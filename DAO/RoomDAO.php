@@ -109,5 +109,17 @@
                 throw $ex;
             }
         }
+        public function edit(Room $room){
+            try
+            {
+                $query = "UPDATE " .$this->tableName." SET  name = '".$room->getName()."' , capacity = ".$room->getCapacity(). " where id=" .$room->getId();
+                $this->connection = Connection::GetInstance();
+                $this->connection->ExecuteNonQuery($query);
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+        }
     }
 ?>

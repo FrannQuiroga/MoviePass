@@ -67,15 +67,39 @@
             
             $this->ShowAddView($idRoom);
         }
-
-        public function Remove($id)
+        public function Remove($idFunction)
         {
+            $function = $this->functionDAO->GetById($idFunction);
+
+            $this->functionDAO->Remove($idFunction);
             
+            $this->ShowListView($function->getRoom()->getId());
         }
 
-        public function Edit($id)
+        public function ShowEditView($idfunction)
         {
             //Deberia mostrarme una vista con los campos que tengo actualmente y la opcion de modificar cuantos quiera
+            $function=$this->functionDAO->GetById($idfunction);
+            $room=$this->roomDAO->GetById($function->getRoom()->getId());
+            $movie=$this->movieDAO->GetMovie($function->getMovie()->getId());
+            var_dump($function);
+            
+            require_once(VIEWS_PATH."edit-function.php");
         }
+        /*public function Edit($name,$capacity,$idCinema,$id)
+        {
+            $function = new Function_();
+            
+            $function->setId($id);
+            $function->setName($name);
+            $function->setCapacity($capacity);
+
+            $this->functionDAO->edit($function);
+
+            echo "<script> if(confirm('Sala Modificado con Exito!!'));
+                </script>";
+            $this->ShowListView($idCinema);
+        }*/
+
     }
 ?>

@@ -69,9 +69,71 @@
             }
         }
 
+        public function GetById($id)
+        {
+            try
+            {
+
+                $query = "SELECT * FROM ".$this->tableName." WHERE id =".$id;
+
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->Execute($query);
+                
+                foreach ($resultSet as $row)
+                {                
+                    $function = new Function_();
+                    $function->setId($row["id"]);
+                    $function->setDay($row["day"]);
+                    $function->setTime($row["time"]);
+                    
+                    //la unica forma de traer el objeto completo es llamar al movieDAO
+                    //preguntar si se puede llamar a otro DAO
+                    $movie = new Movie();
+                    $movie->setId($row["movie_id"]);
+                    $function->setMovie($movie);//falta el objeto completo
+                    
+                    //la unica forma de traer el objeto completo es llamar al roomDAO
+                    $room =new Room();
+                    $room->setId($row["room_id"]);
+                    $function->setRoom($room);//falta el objeto completo
+
+
+                }
+                return $function;
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+        }
+
         public function remove($id)
         {
-            
+            try
+            {
+                $query = "DELETE FROM .$this->tableName  WHERE id =".$id;
+
+                $this->connection = Connection::GetInstance();
+
+                $this->connection->ExecuteNonQuery($query);
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
         }
+        /*public function edit(Function $function){
+            try
+            {
+                $query = "UPDATE " .$this->tableName." SET  name = '".$room->getName()."' , capacity = ".$room->getCapacity(). " where id=" .$room->getId();
+                $this->connection = Connection::GetInstance();
+                $this->connection->ExecuteNonQuery($query);
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+        }*/
     }
 ?>

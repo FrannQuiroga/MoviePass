@@ -9,7 +9,7 @@
         private $movie;
         //-------------faltaba el cine
         private $room;
-        //------------
+        
         private $ticketsList = array();
 
         
