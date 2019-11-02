@@ -4,7 +4,7 @@ include_once('nav-bar.php');
 ?>
 
   <div id="breadcrumb" class="hoc clear"> 
-      <h6 class="heading">Ingreso de Funciones</h6>
+      <h6 class="heading">Sala: <?php echo $room->getName()?> </h6>
       <form action="<?php echo FRONT_ROOT; ?>Function/ShowListView" method="get">
             <button class="btn" type="submit" name="idRoom" style="background-color:GREEN;color:white;" value="<?php echo $room->getId();?>">Ver Listado</button>
           </form>
@@ -15,7 +15,7 @@ include_once('nav-bar.php');
       <!-- main body -->
       <div class="content" > 
         <div id="comments" style="align-items:center;">
-          <h2>PRUEBA</h2>
+          <h2>Ingresar Datos a modificar</h2>
           <form action="<?php echo FRONT_ROOT ?>Function/Edit" method="post"  style="padding: 2rem !important;">
             <table> 
               <thead class="center">
@@ -27,6 +27,16 @@ include_once('nav-bar.php');
                 </tr>
               </thead>
               <tbody allign="center">
+                <tr>
+                <?php echo "Sala: ".$room->getName();?>
+                </tr>
+                <tr>
+                <?php echo "Dia: ".$function->getDay();?>
+                </tr>
+                <tr>
+                <?php echo "Hora: ".$function->getTime();?>
+                </tr>
+                <?php echo "Pelicula: ".$movie->getTitle();?>
                 <tr>
                   <td>
                     <select name="idRoom" style="margin-right:3px;height:43px;width:240px;" required>
@@ -58,12 +68,15 @@ include_once('nav-bar.php');
                       <option value="<?php echo $movie->getId()?>"><?php echo $movie->getTitle();?></option>
                     <?php } ?>      
                     </select>
+                    
+                    <input type="hidden" name="idroom" value="<?php echo $room->getId()?>">    
+                  
                   </td>      
                 </tr>
                 </tbody>
             </table>
             <div>
-              <input type="submit" class="btn" value="Agregar" style="background-color:#DC8E47;color:white;"/>
+              <input type="submit" class="btn" value="Modificar" style="background-color:#DC8E47;color:white;"/>
             </div>
           </form>
         </div>

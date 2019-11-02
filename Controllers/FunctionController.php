@@ -82,24 +82,26 @@
             $function=$this->functionDAO->GetById($idfunction);
             $room=$this->roomDAO->GetById($function->getRoom()->getId());
             $movie=$this->movieDAO->GetMovie($function->getMovie()->getId());
-            var_dump($function);
+            $movieList= $this->movieDAO->Get("title");
             
             require_once(VIEWS_PATH."edit-function.php");
         }
-        /*public function Edit($name,$capacity,$idCinema,$id)
+        public function Edit($id,$day,$time,$idMovie,$idRoom)
         {
             $function = new Function_();
-            
             $function->setId($id);
-            $function->setName($name);
-            $function->setCapacity($capacity);
+            $function->setDay($day);
+            $function->setTime($time);
+            $movie = new Movie();
+            $movie->setId($idMovie);
+            $function->setMovie($movie);
 
             $this->functionDAO->edit($function);
 
-            echo "<script> if(confirm('Sala Modificado con Exito!!'));
+            echo "<script> if(confirm('Funcion Modificado con Exito!!'));
                 </script>";
-            $this->ShowListView($idCinema);
-        }*/
+            $this->ShowListView($idRoom);
+        }
 
     }
 ?>

@@ -123,10 +123,10 @@
                 throw $ex;
             }
         }
-        /*public function edit(Function $function){
+        public function edit(Function_ $function){
             try
             {
-                $query = "UPDATE " .$this->tableName." SET  name = '".$room->getName()."' , capacity = ".$room->getCapacity(). " where id=" .$room->getId();
+                $query = "UPDATE " .$this->tableName." SET  day = '".$function->getDay()."' , time = '".$function->getTime()."' , movie_id = '".$function->getMovie()->getId(). "' where id=" .$function->getId();
                 $this->connection = Connection::GetInstance();
                 $this->connection->ExecuteNonQuery($query);
             }
@@ -134,6 +134,6 @@
             {
                 throw $ex;
             }
-        }*/
+        }
     }
 ?>
