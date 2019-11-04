@@ -34,7 +34,7 @@
             }
         }
 
-        public function Truncate()
+        /*public function Truncate()
         {
             try
             {
@@ -49,15 +49,49 @@
                 //throw $ex;
             }
 
+        }*/
+
+        public function Truncate()
+        {
+            try
+            {
+                $query = "UPDATE ".$this->tableName." SET isAvailable = 0";
+
+                $this->connection = Connection::GetInstance();
+
+                $this->connection->ExecuteNonQuery($query);
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+
         }
 
-        public function Get($orderedBy)
+        public function EditMovie($id)
+        {
+            try
+            {
+                $query = "UPDATE ".$this->tableName." SET isAvailable = 1 WHERE id = ".$id;
+
+                $this->connection = Connection::GetInstance();
+
+                $this->connection->ExecuteNonQuery($query);
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+
+        }
+
+        public function Get($orderedBy) //La voy a dejar de usar, solo para saber que peliculas tengo disponibles. ACOMODAR!!
         {
             try
             {
                 $movieList = array();
 
-                $query = "SELECT * FROM ".$this->tableName." ORDER BY ".$orderedBy;
+                $query = "SELECT * FROM ".$this->tableName." WHERE isAvailable = 1 ORDER BY ".$orderedBy;
 
                 
                 /*$query = "SELECT m.id, m.original_title, m.poster_path, m.vote_average, m.overview, g.name as genre_ids
@@ -164,6 +198,28 @@
                 }
 
                 return $movie;
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+        }
+
+        public function ExistsMovie($id) /*FALTA PROBAR FUNCION!!*/ 
+        {
+            try
+            {
+
+                $query = "SELECT * FROM ".$this->tableName." WHERE id =".$id;
+                
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->Execute($query);
+                
+                if(!empty($resultSet)){
+                    return true;}
+                else{
+                    return false;}
             }
             catch(Exception $ex)
             {

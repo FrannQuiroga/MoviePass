@@ -10,6 +10,7 @@
         private $voteAverage;
         private $overview;
         private $backdropPath;
+        private $isAvailable;
   
         public function getPosterPath()
         {
@@ -91,6 +92,18 @@
         public function setBackdropPath($backdropPath)
         {
                 $this->backdropPath = $backdropPath;
+
+                return $this;
+        }
+
+        public function getIsAvailable()
+        {
+                return $this->isAvailable;
+        }
+
+        public function setIsAvailable($isAvailable)
+        {
+                $this->isAvailable = $isAvailable;
 
                 return $this;
         }

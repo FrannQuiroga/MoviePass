@@ -53,32 +53,40 @@
             //DEBERIA VERIFICAR PREVIO A VACIAR LA TABLA QUE ESTE TRAYENDO AL MENOS UNA PELICULA NUEVA DE LA API!!
             if($array != null)
             {
-                $this->movieDAO->Truncate(); //AGREGO ESTA FUNCION PARA VACIAR LA TABLA ANTES DE ACTUALIZAR!! (en prueba)
-                $this->genreByMovieDAO->Truncate(); //VACIO LA TABLA RELACIONAL DE GENEROS POR PELICULA!!
+                $this->movieDAO->Truncate(); //Esta funcion me pone todas las peliculas como no disponibles(dsp voy actualizando)
+                //$this->genreByMovieDAO->Truncate(); //VACIO LA TABLA RELACIONAL DE GENEROS POR PELICULA!!
 
                 foreach($array['results'] as $row)
                 {
-                    $movie = new Movie();
+                    if($this->movieDAO->ExistsMovie($row["id"]))//Si la pelicula esta el la bd, la vuelvo a dar de alta
+                    {
+                        $this->movieDAO->EditMovie($row["id"]);//setea isAvailable en 1.
+                    }
+                    else //Si es la primera vez, la agrego a la base de datos y guardo sus generos en la tabla relacional
+                    {
+                        $movie = new Movie();
 
-                    $movie->setPosterPath($row["poster_path"]);
-                    $movie->setId($row["id"]);
-                    $movie->setTitle($row["title"]);
-                    $movie->setVoteAverage($row["vote_average"]);
-                    $movie->setOverview($row["overview"]);
-                    $movie->setBackdropPath($row["backdrop_path"]);
-
-                    $this->movieDAO->Add($movie);
+                        $movie->setPosterPath($row["poster_path"]);
+                        $movie->setId($row["id"]);
+                        $movie->setTitle($row["title"]);
+                        $movie->setVoteAverage($row["vote_average"]);
+                        $movie->setOverview($row["overview"]);
+                        $movie->setBackdropPath($row["backdrop_path"]);
+    
+                        $this->movieDAO->Add($movie);
+                        
+                        //AGREGAR GENEROS CON TABLA INTERMEDIA GENEROS X PELICULA!!
+                        foreach($row["genre_ids"] as $id){
+                            $genreByMovie = new GenreByMovie();
+                            $genreByMovie->setMovieId($movie->getId());
+                            $genreByMovie->setGenreId($id);
+    
+                            $this->genreByMovieDAO->Add($genreByMovie);
+                    }
                     
-                    //AGREGAR GENEROS CON TABLA INTERMEDIA GENEROS X PELICULA!!
-                    foreach($row["genre_ids"] as $id){
-                        $genreByMovie = new GenreByMovie();
-                        $genreByMovie->setMovieId($movie->getId());
-                        $genreByMovie->setGenreId($id);
-
-                        $this->genreByMovieDAO->Add($genreByMovie);
                     }
                 }
-                $this->ShowSuccessfulView(); 
+                $this->ShowSuccessfulView(); //Muestro vista de exito
             }
             else
             {

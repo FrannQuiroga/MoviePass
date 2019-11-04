@@ -4,7 +4,7 @@
   <div class="wrapper">
     <header id="header" class="hoc clear" > 
       <div id="logo" class="fl_left">
-        <h1><a href="<?php echo FRONT_ROOT ?>"><strong>Movie Pass</strong></a></h1>
+        <h1><a href="<?php echo FRONT_ROOT ?>">movie<strong>pass</strong></a></h1>
       </div>
       <?php if(isset($_SESSION["loggedUser"])) { 
                 $loggedUser = $_SESSION["loggedUser"]; 
