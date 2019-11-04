@@ -2,6 +2,7 @@
     namespace Controllers;
 
     use DAO\CinemaDAO as CinemaDAO;
+    use DAO\RoomDAO as RoomDAO;
     use Models\Cinema as Cinema;
 
     class CinemaController
@@ -11,6 +12,7 @@
         public function __construct()
         {
             $this->cinemaDAO = new CinemaDAO();
+            $this->roomDAO = new RoomDAO();
         }
 
         public function ShowAddView()
@@ -49,9 +51,12 @@
 
         public function Remove($idCinema)
         {
+            $cinema = $this->cinemaDAO->GetById($idCinema);
             //Trabajamos con baja logica para seguir teniendo persistencia de todo
-            $this->cinemaDAO->Remove($idCinema);
-
+            if(empty($this->roomDAO->Get("name",$cinema)))//SI EL CINE TIENE SALAS; NO DEJA BORRARLO!!
+                $this->cinemaDAO->Remove($idCinema);
+                //AGREGAR SCRIPT EXITO
+            else {} //AGREGAR SCRIPT ERROR; POR TENER SALAS ASOCIADAS
             $this->ShowListView();
         }
 

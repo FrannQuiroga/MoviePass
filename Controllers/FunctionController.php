@@ -70,7 +70,7 @@
 
         public function Remove($id)
         {
-            
+            //VER LUEGO VALIDACIONES RESPECTO A LAS ENTRADAS VENDIDAS!!
         }
 
         public function Edit($id)
