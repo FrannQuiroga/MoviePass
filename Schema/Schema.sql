@@ -41,11 +41,11 @@ CREATE table rooms(
     constraint fk_cinema_id foreign key (cinema_id) references cinemas (id)
 );
 
---SIN CREAR--
+
 CREATE table functions(
     id int primary key auto_increment,
-    day varchar(30),
-    time varchar(30),
+    day date,
+    time varchar(5),
     movie_id int,
     room_id int,
     isAvailable TINYINT default 1,

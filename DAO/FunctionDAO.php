@@ -16,8 +16,11 @@
         {
             try
             {
+
                 $query = "INSERT INTO ".$this->tableName." (day,time,movie_id,room_id) VALUES (:day,:time,:movie_id, :room_id);";
                 
+                //$parameters["day"] = date( 'Ymd H:i:s', $function->getDay());
+                //var_dump($function->getDay());
                 $parameters["day"] = $function->getDay();
                 $parameters["time"] = $function->getTime();
                 $parameters["movie_id"] = $function->getMovie()->getId();
@@ -41,7 +44,7 @@
 
                 $query = "SELECT * FROM ". $this->tableName.
                 " WHERE isAvailable = 1 AND room_id =" .$room->getId(). 
-                 " ORDER BY day";//VER CON QUE ORDENAMOS; DAY ESTA FORZADO.
+                 " ORDER BY day,time";//VER CON QUE ORDENAMOS; DAY ESTA FORZADO.
 
                 $this->connection = Connection::GetInstance();
 
@@ -69,9 +72,80 @@
             }
         }
 
-        public function remove($id)
+        public function GetById($idFunction)
         {
-            
+            try
+            {
+                $functionList = array();
+
+                $query = "SELECT * FROM ". $this->tableName.
+                " WHERE isAvailable = 1 AND id =" .$idFunction;
+
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->Execute($query);
+                
+                foreach ($resultSet as $row)
+                {                
+                    $function = new Function_();
+                    $function->setId($row["id"]);
+                    $function->setDay($row["day"]);
+                    $function->setTime($row["time"]);
+                    
+                    $room = new Room();
+                    $room->setId($row["room_id"]);
+                    $function->setRoom($room);
+                    
+                    $movie = new Movie();
+                    $movie->setId($row["movie_id"]);
+                    $function->setMovie($movie);
+                }
+
+                return $function;
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+        }
+
+        public function ExistsFunction($day,$time,$idRoom)
+        {
+            try
+            {
+
+                $query = "SELECT * FROM ". $this->tableName.
+                " WHERE isAvailable = 1 AND day LIKE '%" .$day. "%' AND time LIKE '%" .$time. "%' AND room_id = " .$idRoom;
+                
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->Execute($query);
+                var_dump($resultSet);
+                if(empty($resultSet))
+                    return false;
+
+                return true;
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+        }
+
+        public function Remove($id)
+        {
+            try
+            {
+                $query = "UPDATE .$this->tableName SET isAvailable = 0 WHERE id =".$id;
+
+                $this->connection = Connection::GetInstance();
+
+                $this->connection->ExecuteNonQuery($query);
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
         }
     }
 ?>
