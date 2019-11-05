@@ -29,7 +29,7 @@
                   <tr>
                     <th style="width: 80px;">Id</th>
                     <th style="width: 250px;">Nombre</th>
-                    <th style="width: 250px;">Cantidad de peliculas actuales</th>
+                    <!--<th style="width: 250px;">Cantidad de peliculas actuales</th>-->
                     
                   </tr>
                 </thead>
@@ -38,7 +38,7 @@
                     <tr>
                         <td><?php echo $genre->getId(); ?></td>
                         <td><?php echo $genre->getName(); ?></td>
-                        <td>¡Ni idea!</td>
+                        <!--<td>¡Ni idea!</td>-->
                     </tr>
                   <?php } ?>
                 </tbody>

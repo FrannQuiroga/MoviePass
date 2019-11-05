@@ -108,18 +108,7 @@
                     $user->setPassword($row["password"]);
                     $user->setIsAdmin($row["isAdmin"]);
 
-                    //CONSULTA PARA TRAER EL USER PROFILE!!
-                    $query = "SELECT * FROM user_profiles WHERE id = " .$row["id"];
-                    $this->connection = Connection::GetInstance();
-
-                    $profile = $this->connection->Execute($query);
-                    $userProfile = new UserProfile();
-                    $userProfile->setId($profile["id"]);
-                    $userProfile->setName($profile["name"]);
-                    $userProfile->setSurname($profile["surname"]);
-                    $userProfile->setDocument($profile["document"]);
-
-                    $user->setUserProfile($userProfile);
+                    $user->setUserProfile($this->GetProfile($row["user_profile_id"]));
 
                     array_push($userList, $user);
                 }

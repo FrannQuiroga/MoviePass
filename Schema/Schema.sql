@@ -7,8 +7,9 @@ create table movies(
     original_title varchar(50),
     vote_average float,
     overview text,
-    backdrop_path varchar (50)
-);
+    backdrop_path varchar (50),
+    isAvailable TINYINT default 1
+); --Agrega campo isAvailable para persistir info de peli una vez sacada de cartelera
 
 create table cinemas(
     id int primary key auto_increment,
