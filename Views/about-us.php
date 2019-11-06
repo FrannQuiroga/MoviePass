@@ -6,9 +6,10 @@ include_once('nav-bar.php');
     <div id="breadcrumb" class="hoc clear"> 
     <h6 class="heading">Sobre Nosotros</h6>
     <a href="<?php echo FRONT_ROOT ?>"  class="btn" style="background-color:GREEN;color:white;" >Volver</a>
-    </div> 
+    </div>
+</div> 
 
-    <div class="row">
+    <div class="row" style="background-color:#EAEDED;padding: 2rem !important;">
         <div class="card flex-md-row mb-4 shadow-sm h-md-250" style="align-items:center;margin-left:100px;width:700px;">
                 <img class="card-img-left flex-auto d-none d-lg-block" alt="Movie_Poster_[180x250]" src="<?php echo FRONT_ROOT . IMG_PATH?>FrancoQuiroga.jpg" style="width: 180px; height: 250px;">
                 <div class="card-body d-flex flex-column align-items-start">
@@ -33,6 +34,7 @@ include_once('nav-bar.php');
         
     </div>
 
+<div class="bgded overlay" style="background-image:url('<?php echo FRONT_ROOT.IMG_PATH?>butacas.jpg');">
 <?php 
 include_once('footer.php');
 ?>

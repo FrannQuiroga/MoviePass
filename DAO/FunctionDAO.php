@@ -44,7 +44,7 @@
 
                 $query = "SELECT * FROM ". $this->tableName.
                 " WHERE isAvailable = 1 AND room_id =" .$room->getId(). 
-                 " ORDER BY day,time";//VER CON QUE ORDENAMOS; DAY ESTA FORZADO.
+                 " ORDER BY day,time";//ORDENO POR DIA Y HORARIO (en ese orden).
 
                 $this->connection = Connection::GetInstance();
 

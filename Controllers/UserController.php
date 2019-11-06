@@ -39,6 +39,11 @@
             require_once(VIEWS_PATH."user-list.php");
         }
 
+        public function ShowProfileView()
+        {
+            $user = $_SESSION["loggedUser"];
+            require_once(VIEWS_PATH."profile-view.php");
+        }
 
         public function Add($name,$surname,$document,$email,$password)
         {

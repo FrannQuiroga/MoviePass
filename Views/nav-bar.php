@@ -17,7 +17,7 @@
               <ul>
                 <li><a href="<?php echo FRONT_ROOT ?>Movie/Update">Peliculas</a></li>
                 <li><a href="<?php echo FRONT_ROOT ?>Genre/Update">Generos</a></li>
-                <li><a href="<?php echo FRONT_ROOT ?>Cinema/ShowAddView">Cines</a></li>
+                
               </ul>
             </li>
             <li>
@@ -32,7 +32,7 @@
             <li>
               <a class="drop "><i class="fa fa-user"></i></a>
               <ul>
-                <li><a href="<?php echo FRONT_ROOT ?>">Ver mi perfil</a></li>
+                <li><a href="<?php echo FRONT_ROOT ?>User/ShowProfileView">Ver mi perfil</a></li>
                 <li><a href="<?php echo FRONT_ROOT ?>User/Logout">Salir</a></li>
               </ul>
             </li>
@@ -65,7 +65,7 @@
             <li>
               <a class="drop "><i class="fa fa-user"></i></a>
               <ul>
-                <li><a href="<?php echo FRONT_ROOT ?>">Ver mi perfil</a></li>
+                <li><a href="<?php echo FRONT_ROOT ?>User/ShowProfileView">Ver mi perfil</a></li>
                 <li><a href="<?php echo FRONT_ROOT ?>User/Logout">Salir</a></li>
               </ul>
             </li>

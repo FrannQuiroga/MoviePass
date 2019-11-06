@@ -35,6 +35,15 @@
             require_once(VIEWS_PATH."room-list.php");
         }
 
+        public function ShowEditView($id)
+        {
+            //Deberia mostrarme una vista con los campos que tengo actualmente y la opcion de modificar cuantos quiera
+            $room=$this->roomDAO->GetById($id);
+            $room->setCinema($this->cinemaDAO->GetById($room->getCinema()->getId()));//VER QUE ONDA!
+            //$cinema=$this->cinemaDAO->GetById($room->getCinema()->getId());
+            require_once(VIEWS_PATH."edit-room.php");
+        }
+
         public function Add($name,$capacity,$idCinema)
         {
             $room = new Room();
@@ -61,17 +70,36 @@
             {
                 $this->roomDAO->Remove($idRoom);//VER SI PASO EL ROOM O SOLO ID
                 //AGREGAR SCRIPT DE EXITO
+                echo "<script> if(confirm('Sala borrada con Exito!!'));
+                </script>";
             }
-            else {}//SCRIPT DE ERROR; POR TENER FUNCIONES}
+            else 
+            {
+                //SCRIPT DE ERROR; POR TENER FUNCIONES
+                echo "<script> if(confirm('La sala no puede ser borrada porque tiene funciones disponibles!!'));
+                </script>";
+            }
+
             //Si borro una sala que tiene funciones,no me tiene que dejar.
             // o preguntar que quiero hacer y borrar las funciones. ver luego tema de entradas vendidas
+
             $this->ShowListView($room->getCinema()->getId());
         }
 
-        public function Edit($idRoom)
+        public function Edit($name,$capacity,$idCinema,$id)
         {
-            //Deberia mostrarme una vista con los campos que tengo actualmente y la opcion de modificar cuantos quiera
+            $room = new Room();
+            
+            $room->setId($id);
+            $room->setName($name);
+            $room->setCapacity($capacity);
+            $this->roomDAO->Edit($room);
 
+            //Agregar restricciones para evitar duplicados de nombre!! o algun script en caso de error.
+            echo "<script> if(confirm('Sala Modificada con Exito!!'));
+                </script>";
+                
+            $this->ShowListView($idCinema);
         }
     }
 ?>
