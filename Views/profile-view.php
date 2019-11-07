@@ -13,7 +13,7 @@ include_once('nav-bar.php');
 <div class="row" style="background-color:#EAEDED;padding: 2rem !important;">
 
     <div class="card flex-md-row mb-4 shadow-sm h-md-250" style="align-items:center;width:500px;margin-left:auto;margin-right:auto;">
-            <img class="card-img-left flex-auto d-none d-lg-block" alt="Movie_Poster_[180x250]" src="<?php echo FRONT_ROOT . IMG_PATH?>Logo.jpg" style="width: 180px; height: 200px;">
+            <img class="card-img-left flex-auto d-none d-lg-block" alt="Movie_Poster_[180x250]" src="<?php echo FRONT_ROOT . IMG_PATH?>Avatar.png" style="width: 180px; height: 200px;">
             <div class="card-body d-flex flex-column align-items-start">
                 <div class="mb-1 text-muted small">
                 </div>

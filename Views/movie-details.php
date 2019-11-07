@@ -4,8 +4,10 @@ include_once('header.php');
 include_once('nav-bar.php');
 require_once('validate-session.php');
 ?>
-
-  
+    
+    <div id="breadcrumb" class="hoc clear"> 
+        <h6 class="heading">Horarios</h6>
+    </div>
 </div>
 
 

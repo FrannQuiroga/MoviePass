@@ -20,7 +20,7 @@
 
         public function ShowloggedView() //QUEDA DUPLICADO CON HOME CONTROLLER: ESTA BIEN??
         {
-            require_once(VIEWS_PATH."home.php");
+            require_once(VIEWS_PATH."carrousel.php");
         }
 
         public function ShowLoginView()

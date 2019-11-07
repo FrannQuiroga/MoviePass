@@ -120,7 +120,7 @@
                 $this->connection = Connection::GetInstance();
 
                 $resultSet = $this->connection->Execute($query);
-                var_dump($resultSet);
+                
                 if(empty($resultSet))
                     return false;
 
@@ -146,6 +146,12 @@
             {
                 throw $ex;
             }
+        }
+
+        public function GetMovieFunctionsByCinema($movieId,$cinemaId)
+        {
+            //Consulta que me va a traer todas las funciones de una pelicula que tiene ese cine;
+            //COMO GARCHA LO ARMO BIEN?? PENSAR EN PAPEL!!
         }
     }
 ?>

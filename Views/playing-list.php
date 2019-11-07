@@ -25,7 +25,7 @@ require_once('validate-session.php');
 
   <div class="row" style="background-color:#EAEDED;padding: 2rem !important;" >
     <div class="col-md-6 hoc" style="align-items:center;">
-      <?php foreach($movieList as $movie){?>
+      <?php foreach($playingList as $movie){?>
         <div class="card flex-md-row mb-4 shadow-sm h-md-250" >
           <div class="card-body d-flex flex-column align-items-start">
             <div class="mb-1 text-muted small">| <?php foreach($movie->getGenres() as $genre) {
