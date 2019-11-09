@@ -5,8 +5,9 @@
     use DAO\IMovieDAO as IMovieDAO;
     use Models\Movie as Movie;    
     use DAO\Connection as Connection;
+    use DAO\BaseDAO as BaseDAO;
 
-    class MovieDAO implements IMovieDAO
+    class MovieDAO extends BaseDAO implements IMovieDAO
     {
         private $connection;
         private $tableName = "movies";
@@ -34,24 +35,7 @@
             }
         }
 
-        /*public function Truncate()
-        {
-            try
-            {
-                $query = "TRUNCATE ".$this->tableName;
-
-                $this->connection = Connection::GetInstance();
-
-                $resultSet = $this->connection->Execute($query);
-            }
-            catch(Exception $ex)
-            {
-                //throw $ex;
-            }
-
-        }*/
-
-        public function Truncate()
+        public function Truncate() //ME PONE TODAS LAS PELIS COMO NO DISPONIBLES!!
         {
             try
             {
@@ -68,11 +52,11 @@
 
         }
 
-        public function EditMovie($id)
+        public function EditMovie($idMovie) //ME ACTUVA NUEVAMENTE LA PELICULA, SI ES QUE YA ESTABA EN LA BD!!
         {
             try
             {
-                $query = "UPDATE ".$this->tableName." SET isAvailable = 1 WHERE id = ".$id;
+                $query = "UPDATE ".$this->tableName." SET isAvailable = 1 WHERE id = ".$idMovie;
 
                 $this->connection = Connection::GetInstance();
 
@@ -92,14 +76,6 @@
                 $movieList = array();
 
                 $query = "SELECT * FROM ".$this->tableName." WHERE isAvailable = 1 ORDER BY ".$orderedBy;
-
-                
-                /*$query = "SELECT m.id, m.original_title, m.poster_path, m.vote_average, m.overview, g.name as genre_ids
-                FROM genre_by_movie as gbm
-                INNER JOIN movies as m on gbm.movie_id = m.id
-                INNER JOIN genres as g on g.id = gbm.genre_id
-                ORDER BY ".$orderedBy;*/
-                
 
                 $this->connection = Connection::GetInstance();
 
@@ -129,7 +105,7 @@
             }
         }
 
-        public function GetSearchList($searched) //NO SE POR QUE PORONGA NO ANDA!!
+        public function GetSearchList($searched) //YA ESTA ANDANDO JOYA!!
         {
             try
             {
@@ -164,20 +140,12 @@
             }
         }
 
-        public function GetMovie($id) /*FALTA PROBAR FUNCION!!*/ 
+        /*public function GetMovie($id) //EN BaseDAO
         {
             try
             {
 
-                $query = "SELECT * FROM ".$this->tableName." WHERE id =".$id;
-
-
-                /*$query = "SELECT m.id, m.original_title, m.poster_path, m.vote_average, m.overview, g.name as genre_ids
-                FROM genre_by_movie as gbm
-                INNER JOIN movies as m on gbm.movie_id = m.id
-                INNER JOIN genres as g on g.id = gbm.genre_id
-                ORDER BY ".$orderedBy;*/
-                
+                $query = "SELECT * FROM ".$this->tableName." WHERE id =".$id;              
 
                 $this->connection = Connection::GetInstance();
 
@@ -203,14 +171,14 @@
             {
                 throw $ex;
             }
-        }
+        }*/
 
-        public function ExistsMovie($id) /*FALTA PROBAR FUNCION!!*/ 
+        public function ExistsMovie($idMovie) //TESTEADA!
         {
             try
             {
 
-                $query = "SELECT * FROM ".$this->tableName." WHERE id =".$id;
+                $query = "SELECT * FROM ".$this->tableName." WHERE id =".$idMovie;
                 
                 $this->connection = Connection::GetInstance();
 
@@ -227,7 +195,7 @@
             }
         }
 
-        private function GetGenreListByMovie($id)
+        /*private function GetGenreListByMovie($id) //EN BaseDAO
         {
             try
             {
@@ -253,6 +221,6 @@
             {
                 throw $ex;
             }
-        }
+        }*/
     }
 ?>

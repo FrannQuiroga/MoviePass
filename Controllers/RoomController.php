@@ -5,7 +5,7 @@
     use DAO\CinemaDAO as CinemaDAO;
     use DAO\FunctionDAO as FunctionDAO;
     use Models\Room as Room;
-    use Models\Cinema as Cinema;
+    //use Models\Cinema as Cinema;
     //use Models\Function as Function;
 
     class RoomController
@@ -23,23 +23,24 @@
 
         public function ShowAddView($idCinema)
         {
-            $cinema = $this->cinemaDAO->GetById($idCinema);
+            $cinema = $this->cinemaDAO->GetCinema($idCinema); //--->>>((preguntar a ver que onda!!!))<<<---
+            //LO PODRIA BUSCAR POR ROOMDAO PORQUE LO TENGO EN BASEDAO!! 
             require_once(VIEWS_PATH."add-room.php");
         }
 
         public function ShowListView($idCinema, $orderedBy = "name") //AGREGAR UN VALOR EN DEFAULT SI NO HAY GET PARA PODER UNIFICAR LAS FUNCIONES!!
         {
-            $cinema = $this->cinemaDAO->GetById($idCinema);
-            $roomList = $this->roomDAO->Get($orderedBy,$cinema);
+            $cinema = $this->cinemaDAO->GetCinema($idCinema);
+            $roomList = $this->roomDAO->Get($cinema,$orderedBy);
 
             require_once(VIEWS_PATH."room-list.php");
         }
 
-        public function ShowEditView($id)
+        public function ShowEditView($idRoom)
         {
             //Deberia mostrarme una vista con los campos que tengo actualmente y la opcion de modificar cuantos quiera
-            $room=$this->roomDAO->GetById($id);
-            $room->setCinema($this->cinemaDAO->GetById($room->getCinema()->getId()));//VER QUE ONDA!
+            $room=$this->roomDAO->GetRoom($idRoom);
+            //$room->setCinema($this->cinemaDAO->GetCinema($room->getCinema()->getId()));//VER QUE ONDA!
             //$cinema=$this->cinemaDAO->GetById($room->getCinema()->getId());
             require_once(VIEWS_PATH."edit-room.php");
         }
@@ -50,7 +51,7 @@
     
             $room->setName($name);
             $room->setCapacity($capacity);
-            $room->setCinema($this->cinemaDAO->GetById($idCinema)); //MODIFICADO
+            $room->setCinema($this->cinemaDAO->GetCinema($idCinema)); //MODIFICADO
 
             //AGREGAR LAS FUNCIONES A LA SALA 
 
@@ -63,12 +64,12 @@
 
         public function Remove($idRoom)
         {
-            $room = $this->roomDAO->GetById($idRoom);//LO HAGO PARA PODER TENER EL ID DEL CINE Y VOLVER A MOSTRAR LA LISTA
+            $room = $this->roomDAO->GetRoom($idRoom);//LO HAGO PARA PODER TENER EL ID DEL CINE Y VOLVER A MOSTRAR LA LISTA
             //Trabajamos con baja logica para seguir teniendo persistencia de todo
             
             if(empty($this->functionDAO->Get($room)))//SI LA SALA NO TIENE FUNCIONES, la puedo borrar
             {
-                $this->roomDAO->Remove($idRoom);//VER SI PASO EL ROOM O SOLO ID
+                $this->roomDAO->Remove($idRoom);
                 //AGREGAR SCRIPT DE EXITO
                 echo "<script> if(confirm('Sala borrada con Exito!!'));
                 </script>";

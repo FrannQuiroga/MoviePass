@@ -2,12 +2,13 @@
     namespace DAO;
 
     use \Exception as Exception;
-    //use DAO\IRoomDAO as IRoomDAO;
+    use DAO\IRoomDAO as IRoomDAO;
     use Models\Room as Room;
-    use Models\Cinema as Cinema; 
+    //use Models\Cinema as Cinema; 
     use DAO\Connection as Connection;
+    use DAO\BaseDAO as BaseDAO;
 
-    class RoomDAO /*implements IRoomDAO*/
+    class RoomDAO extends BaseDAO implements IRoomDAO
     {
         private $connection;
         private $tableName = "rooms";
@@ -32,7 +33,7 @@
             }
         }
 
-        public function Get($orderedBy,$cinema)
+        public function Get($cinema,$orderedBy)
         {
             try
             {
@@ -65,40 +66,13 @@
             }
         }
 
-        public function GetById($id)
+        
+
+        public function Remove($idRoom)
         {
             try
             {
-
-                $query = "SELECT * FROM ".$this->tableName." WHERE isAvailable = 1 AND id =".$id;
-
-                $this->connection = Connection::GetInstance();
-
-                $resultSet = $this->connection->Execute($query);
-                
-                foreach ($resultSet as $row)
-                {                
-                    $room = new Room();
-                    $room->setId($row["id"]);
-                    $room->setName($row["name"]);
-                    $room->setCapacity($row["capacity"]);
-                    $cinema = new Cinema();
-                    $cinema->setId($row["cinema_id"]);
-                    $room->setCinema($cinema);
-                }
-                return $room;
-            }
-            catch(Exception $ex)
-            {
-                throw $ex;
-            }
-        }
-
-        public function Remove($id)
-        {
-            try
-            {
-                $query = "UPDATE .$this->tableName SET isAvailable = 0 WHERE id =".$id;
+                $query = "UPDATE .$this->tableName SET isAvailable = 0 WHERE id =".$idRoom;
 
                 $this->connection = Connection::GetInstance();
 

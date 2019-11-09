@@ -5,10 +5,10 @@
 
     interface IRoomDAO{
         
-        public function Add(Rooom $room);
-        public function Get($orderedBy,$cinema);
-        public function GetById($id);
-        public function remove($id);
+        public function Add(Room $room);
+        public function Get($cinema,$orderedBy);
+        public function Remove($idRoom);
+        public function Edit($room);
     }
 
 ?>

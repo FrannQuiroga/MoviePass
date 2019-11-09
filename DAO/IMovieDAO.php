@@ -9,7 +9,10 @@
         public function Get($orderedBy);
         public function Truncate();
         public function GetSearchList($searched);
-        public function GetMovie($id);
+        public function EditMovie($idMovie);
+        public function ExistsMovie($idMovie);
+        
+        
     }
 
 ?>

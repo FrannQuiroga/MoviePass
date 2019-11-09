@@ -5,8 +5,9 @@
     use DAO\ICinemaDAO as ICinemaDAO;
     use Models\Cinema as Cinema;    
     use DAO\Connection as Connection;
+    use DAO\BaseDAO as BaseDAO;
 
-    class CinemaDAO implements ICinemaDAO
+    class CinemaDAO extends BaseDAO implements ICinemaDAO
     {
         private $connection;
         private $tableName = "cinemas";
@@ -63,40 +64,11 @@
             }
         }
 
-        public function GetById($id)
+        public function Remove($idCinema)
         {
             try
             {
-                $cinema= null;
-
-                $query = "SELECT * FROM ".$this->tableName." WHERE isAvailable = 1 AND id =".$id;
-
-                $this->connection = Connection::GetInstance();
-
-                $resultSet = $this->connection->Execute($query);
-                
-                foreach ($resultSet as $row)
-                {                
-                    $cinema = new Cinema();
-                    $cinema->setId($row["id"]);
-                    $cinema->setName($row["name"]);
-                    $cinema->setCapacity($row["capacity"]);
-                    $cinema->setAddress($row["address"]);
-                    $cinema->setPrice($row["price"]);
-                }
-                return $cinema;
-            }
-            catch(Exception $ex)
-            {
-                throw $ex;
-            }
-        }
-
-        public function Remove($id)
-        {
-            try
-            {
-                $query = "UPDATE .$this->tableName SET isAvailable = 0 WHERE id =".$id;
+                $query = "UPDATE .$this->tableName SET isAvailable = 0 WHERE id =".$idCinema;
 
                 $this->connection = Connection::GetInstance();
 
@@ -108,7 +80,7 @@
             }
         }
 
-        public function Edit(Cinema $cinema)
+        public function Edit($cinema)
         {
             try
             {

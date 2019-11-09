@@ -2,11 +2,11 @@
     namespace DAO;
 
     use \Exception as Exception;
-    //use DAO\IUserProfileDAO as IUserProfileDAO;
+    use DAO\IUserProfileDAO as IUserProfileDAO;
     use Models\UserProfile as UserProfile;    
     use DAO\Connection as Connection;
 
-    class UserProfileDAO /*implements IUserProfileDAO*/
+    class UserProfileDAO implements IUserProfileDAO
     {
         private $connection;
         private $tableName = "user_profiles";
@@ -89,12 +89,12 @@
             }
         }
 
-        public function GetById($id){
+        public function GetById($idProfile){
             try
             {
                 $userProfile= null;
 
-                $query = "SELECT * FROM ".$this->tableName." WHERE id =".$id;
+                $query = "SELECT * FROM ".$this->tableName." WHERE id =".$idProfile;
 
                 $this->connection = Connection::GetInstance();
 
@@ -117,11 +117,11 @@
             }
         }
 
-        public function remove($id)
+        public function Remove($idProfile)
         {
             try
             {
-                $query = "DELETE FROM .$this->tableName WHERE id =".$id;
+                $query = "DELETE FROM .$this->tableName WHERE id =".$idProfile;
 
                 $this->connection = Connection::GetInstance();
 

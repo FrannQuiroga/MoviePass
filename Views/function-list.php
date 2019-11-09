@@ -18,7 +18,7 @@
       <form action="<?php echo FRONT_ROOT ?>Function/ShowListView" method="get">
         <!--<input type="radio" name="orderedBy" value="name" onclick="this.form.submit()" <?php if($orderedBy =="movie") {echo "checked";}?>><h6 class= "mb-1 text-muted small">Nombre</h6>
         <input type="radio" name="orderedBy" value="capacity" onclick="this.form.submit()" <?php if($orderedBy =="time") {echo "checked";}?>><h6 class= "mb-1 text-muted small">Capacidad</h6>
-      </form>-->
+      --></form>
     </div>
   </div>
 
@@ -45,7 +45,7 @@
                       <td><?php echo $function->getTime(); ?></td>
                       <td><?php echo $function->getMovie()->getTitle(); ?></td>
                       <td>
-                        <form action="<?php echo FRONT_ROOT ?>Function/Edit" method="post">
+                        <form action="<?php echo FRONT_ROOT ?>Function/ShowEditView" method="post">
                         <button type="submit" class="btn" name="idFunction" style="background-color:#DC8E47;color:white;" value="<?php echo $function->getId();?>">Editar</button>
                         </form>
                       </td>

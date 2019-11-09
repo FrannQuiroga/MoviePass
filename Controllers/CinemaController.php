@@ -30,7 +30,7 @@
         public function ShowEditView($id)
         {
             //Deberia mostrarme una vista con los campos que tengo actualmente y la opcion de modificar cuantos quiera
-            $cinema = $this->cinemaDAO->GetById($id);
+            $cinema = $this->cinemaDAO->GetCinema($id);
             require_once(VIEWS_PATH."edit-cinema.php");
         }
 
@@ -51,9 +51,9 @@
 
         public function Remove($idCinema)
         {
-            $cinema = $this->cinemaDAO->GetById($idCinema);
+            $cinema = $this->cinemaDAO->GetCinema($idCinema);
             //Trabajamos con baja logica para seguir teniendo persistencia de todo
-            if(empty($this->roomDAO->Get("name",$cinema)))//SI EL CINE TIENE SALAS; NO DEJA BORRARLO!!
+            if(empty($this->roomDAO->Get($cinema)))//SI EL CINE TIENE SALAS; NO DEJA BORRARLO!!
                 $this->cinemaDAO->Remove($idCinema);
                 //AGREGAR SCRIPT EXITO
             else {} //AGREGAR SCRIPT ERROR; POR TENER SALAS ASOCIADAS
@@ -62,6 +62,8 @@
 
         public function Edit($name,$capacity,$address,$price,$id)
         {
+            //AGREGAR VALIDACIONES!! ESTAMOS REEMPLAZANDO TODOS LOS CAMPOS SIN VER SI FUERON MODIFICADOS!!
+
             $cinema = new Cinema();
             
             $cinema->setId($id);
@@ -71,6 +73,7 @@
             $cinema->setPrice($price);
 
             $this->cinemaDAO->Edit($cinema);
+            //HABRIA QUE VER QUE NO HAYA ERRORES LA CARGA DE DATOS EN BD! VALIDAR
             $this->ShowListView();
         }
     }

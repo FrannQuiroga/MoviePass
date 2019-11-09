@@ -7,6 +7,7 @@
         
         public function Add(UserProfile $userProfile);
         public function Get();
+        public function GetByDocument($document);
         public function GetById($id);
         public function remove($id);
     }

@@ -6,7 +6,7 @@ require_once('validate-session.php');
 ?>
     
     <div id="breadcrumb" class="hoc clear"> 
-        <h6 class="heading">Horarios</h6>
+        <h6 class="heading">Horarios: <?php echo $movie->getTitle();?></h6>
     </div>
 </div>
 

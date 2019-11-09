@@ -2,12 +2,12 @@
     namespace DAO;
 
     use \Exception as Exception;
-    //use DAO\IUserDAO as IUserDAO;
+    use DAO\IUserDAO as IUserDAO;
     use Models\User as User;
     use Models\UserProfile as UserProfile;
     use DAO\Connection as Connection;
 
-    class UserDAO /*implements IUserDAO*/
+    class UserDAO implements IUserDAO
     {
         private $connection;
         private $tableName = "users";
@@ -120,11 +120,11 @@
             }
         }
 
-        public function remove($id)
+        public function Remove($idUser)
         {
             try
             {
-                $query = "UPDATE .$this->tableName SET isAvailable = 0 WHERE id =".$id;
+                $query = "UPDATE .$this->tableName SET isAvailable = 0 WHERE id =".$idUser;
 
                 $this->connection = Connection::GetInstance();
 
