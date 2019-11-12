@@ -52,7 +52,7 @@
             <li>
             <a class="drop" ><i class="fa fa-film"></i></a>
               <ul>
-                <li><a href="<?php echo FRONT_ROOT ?>Movie/ShowListView">Ver Cartelera</a></li>
+                <li><a href="<?php echo FRONT_ROOT ?>Movie/ShowPlayingView">Ver Cartelera</a></li>
               </ul>
             </li>
             <li>

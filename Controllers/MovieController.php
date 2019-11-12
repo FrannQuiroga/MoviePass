@@ -34,9 +34,17 @@
             require_once(VIEWS_PATH."movie-list.php");
         } 
 
-        public function ShowMovieView($id)
+        public function ShowPlayingView($orderedBy = "title")
+        {
+            $playingList = $this->movieDAO->GetPlayingList($orderedBy);
+            
+            require_once(VIEWS_PATH."playing-list.php");
+        }
+
+        public function ShowMovieView($id)//MODIFICADO PARA PRUEBA!
         {
             $movie = $this->movieDAO->GetMovie($id);
+            $functionList = $this->movieDAO->GetFunctionsByMovie($movie);//PROBANDO!!!
             require_once(VIEWS_PATH."movie-details.php");
         }
 

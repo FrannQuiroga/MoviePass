@@ -25,6 +25,7 @@ include_once('nav-bar.php');
             </div>     
     </div>
     <!--Tabla de entradas compradas-->
+    <?php if(!$user->getIsAdmin()){ ?> <!--Validacion, si es admin no tiene entradas compradas!!-->
     <div class="scrollable">
           <h6 class="heading" style="float:left"><br><br>Mis entradas</h6>
               <table style="text-align:center;">
@@ -43,6 +44,8 @@ include_once('nav-bar.php');
                 </tbody>
             </table>
     </div>
+    <?php } ?>
+
 </div>
 
 <div class="bgded overlay" style="background-image:url('<?php echo FRONT_ROOT.IMG_PATH?>butacas.jpg');">

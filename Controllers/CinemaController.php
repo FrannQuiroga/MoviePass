@@ -45,6 +45,8 @@
             $cinema->setPrice($price);
 
             $this->cinemaDAO->Add($cinema);
+            echo "<script> if(confirm('Cine Agregado con Exito!!'));
+                </script>";
 
             $this->ShowAddView();
         }
@@ -53,10 +55,19 @@
         {
             $cinema = $this->cinemaDAO->GetCinema($idCinema);
             //Trabajamos con baja logica para seguir teniendo persistencia de todo
-            if(empty($this->roomDAO->Get($cinema)))//SI EL CINE TIENE SALAS; NO DEJA BORRARLO!!
+            if(empty($this->roomDAO->Get($cinema,"name"))) //Ver de hacer default el orderedBy en DAO!!
+            //SI EL CINE TIENE SALAS; NO DEJA BORRARLO!!
+            {
                 $this->cinemaDAO->Remove($idCinema);
                 //AGREGAR SCRIPT EXITO
-            else {} //AGREGAR SCRIPT ERROR; POR TENER SALAS ASOCIADAS
+                echo "<script> if(confirm('Cine Eliminado con Exito!!'));
+                </script>";
+            }
+            else //AGREGAR SCRIPT ERROR; POR TENER SALAS ASOCIADAS
+            {
+                echo "<script> if(confirm('El cine no puede ser borrado porque tiene salas asociadas!!'));
+                </script>";
+            }
             $this->ShowListView();
         }
 
@@ -74,6 +85,8 @@
 
             $this->cinemaDAO->Edit($cinema);
             //HABRIA QUE VER QUE NO HAYA ERRORES LA CARGA DE DATOS EN BD! VALIDAR
+            echo "<script> if(confirm('Cine Modificado con Exito!!'));
+                </script>";
             $this->ShowListView();
         }
     }

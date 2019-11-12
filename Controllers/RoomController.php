@@ -58,6 +58,8 @@
             //QUE HAGO CON EL ID DEL CINE? SE GUARDA EN EL OBJETO O UN CAMPO SEPARADO PARA LA BD??
 
             $this->roomDAO->Add($room);
+            echo "<script> if(confirm('Sala Agregada con Exito!!'));
+                </script>";
             
             $this->ShowAddView($room->getCinema()->getId());
         }

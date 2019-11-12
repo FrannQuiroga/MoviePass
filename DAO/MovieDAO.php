@@ -6,6 +6,7 @@
     use Models\Movie as Movie;    
     use DAO\Connection as Connection;
     use DAO\BaseDAO as BaseDAO;
+    use Models\Function_ as Function_;
 
     class MovieDAO extends BaseDAO implements IMovieDAO
     {
@@ -105,7 +106,7 @@
             }
         }
 
-        public function GetSearchList($searched) //YA ESTA ANDANDO JOYA!!
+        /*public function GetSearchList($searched) //YA ESTA ANDANDO JOYA!!
         {
             try
             {
@@ -138,15 +139,20 @@
             {
                 throw $ex;
             }
-        }
+        }*/
 
-        /*public function GetMovie($id) //EN BaseDAO
+        public function GetSearchList($searched) //YA ESTA ANDANDO JOYA!!
         {
             try
             {
+                $searchList = array();
 
-                $query = "SELECT * FROM ".$this->tableName." WHERE id =".$id;              
-
+                /*$query = "SELECT * FROM ".$this->tableName." WHERE title LIKE '%" .$searched."%';";*/
+                $query = "SELECT m.id,m.poster_path,m.title,m.vote_average,m.overview,m.backdrop_path FROM functions f
+                        INNER JOIN ".$this->tableName." m on m.id = f.movie_id
+                        WHERE m.isAvailable = 1 AND f.isAvailable = 1 AND title LIKE '%".$searched."%'
+                        GROUP BY m.id";
+                
                 $this->connection = Connection::GetInstance();
 
                 $resultSet = $this->connection->Execute($query);
@@ -163,15 +169,16 @@
                     $movie->setBackdropPath($row["backdrop_path"]);
                     //funcion auxiliar para cargar los generos de la pelicula a un arreglo
                     $movie->setGenres($this->GetGenreListByMovie($movie->getId()));
-                }
 
-                return $movie;
+                    array_push($searchList, $movie);
+                }
+                return $searchList;
             }
             catch(Exception $ex)
             {
                 throw $ex;
             }
-        }*/
+        }
 
         public function ExistsMovie($idMovie) //TESTEADA!
         {
@@ -195,32 +202,47 @@
             }
         }
 
-        /*private function GetGenreListByMovie($id) //EN BaseDAO
+        public function GetPlayingList($orderedBy)
         {
             try
             {
-                $genreList = array();
+                $playingList = array();
 
-                $query = "SELECT g.name 
-                FROM  genre_by_movie as gbm 
-                INNER JOIN genres as g on g.id = gbm.genre_id
-                WHERE gbm.movie_id =".$id;
-
+                $query = "SELECT m.id,m.poster_path,m.title,m.vote_average,m.overview,m.backdrop_path FROM functions f
+                        INNER JOIN ".$this->tableName." m on m.id = f.movie_id
+                        WHERE m.isAvailable = 1 AND f.isAvailable = 1
+                        GROUP BY m.id
+                        ORDER BY m.".$orderedBy;
+                
                 $this->connection = Connection::GetInstance();
 
                 $resultSet = $this->connection->Execute($query);
                 
                 foreach ($resultSet as $row)
                 {                
-                    array_push($genreList, $row["name"]);
-                }
+                    $movie = new Movie();
+                    
+                    $movie->setId($row["id"]);
+                    $movie->setPosterPath($row["poster_path"]);
+                    $movie->setTitle($row["title"]);
+                    $movie->setVoteAverage($row["vote_average"]);
+                    $movie->setOverview($row["overview"]);
+                    $movie->setBackdropPath($row["backdrop_path"]);
+                    //funcion auxiliar para cargar los generos de la pelicula a un arreglo
+                    $movie->setGenres($this->GetGenreListByMovie($movie->getId()));
 
-                return $genreList;
+                    array_push($playingList, $movie);
+                }
+                return $playingList;
             }
             catch(Exception $ex)
             {
                 throw $ex;
             }
-        }*/
+        }
+
+
+        
+
     }
 ?>

@@ -118,7 +118,7 @@
                 $function->setRoom($this->roomDAO->GetRoom($idRoom));
 
                 $this->functionDAO->Edit($function);
-                echo "<script> if(confirm('Funcion Modificado con Exito!!'));
+                echo "<script> if(confirm('Funcion Modificada con Exito!!'));
                     </script>";
                 $this->ShowListView($idRoom);
             }
@@ -136,6 +136,8 @@
             $function = $this->functionDAO->GetFunction($idFunction);
             $this->functionDAO->Remove($idFunction);
             //VER LUEGO VALIDACIONES RESPECTO A LAS ENTRADAS VENDIDAS!!
+            echo "<script> if(confirm('Funcion Eliminada con Exito!!'));
+                    </script>";
             $this->ShowListView($function->getRoom()->getId());
         }
     }

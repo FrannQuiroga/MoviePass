@@ -143,7 +143,6 @@
                 throw $ex;
             }
         }
-
         //FUNCTION
         public function GetFunction($idFunction)
         {
@@ -175,5 +174,51 @@
             }
         }
 
+        //AGREGO ACA PARA PROBAR!!
+        public function GetFunctionsByMovie($movie)
+        //Todas las funciones de la pelicula en todos los cines!!
+        //Ordenado por cine --> sala --> dia --> hora (en ese orden)
+        {
+            try
+            {
+                $functionList = array();
+                
+                $query = "SELECT f.id,f.day,f.time,f.movie_id,f.room_id FROM functions f
+                          INNER JOIN rooms r on f.room_id = r.id 
+                          INNER JOIN cinemas c on r.cinema_id = c.id
+                          WHERE f.isAvailable = 1 AND f.movie_id =" .$movie->getId(). 
+                          " ORDER BY c.name,r.name,f.day,f.time;";
+
+                /*$query = "SELECT f.day,f.time,c.name,r.name,m.title FROM ".$this->tableName." f
+                INNER JOIN movies m on f.movie_id = m.id
+                INNER JOIN rooms r on f.room_id = r.id 
+                INNER JOIN cinemas c on r.cinema_id = c.id
+                WHERE f.isAvailable = 1 AND f.movie_id =" .$movie->getId(). 
+                " ORDER BY c.name,r.name,f.day,f.time;";*/
+
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->Execute($query);
+                
+                foreach ($resultSet as $row)
+                {                
+                    $function = new Function_();
+                    $function->setId($row["id"]);
+                    $function->setDay($row["day"]);
+                    $function->setTime($row["time"]);
+                    $function->setMovie($movie);
+                    $function->setRoom($this->GetRoom($row["room_id"]));
+
+                    array_push($functionList, $function);
+                }
+                return $functionList;
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+        }
+
+        
     }
 ?>

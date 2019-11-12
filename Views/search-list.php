@@ -19,7 +19,8 @@ require_once('validate-session.php');
 
   <div class="row" style="background-color:#EAEDED;padding: 2rem !important;" >
     <div class="col-md-6 hoc" style="align-items:center;">
-      <?php foreach($searchList as $movie){?>
+      <?php if(!empty($searchList)){
+            foreach($searchList as $movie){?>
         <div class="card flex-md-row mb-4 shadow-sm h-md-250" >
           <div class="card-body d-flex flex-column align-items-start">
             <div class="mb-1 text-muted small">| <?php foreach($movie->getGenres() as $genre) {
@@ -36,7 +37,8 @@ require_once('validate-session.php');
           </div>
           <img class="card-img-right flex-auto d-none d-lg-block" alt="Movie_Poster_[180x250]" src="<?php echo IMAGE_URL . $movie->getPosterPath();?>" style="width: 180px; height: 250px;">
         </div>
-      <?php } ?>
+        <?php } } else{ ?>
+      <br><div class= "center" style="text-align:center"><?php echo "Por favor, inténtelo nuevamente con otra búsqueda."; ?></div><br><br><br><br><br><br><?php } ?>
     </div>
   </div>
 
