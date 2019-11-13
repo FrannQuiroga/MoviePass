@@ -69,10 +69,10 @@
             if(!$this->functionDAO->ExistsFunction($day,$time,$idRoom)) //Si no hay funcion en ese horario, dia y sala.
             {
                 $function = new Function_();
-                $function->setMovie($this->movieDAO->GetMovie($idMovie));
+                $function->setMovie($this->functionDAO->GetMovie($idMovie));
                 $function->setDay($day);
                 $function->setTime($time);
-                $function->setRoom($this->roomDAO->GetRoom($idRoom));
+                $function->setRoom($this->functionDAO->GetRoom($idRoom));
     
                 $this->functionDAO->Add($function);
                 //SCRIPT exito!!
@@ -100,8 +100,8 @@
                 $function->setId($idFunction);
                 $function->setDay($day);
                 $function->setTime($time);
-                $function->setMovie($this->movieDAO->GetMovie($idMovie));
-                $function->setRoom($this->roomDAO->GetRoom($idRoom));
+                $function->setMovie($this->functionDAO->GetMovie($idMovie));
+                $function->setRoom($this->functionDAO->GetRoom($idRoom));
 
                 $this->functionDAO->Edit($function);
                 echo "<script> if(confirm('Funcion Modificada con Exito!!'));

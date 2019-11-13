@@ -177,6 +177,7 @@
                 $functionList = array();
                 
                 $query = "SELECT f.id,f.day,f.time,f.movie_id,f.room_id FROM functions f
+                          INNER JOIN movies m on f.movie_id = m.id
                           INNER JOIN rooms r on f.room_id = r.id 
                           INNER JOIN cinemas c on r.cinema_id = c.id
                           WHERE f.isAvailable = 1 AND m.isAvailable = 1 AND movie_id =" .$movie->getId().

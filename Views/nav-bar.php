@@ -4,7 +4,7 @@
   <div class="wrapper">
     <header id="header" class="hoc clear" > 
       <div id="logo" class="fl_left">
-        <h1><a href="<?php echo FRONT_ROOT ?>">movie<strong>pass</strong></a></h1>
+        <h1><a href="<?php echo FRONT_ROOT ?>User/ShowLoggedView">movie<strong>pass</strong></a></h1>
       </div>
       <?php if(isset($_SESSION["loggedUser"])) { 
                 $loggedUser = $_SESSION["loggedUser"]; 
@@ -58,8 +58,8 @@
             <li>
               <a class="drop"><i class="fa fa-shopping-cart"></i></a>
               <ul>
-                <li><a href="<?php echo FRONT_ROOT ?>">-------</a></li>
-                <li><a href="<?php echo FRONT_ROOT ?>">-------</a></li>
+                <li><a href="">Ver carrito</a></li>
+                <li><a href="">Checkout</a></li>
               </ul>
             </li>
             <li>
