@@ -7,7 +7,7 @@
         private $email;
         private $password;
         private $userProfile; //agregado objeto  
-        private $isAdmin; //ROLE. 1=Admin; 0=Common User
+        private $isAdmin; //ROLE. 1=Admin; 0=Common User -->VER LUEGO DE STANDARIZAR CON TABLA Y ROLE DEFINIDO
 
         public function getId()
         {

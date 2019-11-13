@@ -2,35 +2,30 @@
     namespace Controllers;
 
     use DAO\RoomDAO as RoomDAO;
-    use DAO\CinemaDAO as CinemaDAO;
     use DAO\FunctionDAO as FunctionDAO;
     use Models\Room as Room;
-    //use Models\Cinema as Cinema;
-    //use Models\Function as Function;
 
     class RoomController
     {
         private $roomDAO;
-        private $cinemaDAO;
         private $functionDAO;
 
         public function __construct()
         {
             $this->roomDAO = new RoomDAO();
-            $this->cinemaDAO = new CinemaDAO();
             $this->functionDAO = new FunctionDAO();
         }
 
         public function ShowAddView($idCinema)
         {
-            $cinema = $this->cinemaDAO->GetCinema($idCinema); //--->>>((preguntar a ver que onda!!!))<<<---
+            $cinema = $this->roomDAO->GetCinema($idCinema); //--->>>((preguntar a ver que onda!!!))<<<---
             //LO PODRIA BUSCAR POR ROOMDAO PORQUE LO TENGO EN BASEDAO!! 
             require_once(VIEWS_PATH."add-room.php");
         }
 
         public function ShowListView($idCinema, $orderedBy = "name") //AGREGAR UN VALOR EN DEFAULT SI NO HAY GET PARA PODER UNIFICAR LAS FUNCIONES!!
         {
-            $cinema = $this->cinemaDAO->GetCinema($idCinema);
+            $cinema = $this->roomDAO->GetCinema($idCinema);//Guardo en variable para poder mostrar nombre si no tiene salas!!
             $roomList = $this->roomDAO->Get($cinema,$orderedBy);
 
             require_once(VIEWS_PATH."room-list.php");
@@ -40,8 +35,7 @@
         {
             //Deberia mostrarme una vista con los campos que tengo actualmente y la opcion de modificar cuantos quiera
             $room=$this->roomDAO->GetRoom($idRoom);
-            //$room->setCinema($this->cinemaDAO->GetCinema($room->getCinema()->getId()));//VER QUE ONDA!
-            //$cinema=$this->cinemaDAO->GetById($room->getCinema()->getId());
+
             require_once(VIEWS_PATH."edit-room.php");
         }
 
@@ -51,12 +45,9 @@
     
             $room->setName($name);
             $room->setCapacity($capacity);
-            $room->setCinema($this->cinemaDAO->GetCinema($idCinema)); //MODIFICADO
+            $room->setCinema($this->roomDAO->GetCinema($idCinema)); //MODIFICADO
 
-            //AGREGAR LAS FUNCIONES A LA SALA 
-
-            //QUE HAGO CON EL ID DEL CINE? SE GUARDA EN EL OBJETO O UN CAMPO SEPARADO PARA LA BD??
-
+            //Validar que no se repita nombre dentro del cine!!
             $this->roomDAO->Add($room);
             echo "<script> if(confirm('Sala Agregada con Exito!!'));
                 </script>";

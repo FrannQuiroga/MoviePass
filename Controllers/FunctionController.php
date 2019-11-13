@@ -1,28 +1,19 @@
 <?php
     namespace Controllers;
 
-    use DAO\RoomDAO as RoomDAO;
     use DAO\FunctionDAO as FunctionDAO;
-    use DAO\CinemaDAO as CinemaDAO;
     use DAO\MovieDAO as MovieDAO;
-    //use Models\Room as Room;
-    //use Models\Movie as Movie;
     use Models\Function_ as Function_;
-    //use Models\Cinema as Cinema;
 
     class FunctionController
     {
-        private $roomDAO;
         private $movieDAO;
         private $functionDAO;
-        private $cinemaDAO;
 
         public function __construct()
         {
-            $this->roomDAO = new RoomDAO();
             $this->functionDAO = new FunctionDAO();
             $this->movieDAO = new MovieDAO();
-            $this->cinemaDAO = new CinemaDAO();
         }
 
         public function ShowAddView($idRoom)
@@ -30,7 +21,7 @@
             /*Necesito el cine para cargar la sala*/
             /*Traer sala*/
             $daysList = $this->getAvailablesDays(); //Genero una lista de dias(desde hoy) //FORZADO DE PRUEBA
-            $room = $this->roomDAO->getRoom($idRoom);
+            $room = $this->functionDAO->getRoom($idRoom);
             $movieList= $this->movieDAO->Get("title");/*Traer peliculas disponibles para armar la funcion*/ 
             /*Que hago con los horarios?? Los quiero predefinidos. 4 distintos y fijos por dia*/
             require_once(VIEWS_PATH."add-function.php");
@@ -38,18 +29,11 @@
 
         public function ShowListView($idRoom) //AGREGAR UN VALOR EN DEFAULT SI NO HAY GET PARA PODER UNIFICAR LAS FUNCIONES!!
         {
-            //$room = $this->roomDAO->getById($idRoom);
-            //$room->setCinema($this->cinemaDAO->GetById($room->getCinema()->getId())); ///mmmm...
-            //$functionList= $this->functionDAO->Get($room);
-            $functionList = $this->functionDAO->Get($this->roomDAO->getRoom($idRoom));
-            $room = $this->roomDAO->getRoom($idRoom);//PARA PODER MOSTRAR EL NOMBRE DE LA SALA SI NO HAY FUNCIONES!!
-            /*foreach($functionList as $function)
-            {
-                $function->setMovie($this->movieDAO->GetMovie($function->getMovie()->getId()));
-            }*/
+            $room = $this->functionDAO->getRoom($idRoom);//PARA PODER MOSTRAR EL NOMBRE DE LA SALA SI NO HAY FUNCIONES!!
+            $functionList = $this->functionDAO->Get($room);
 
             /*Voy a mostrar las funciones que hay por sala, me tendria que llegar de arriba su id!! 
-             Ahi deberia traer el objeto cine que va dentro del objeto sala, necesito los dos DAO*/
+             Ahi deberia traer el objeto cine que va dentro del objeto sala*/
             require_once(VIEWS_PATH."function-list.php");
         }
 
@@ -58,8 +42,9 @@
             //Deberia mostrarme una vista con los campos que tengo actualmente y la opcion de modificar cuantos quiera
             $function=$this->functionDAO->GetFunction($idfunction);//Traigo la funcion a editar
             $movieList= $this->movieDAO->Get("title");//Traigo toda la lista de peliculas disponibles!!
-            //Faltan traer los dias y como los vamos a manejar??? DEFINIR DE UNA VEZ!!
-            require_once(VIEWS_PATH."edit-function.php"); //NO ESTA CORREGIDA LA VISTA TODAVIA!!!
+            $daysList=$this->getAvailablesDays();
+            
+            require_once(VIEWS_PATH."edit-function.php");
         }
 
         private function getAvailablesDays() //Aux para generar un arreglo de dias consecutivos tipo DateTime();
@@ -105,9 +90,10 @@
             $this->ShowAddView($idRoom);
         }
 
-        public function Edit($idFunction,$day,$time,$idMovie,$idRoom)
+        public function Edit($idRoom,$day,$time,$idMovie,$idFunction)
         {
             //Revisar que si quiero cambiar la pelicula para ese dia no me va a dejar!!
+            //Agregar validacion, si la funcion que existe dia y hora es misma que mi id a modificar!
             if(!$this->functionDAO->ExistsFunction($day,$time,$idRoom)) //Si no hay funcion en ese horario, dia y sala.
             {
                 $function = new Function_();

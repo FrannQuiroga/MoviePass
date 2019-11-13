@@ -38,14 +38,6 @@ require_once('validate-admin.php');
                     <select name="day" style="margin-right:3px;height:43px;width:240px;" required>
                       <?php foreach($daysList as $day){ ?>
                       <option value="<?php echo $day->format('d-m-y');?>"><?php echo $day->format('l d-M');?></option>
-                    
-                      <!--<option value="7/11">7/11</option>
-                      <option value="8/11">8/11</option>
-                      <option value="9/11">9/11</option>
-                      <option value="10/11">10/11</option>
-                      <option value="11/11">11/11</option>
-                      <option value="12/11">12/11</option>
-                      <option value="13/11">13/11</option> --> 
                       <?php } ?>   
                     </select>
                       

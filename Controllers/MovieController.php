@@ -83,7 +83,7 @@
     
                         $this->movieDAO->Add($movie);
                         
-                        //AGREGAR GENEROS CON TABLA INTERMEDIA GENEROS X PELICULA!!
+                        // AGREGAR GENEROS CON TABLA INTERMEDIA GENEROS X PELICULA!!
                         foreach($row["genre_ids"] as $id){
                             $genreByMovie = new GenreByMovie();
                             $genreByMovie->setMovieId($movie->getId());

@@ -98,7 +98,8 @@
         {
             try
             {
-                $query = "UPDATE " .$this->tableName." SET  day = '".$function->getDay()."' , time = '".$function->getTime()."' , movie_id = '".$function->getMovie()->getId(). "' where id=" .$function->getId();
+                $query = "UPDATE " .$this->tableName." SET  day = '".$function->getDay()."', time = '".$function->getTime()."', movie_id = ".$function->getMovie()->getId()." where id=" .$function->getId();
+                
                 $this->connection = Connection::GetInstance();
                 $this->connection->ExecuteNonQuery($query);
             }

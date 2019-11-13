@@ -18,7 +18,7 @@
             $this->userProfileDAO =new UserProfileDAO();
         }
 
-        public function ShowloggedView() //QUEDA DUPLICADO CON HOME CONTROLLER: ESTA BIEN??
+        public function ShowloggedView() // Carrousel, ver por que no anda o volar!!
         {
             require_once(VIEWS_PATH."carrousel.php");
         }

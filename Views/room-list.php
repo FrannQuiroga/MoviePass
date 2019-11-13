@@ -64,9 +64,7 @@
                 <?php } } else {?><tr><td colspan=6;><?php echo "No hay salas disponibles para este cine";}?></td></tr>
               </tbody>
           </table>
-          <!--<form action="<?php echo FRONT_ROOT; ?>Room/ShowAddView" method="get">
-            <button class="btn" type="submit" name="idCinema" style="background-color:GREEN;color:white;" value="<?php echo $cinema->getId();?>">Agregar Salas</button>
-          </form>-->
+          
         </div>
       </div>
       <!-- / main body -->

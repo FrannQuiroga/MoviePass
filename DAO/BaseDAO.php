@@ -23,15 +23,7 @@
             {
 
                 $query = "SELECT * FROM movies WHERE id =".$idMovie;
-
-
-                /*$query = "SELECT m.id, m.original_title, m.poster_path, m.vote_average, m.overview, g.name as genre_ids
-                FROM genre_by_movie as gbm
-                INNER JOIN movies as m on gbm.movie_id = m.id
-                INNER JOIN genres as g on g.id = gbm.genre_id
-                ORDER BY ".$orderedBy;*/
                 
-
                 $this->connection = Connection::GetInstance();
 
                 $resultSet = $this->connection->Execute($query);
@@ -46,6 +38,7 @@
                     $movie->setVoteAverage($row["vote_average"]);
                     $movie->setOverview($row["overview"]);
                     $movie->setBackdropPath($row["backdrop_path"]);
+
                     //funcion auxiliar para cargar los generos de la pelicula a un arreglo
                     $movie->setGenres($this->GetGenreListByMovie($movie->getId()));
                 }
@@ -144,7 +137,7 @@
             }
         }
         //FUNCTION
-        public function GetFunction($idFunction)
+        public function GetFunction($idFunction)//DEVUELVE LA FUNCION COMPLETA, CON OBJ MOVIE Y ROOM(CON CINE DENTRO).
         {
             try
             {
@@ -186,15 +179,9 @@
                 $query = "SELECT f.id,f.day,f.time,f.movie_id,f.room_id FROM functions f
                           INNER JOIN rooms r on f.room_id = r.id 
                           INNER JOIN cinemas c on r.cinema_id = c.id
-                          WHERE f.isAvailable = 1 AND f.movie_id =" .$movie->getId(). 
+                          WHERE f.isAvailable = 1 AND m.isAvailable = 1 AND movie_id =" .$movie->getId().
                           " ORDER BY c.name,r.name,f.day,f.time;";
-
-                /*$query = "SELECT f.day,f.time,c.name,r.name,m.title FROM ".$this->tableName." f
-                INNER JOIN movies m on f.movie_id = m.id
-                INNER JOIN rooms r on f.room_id = r.id 
-                INNER JOIN cinemas c on r.cinema_id = c.id
-                WHERE f.isAvailable = 1 AND f.movie_id =" .$movie->getId(). 
-                " ORDER BY c.name,r.name,f.day,f.time;";*/
+                    //TIENEN QUE ESTAR VIGENTES TANTO LA FUNCION COMO LA PELICULA EN BD!!
 
                 $this->connection = Connection::GetInstance();
 

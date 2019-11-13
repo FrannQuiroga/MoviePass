@@ -20,7 +20,7 @@
             require_once(VIEWS_PATH."add-cinema.php");
         }
 
-        public function ShowListView($orderedBy = "name") //AGREGAR UN VALOR EN DEFAULT SI NO HAY GET PARA PODER UNIFICAR LAS FUNCIONES!!
+        public function ShowListView($orderedBy = "name") // USO VALOR DEFAULT PARA REUTILIZAR CODIGO!!
         {
             $cinemaList = $this->cinemaDAO->Get($orderedBy);
 

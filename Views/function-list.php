@@ -16,8 +16,8 @@
     <div class="form-group nospace inline  ">
       <h6 class= "mb-1 text-muted small"><br><!--Ordenar por--></h6>
       <form action="<?php echo FRONT_ROOT ?>Function/ShowListView" method="get">
-        <!--<input type="radio" name="orderedBy" value="name" onclick="this.form.submit()" <?php if($orderedBy =="movie") {echo "checked";}?>><h6 class= "mb-1 text-muted small">Nombre</h6>
-        <input type="radio" name="orderedBy" value="capacity" onclick="this.form.submit()" <?php if($orderedBy =="time") {echo "checked";}?>><h6 class= "mb-1 text-muted small">Capacidad</h6>
+        <!--<input type="radio" name="orderedBy" value="name" onclick="this.form.submit()" ><h6 class= "mb-1 text-muted small">Nombre</h6>
+        <input type="radio" name="orderedBy" value="capacity" onclick="this.form.submit()" ><h6 class= "mb-1 text-muted small">Capacidad</h6>
       --></form>
     </div>
   </div>
@@ -58,9 +58,7 @@
                     <?php } } else {?><tr><td colspan=6;><?php echo "No hay funciones disponibles para esta sala";}?></td></tr>
                 </tbody>
             </table>
-            <!--<form action="<?php echo FRONT_ROOT ?>Function/ShowAddView" method="get">
-              <button type="submit" class="btn" style="background-color:GREEN;color:white;" name="idRoom" value="<?php echo $room->getId();?>">Agregar Sala</button>
-            </form>-->
+            
         </div>
       </div>
       <!-- / main body -->

@@ -1,6 +1,8 @@
-<?php namespace Models;
-    class UserProfile{
-        
+<?php 
+    namespace Models;
+
+    class UserProfile
+    {  
         private $id;
         private $name;
         private $surname;

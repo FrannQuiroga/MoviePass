@@ -45,18 +45,18 @@
                       <td><?php echo $user->getPassword(); ?></td>
                       <td><?php if($user->getIsAdmin()) echo "Si";else echo "No"; ?></td>
                       <td>
-                        <form action="<?php echo FRONT_ROOT ?>User/Get" method="get">
-                          <button type="submit" class="btn" name="id" style="background-color:GREEN;color:white;" value="<?php echo $user->getId();?>">Ver</button>
+                        <form action="" method="get">
+                          <button type="submit" class="btn" name="" style="background-color:GREEN;color:white;" value="">Ver</button>
                         </form>
                       </td>
                       <td>
-                        <form action="<?php echo FRONT_ROOT ?>User/Edit" method="post">
-                        <button type="submit" class="btn" name="id" style="background-color:#DC8E47;color:white;" value="<?php echo $user->getId();?>">Editar</button>
+                        <form action="" method="post">
+                        <button type="submit" class="btn" name="" style="background-color:#DC8E47;color:white;" value="">Editar</button>
                         </form>
                       </td>
                       <td>
-                        <form action="<?php echo FRONT_ROOT ?>User/Remove" method="post">
-                          <button type="submit" class="btn" name="id" style="background-color:RED;color:white;" value="<?php echo $user->getId();?>">Remover</button>
+                        <form action="" method="post">
+                          <button type="submit" class="btn" name="" style="background-color:RED;color:white;" value="">Remover</button>
                         </form>
                       </td>
                     </tr>
