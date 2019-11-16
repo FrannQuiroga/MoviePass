@@ -3,8 +3,7 @@
 
     use \Exception as Exception;
     use DAO\IRoomDAO as IRoomDAO;
-    use Models\Room as Room;
-    //use Models\Cinema as Cinema; 
+    use Models\Room as Room; 
     use DAO\Connection as Connection;
     use DAO\BaseDAO as BaseDAO;
 
@@ -90,6 +89,29 @@
                 $query = "UPDATE " .$this->tableName." SET  name = '".$room->getName()."' , capacity = ".$room->getCapacity(). " where id=" .$room->getId();
                 $this->connection = Connection::GetInstance();
                 $this->connection->ExecuteNonQuery($query);
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+        }
+
+        public function ExistsRoomName($name,$idCinema)//To verify that the cinema doesn´t have another room with this name
+        {
+            try
+            {
+
+                $query = "SELECT * FROM ". $this->tableName.
+                " WHERE isAvailable = 1 AND cinema_id = ".$idCinema." AND name LIKE '%" .$name. "'";
+                
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->Execute($query);
+                
+                if(empty($resultSet))
+                    return false;
+
+                return true;
             }
             catch(Exception $ex)
             {

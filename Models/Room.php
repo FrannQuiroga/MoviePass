@@ -8,7 +8,7 @@
         private $capacity;
         private $cinema;
         private $isAvailable;
-        //private $functionsList = array();
+        
 
         public function getId()
         {
@@ -65,15 +65,6 @@
             return $this;
         }
 
-        /*public function getFunctionsList()
-        {
-            return $this->functionsList;
-        }
-
-        public function setFunctionsList($functionsList)
-        {
-            $this->functionsList = $functionsList;
-            return $this;
-        }*/
+        
     }
 ?>

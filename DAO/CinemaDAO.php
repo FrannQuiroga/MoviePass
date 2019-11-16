@@ -94,5 +94,28 @@
                 throw $ex;
             }
         }
+
+        public function ExistsCinemaName($name)
+        {
+            try
+            {
+
+                $query = "SELECT * FROM ". $this->tableName.
+                " WHERE isAvailable = 1 AND name LIKE '%" .$name. "'";
+                
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->Execute($query);
+                
+                if(empty($resultSet))
+                    return false;
+
+                return true;
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+        }
     }
 ?>

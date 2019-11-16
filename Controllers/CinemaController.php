@@ -20,7 +20,7 @@
             require_once(VIEWS_PATH."add-cinema.php");
         }
 
-        public function ShowListView($orderedBy = "name") // USO VALOR DEFAULT PARA REUTILIZAR CODIGO!!
+        public function ShowListView($orderedBy = "name") // Default value to reuse code
         {
             $cinemaList = $this->cinemaDAO->Get($orderedBy);
 
@@ -29,7 +29,7 @@
 
         public function ShowEditView($id)
         {
-            //Deberia mostrarme una vista con los campos que tengo actualmente y la opcion de modificar cuantos quiera
+            //We can see the current fields at the placeholder and we can modify as much as we want.
             $cinema = $this->cinemaDAO->GetCinema($id);
             require_once(VIEWS_PATH."edit-cinema.php");
         }
@@ -37,33 +37,41 @@
 
         public function Add($name,$capacity,$address,$price)
         {
-            $cinema = new Cinema();
+            //Validator. The name of the cinema must not exists in our database.
+            if(!$this->cinemaDAO->existsCinemaName($name)) //If the name doesn't exists we can add it
+            {
+                $cinema = new Cinema();
     
-            $cinema->setName($name);
-            $cinema->setCapacity($capacity);
-            $cinema->setAddress($address);
-            $cinema->setPrice($price);
-
-            $this->cinemaDAO->Add($cinema);
-            echo "<script> if(confirm('Cine Agregado con Exito!!'));
-                </script>";
-
+                $cinema->setName($name);
+                $cinema->setCapacity($capacity);
+                $cinema->setAddress($address);
+                $cinema->setPrice($price);
+    
+                $this->cinemaDAO->Add($cinema); //Add successfull
+                echo "<script> if(confirm('Cine Agregado con Exito!!'));
+                    </script>";
+            }
+            else
+            {
+                echo "<script> if(confirm('El nombre ingresado ya existe. Prueba con otro!!'));
+                    </script>";
+            }
             $this->ShowAddView();
         }
 
         public function Remove($idCinema)
         {
             $cinema = $this->cinemaDAO->GetCinema($idCinema);
-            //Trabajamos con baja logica para seguir teniendo persistencia de todo
-            if(empty($this->roomDAO->Get($cinema,"name"))) //Ver de hacer default el orderedBy en DAO!!
-            //SI EL CINE TIENE SALAS; NO DEJA BORRARLO!!
+            //We work with logic remove (1 or 0) to have always the past information
+            if(empty($this->roomDAO->Get($cinema,"name")))
+            //If the cinema has rooms you can´t remove it. Validator
             {
                 $this->cinemaDAO->Remove($idCinema);
-                //AGREGAR SCRIPT EXITO
+                
                 echo "<script> if(confirm('Cine Eliminado con Exito!!'));
                 </script>";
             }
-            else //AGREGAR SCRIPT ERROR; POR TENER SALAS ASOCIADAS
+            else //SCRIPT ERROR; the cinema has rooms asociated
             {
                 echo "<script> if(confirm('El cine no puede ser borrado porque tiene salas asociadas!!'));
                 </script>";
@@ -73,21 +81,29 @@
 
         public function Edit($name,$capacity,$address,$price,$id)
         {
-            //AGREGAR VALIDACIONES!! ESTAMOS REEMPLAZANDO TODOS LOS CAMPOS SIN VER SI FUERON MODIFICADOS!!
+            //Validator. The name of the cinema must not exists in our database.
+            if(!$this->cinemaDAO->existsCinemaName($name)) //If the name doesn't exists we can add it
+            {
+                $cinema = new Cinema();
+                
+                $cinema->setId($id);
+                $cinema->setName($name);
+                $cinema->setCapacity($capacity);
+                $cinema->setAddress($address);
+                $cinema->setPrice($price);
 
-            $cinema = new Cinema();
-            
-            $cinema->setId($id);
-            $cinema->setName($name);
-            $cinema->setCapacity($capacity);
-            $cinema->setAddress($address);
-            $cinema->setPrice($price);
-
-            $this->cinemaDAO->Edit($cinema);
-            //HABRIA QUE VER QUE NO HAYA ERRORES LA CARGA DE DATOS EN BD! VALIDAR
-            echo "<script> if(confirm('Cine Modificado con Exito!!'));
-                </script>";
-            $this->ShowListView();
+                $this->cinemaDAO->Edit($cinema);
+                
+                echo "<script> if(confirm('Cine Modificado con Exito!!'));
+                    </script>";
+                $this->ShowListView();
+            }
+            else
+            {
+                echo "<script> if(confirm('El nombre ingresado ya existe. Prueba con otro!!'));
+                    </script>";
+                    $this->ShowEditView($id);
+            }
         }
     }
 ?>

@@ -15,10 +15,10 @@
   <div class="center card shadow-sm " >   
     <div class="form-group nospace inline  ">
       <h6 class= "mb-1 text-muted small"><br><!--Ordenar por--></h6>
-      <form action="<?php echo FRONT_ROOT ?>Function/ShowListView" method="get">
-        <!--<input type="radio" name="orderedBy" value="name" onclick="this.form.submit()" ><h6 class= "mb-1 text-muted small">Nombre</h6>
+      <!--<form action="<?php echo FRONT_ROOT ?>Function/ShowListView" method="get">
+        <input type="radio" name="orderedBy" value="name" onclick="this.form.submit()" ><h6 class= "mb-1 text-muted small">Nombre</h6>
         <input type="radio" name="orderedBy" value="capacity" onclick="this.form.submit()" ><h6 class= "mb-1 text-muted small">Capacidad</h6>
-      --></form>
+      </form>-->
     </div>
   </div>
 
@@ -35,11 +35,11 @@
                     <th style="width: 100px;">Hora</th>
                     <th style="width: 600px;">Pelicula</th>
                     <th style="width: 100px;" colspan=2>Acccion </th>
-                    <!--<th style="width: 100px;">Acccion </th>-->
                   </tr>
                 </thead>
                 <tbody>
                     <?php if(!empty($functionList)) { foreach($functionList as $function) {?>
+                    
                     <tr>
                       <td><?php echo $function->getDay(); ?></td>
                       <td><?php echo $function->getTime(); ?></td>

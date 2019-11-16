@@ -18,7 +18,7 @@
             $this->userProfileDAO =new UserProfileDAO();
         }
 
-        public function ShowloggedView() // Carrousel, ver por que no anda o volar!!
+        public function ShowloggedView() //when you login you must see the billboard!!
         {
             require_once(VIEWS_PATH."carrousel.php");
         }
@@ -102,7 +102,13 @@
                 {
                     //DATOS CORRECTOS; SE LOGEA CON EXITO E INICIA LA SESSION!!
                     $_SESSION["loggedUser"] = $loginUser;
-                    $this->ShowloggedView();
+                    //$this->ShowloggedView();
+                    if($loginUser->getIsAdmin()== 1)
+                    {
+                        header ("location:../Cinema/ShowListView");
+                    }
+                    else
+                        header ("location:../Movie/ShowPlayingView");
                 }
                 else
                 {

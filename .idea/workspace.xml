@@ -3,19 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="d32ca196-47c2-4cb0-acdb-6a73b4a03980" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/Controllers/FunctionController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/FunctionController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/GenreController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/GenreController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/HomeController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Controllers/RoomController.php" beforeDir="false" afterPath="$PROJECT_DIR$/Controllers/RoomController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DAO/ApiDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/ApiDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DAO/FunctionDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/FunctionDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/DAO/RoomDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/RoomDAO.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/add-cinema.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/add-cinema.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/add-function.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/add-function.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/add-room.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/add-room.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/cinema-list.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/cinema-list.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/function-list.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/function-list.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/home.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/home.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Views/room-list.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/room-list.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/DAO/BaseDAO.php" beforeDir="false" afterPath="$PROJECT_DIR$/DAO/BaseDAO.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Schema/Schema.sql" beforeDir="false" afterPath="$PROJECT_DIR$/Schema/Schema.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/carrousel.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/carrousel.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Views/nav-bar.php" beforeDir="false" afterPath="$PROJECT_DIR$/Views/nav-bar.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -57,7 +48,9 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>

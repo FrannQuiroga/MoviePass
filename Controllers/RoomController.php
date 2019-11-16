@@ -41,59 +41,71 @@
 
         public function Add($name,$capacity,$idCinema)
         {
-            $room = new Room();
-    
-            $room->setName($name);
-            $room->setCapacity($capacity);
-            $room->setCinema($this->roomDAO->GetCinema($idCinema)); //MODIFICADO
+            //Validator. The name of the cinema must not exists in our database.
+            if(!$this->roomDAO->existsRoomName($name,$idCinema)) //If the name doesn't exists we can add it
+            {
+                $room = new Room();
+        
+                $room->setName($name);
+                $room->setCapacity($capacity);
+                $room->setCinema($this->roomDAO->GetCinema($idCinema)); 
 
-            //Validar que no se repita nombre dentro del cine!!
-            $this->roomDAO->Add($room);
-            echo "<script> if(confirm('Sala Agregada con Exito!!'));
-                </script>";
+                $this->roomDAO->Add($room);
+                echo "<script> if(confirm('Sala Agregada con Exito!!'));
+                    </script>";
+            }
+            else
+            {
+                echo "<script> if(confirm('El nombre ingresado ya existe. Prueba con otro!!'));
+                </script>"; 
+            }
             
-            $this->ShowAddView($room->getCinema()->getId());
+            $this->ShowAddView($idCinema);
         }
 
         public function Remove($idRoom)
         {
-            $room = $this->roomDAO->GetRoom($idRoom);//LO HAGO PARA PODER TENER EL ID DEL CINE Y VOLVER A MOSTRAR LA LISTA
-            //Trabajamos con baja logica para seguir teniendo persistencia de todo
+            $room = $this->roomDAO->GetRoom($idRoom);//To get the idRoom to show list view
+            //Logic remove to continue having past information
             
-            if(empty($this->functionDAO->Get($room)))//SI LA SALA NO TIENE FUNCIONES, la puedo borrar
+            if(empty($this->functionDAO->Get($room)))//If the room is empty I can remove
             {
                 $this->roomDAO->Remove($idRoom);
-                //AGREGAR SCRIPT DE EXITO
+                
                 echo "<script> if(confirm('Sala borrada con Exito!!'));
                 </script>";
             }
             else 
             {
-                //SCRIPT DE ERROR; POR TENER FUNCIONES
                 echo "<script> if(confirm('La sala no puede ser borrada porque tiene funciones disponibles!!'));
                 </script>";
             }
 
-            //Si borro una sala que tiene funciones,no me tiene que dejar.
-            // o preguntar que quiero hacer y borrar las funciones. ver luego tema de entradas vendidas
-
             $this->ShowListView($room->getCinema()->getId());
         }
 
-        public function Edit($name,$capacity,$idCinema,$id)
+        public function Edit($name,$capacity,$idCinema,$idRoom)
         {
-            $room = new Room();
+            //Validator. The name of the cinema must not exists in our database.
+            if(!$this->roomDAO->existsRoomName($name,$idCinema)) //If the name doesn't exists we can change it
+            {
+                $room = new Room();
             
-            $room->setId($id);
-            $room->setName($name);
-            $room->setCapacity($capacity);
-            $this->roomDAO->Edit($room);
+                $room->setId($idRoom);
+                $room->setName($name);
+                $room->setCapacity($capacity);
+                $this->roomDAO->Edit($room);
 
-            //Agregar restricciones para evitar duplicados de nombre!! o algun script en caso de error.
-            echo "<script> if(confirm('Sala Modificada con Exito!!'));
-                </script>";
-                
-            $this->ShowListView($idCinema);
+                echo "<script> if(confirm('Sala Modificada con Exito!!'));
+                    </script>";
+                $this->ShowListView($idCinema);
+            }
+            else
+            {
+                echo "<script> if(confirm('El nombre ingresado ya existe. Prueba con otro!!'));
+                </script>"; 
+                $this->ShowEditView($idRoom);
+            }
         }
     }
 ?>

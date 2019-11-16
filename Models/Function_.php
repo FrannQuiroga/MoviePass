@@ -8,7 +8,6 @@
         private $time;
         private $movie;
         private $room;
-        //private $ticketsList = array();
 
         
         public function getId()
@@ -54,19 +53,7 @@
             $this->movie = $movie;
             return $this;
         }
-
-        /*public function getTicketsList()
-        {
-            return $this->ticketsList;
-        }
-
-        public function setTicketsList($ticketsList)
-        {
-            $this->ticketsList = $ticketsList;
-            return $this;
-        }*/
-
-       
+  
         public function getRoom()
         {
                 return $this->room;

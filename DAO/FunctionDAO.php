@@ -2,9 +2,7 @@
     namespace DAO;
 
     use \Exception as Exception;
-    use Models\Function_ as Function_;
-    //use Models\Room as Room;
-    //use Models\Movie as Movie;   
+    use Models\Function_ as Function_;  
     use DAO\Connection as Connection;
     use DAO\BaseDAO as BaseDAO;
     use DAO\IFunctionDAO as IFunctionDAO;
@@ -21,8 +19,6 @@
 
                 $query = "INSERT INTO ".$this->tableName." (day,time,movie_id,room_id) VALUES (:day,:time,:movie_id, :room_id);";
                 
-                //$parameters["day"] = date( 'Ymd H:i:s', $function->getDay());
-                //var_dump($function->getDay());
                 $parameters["day"] = $function->getDay();
                 $parameters["time"] = $function->getTime();
                 $parameters["movie_id"] = $function->getMovie()->getId();
@@ -44,23 +40,25 @@
             {
                 $functionList = array();
 
-                $query = "SELECT * FROM ". $this->tableName.
-                " WHERE isAvailable = 1 AND room_id =" .$room->getId(). 
-                 " ORDER BY day,time";//ORDENO POR DIA Y HORARIO (en ese orden).
+                $query= "select * from ". $this->tableName." f 
+                        inner join movies m on f.movie_id=m.id 
+                        where m.isAvailable = 1 AND f.isAvailable = 1 AND f.day>=now() AND f.room_id = ".$room->getId().
+                        " order by f.day,f.time";
 
                 $this->connection = Connection::GetInstance();
 
                 $resultSet = $this->connection->Execute($query);
                 
                 foreach ($resultSet as $row)
-                {                
+                {    
+                    
                     $function = new Function_();
-                    $function->setId($row["id"]);
+                    $function->setId($row[0]);
                     $function->setDay($row["day"]);
                     $function->setTime($row["time"]);
                     $function->setRoom($room);
                     $function->setMovie($this->GetMovie($row["movie_id"]));
-
+                    
                     array_push($functionList, $function);
                 }
                 return $functionList;
@@ -78,6 +76,29 @@
 
                 $query = "SELECT * FROM ". $this->tableName.
                 " WHERE isAvailable = 1 AND day LIKE '%" .$day. "%' AND time LIKE '%" .$time. "%' AND room_id = " .$idRoom;
+                
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->Execute($query);
+                
+                if(empty($resultSet))
+                    return false;
+
+                return true;
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+        }
+
+        public function EditableFunction($day,$time,$idRoom,$idFunction)
+        {
+            try
+            {
+
+                $query = "SELECT * FROM ". $this->tableName.
+                " WHERE isAvailable = 1 AND day LIKE '%" .$day. "%' AND time LIKE '%" .$time. "%' AND room_id = " .$idRoom." AND NOT id = ".$idFunction;
                 
                 $this->connection = Connection::GetInstance();
 
@@ -124,6 +145,8 @@
                 throw $ex;
             }
         }
+
+        
 
         
     }

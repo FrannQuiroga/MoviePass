@@ -1,7 +1,6 @@
 <?php 
 include_once('header.php');
 include_once('nav-bar.php');
-require_once('validate-session.php');
 ?>
 
   <div id="breadcrumb" class="hoc clear"> 
@@ -12,7 +11,7 @@ require_once('validate-session.php');
   <div class="center card shadow-sm ">   
     <div class="form-group nospace inline  ">
       <h6 class= "mb-1 text-muted small"><br>Ordenar por</h6>
-      <form action="<?php echo FRONT_ROOT ?>Movie/ShowPlayingView" method="get">
+      <form action="<?php echo FRONT_ROOT ?>Function/ShowPlayingView" method="get">
         <input type="radio" name="orderedBy" value="title" onclick="this.form.submit()" <?php if($orderedBy =="title") {echo "checked";}?>><h6 class= "mb-1 text-muted small">Titulo</h6>
         <input type="radio" name="orderedBy" value="vote_average desc" onclick="this.form.submit()"<?php if($orderedBy =="vote_average desc") {echo "checked";}?>><h6 class= "mb-1 text-muted small">Puntuacion</h6>
       </form>  

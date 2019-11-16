@@ -141,8 +141,6 @@
         {
             try
             {
-                $functionList = array();
-
                 $query = "SELECT * FROM functions WHERE isAvailable = 1 AND id =" .$idFunction;
 
                 $this->connection = Connection::GetInstance();
@@ -167,7 +165,6 @@
             }
         }
 
-        //AGREGO ACA PARA PROBAR!!
         public function GetFunctionsByMovie($movie)
         //Todas las funciones de la pelicula en todos los cines!!
         //Ordenado por cine --> sala --> dia --> hora (en ese orden)

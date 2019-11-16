@@ -1,4 +1,4 @@
 <?php
     if(!isset($_SESSION["loggedUser"]))
-    header ("location:../");
+    header ("location:../User/ShowLoginView");
 ?>

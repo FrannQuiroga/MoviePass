@@ -20,7 +20,6 @@
         {
             /*Necesito el cine para cargar la sala*/
             /*Traer sala*/
-            $daysList = $this->getAvailablesDays(); //Genero una lista de dias(desde hoy) //FORZADO DE PRUEBA
             $room = $this->functionDAO->getRoom($idRoom);
             $movieList= $this->movieDAO->Get("title");/*Traer peliculas disponibles para armar la funcion*/ 
             /*Que hago con los horarios?? Los quiero predefinidos. 4 distintos y fijos por dia*/
@@ -37,32 +36,16 @@
             require_once(VIEWS_PATH."function-list.php");
         }
 
-        public function ShowEditView($idfunction)
+        public function ShowEditView($idFunction)
         {
+            
             //Deberia mostrarme una vista con los campos que tengo actualmente y la opcion de modificar cuantos quiera
-            $function=$this->functionDAO->GetFunction($idfunction);//Traigo la funcion a editar
+            $function=$this->functionDAO->GetFunction($idFunction);//Traigo la funcion a editar
             $movieList= $this->movieDAO->Get("title");//Traigo toda la lista de peliculas disponibles!!
-            $daysList=$this->getAvailablesDays();
             
             require_once(VIEWS_PATH."edit-function.php");
         }
 
-        private function getAvailablesDays() //Aux para generar un arreglo de dias consecutivos tipo DateTime();
-        {
-            $daysList = array();
-            $day = new \DateTime(); //fecha de hoy
-            $cantDays = 7;//por siete dias mas
-            
-
-            for($i=0; $i<$cantDays;$i++)
-            {
-                $day->modify('+1 day');
-                $thisDay = clone $day;
-                array_push($daysList,$thisDay);
-            }
-
-            return $daysList;
-        }
 
         public function Add($idRoom,$day,$time,$idMovie)
         {
@@ -94,7 +77,7 @@
         {
             //Revisar que si quiero cambiar la pelicula para ese dia no me va a dejar!!
             //Agregar validacion, si la funcion que existe dia y hora es misma que mi id a modificar!
-            if(!$this->functionDAO->ExistsFunction($day,$time,$idRoom)) //Si no hay funcion en ese horario, dia y sala.
+            if(!$this->functionDAO->EditableFunction($day,$time,$idRoom,$idFunction)) //Si no hay funcion en ese horario, dia y sala.
             {
                 $function = new Function_();
                 $function->setId($idFunction);

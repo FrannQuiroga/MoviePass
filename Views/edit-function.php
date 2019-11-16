@@ -20,7 +20,7 @@ include_once('nav-bar.php');
             <table> 
               <thead class="center">
                 <tr>
-                  <th>Sala</th>
+                  
                   <th>Dia</th>
                   <th>Horario</th>
                   <th>Pelicula</th>
@@ -28,27 +28,13 @@ include_once('nav-bar.php');
               </thead>
               <tbody allign="center">
                 <tr>
-                <?php echo "Sala: ".$function->getRoom()->getName();?>
-                </tr>
-                <tr>
-                <?php echo "Dia: ".$function->getDay();?>
-                </tr>
-                <tr>
-                <?php echo "Hora: ".$function->getTime();?>
-                </tr>
-                <?php echo "Pelicula: ".$function->getMovie()->getTitle();?>
-                <tr>
-                  <td>
-                    <select name="idRoom" style="margin-right:3px;height:43px;width:240px;" required>
-                      <option value="<?php echo $function->getRoom()->getId()?>"><?php echo $function->getRoom()->getName();?></option>      
-                    </select>
-                  </td> 
+                  
+                  <input type="hidden" name="idRoom" value="<?php echo $function->getRoom()->getId();?>">
+
+                  <?php $today= new \DateTime();?>
+
                   <td >
-                    <select name="day" style="margin-right:3px;height:43px;width:240px;" required>
-                      <?php foreach($daysList as $day){ ?>
-                        <option <?php if($function->getDay()==$day->format('d-m-y'))echo "selected";?> value="<?php echo $day->format('d-m-y');?>"><?php echo $day->format('l d-M');?></option>
-                      <?php } ?>
-                    </select>
+                    <input type="date" name="day"  style="width:240px;" value="<?php echo $function->getDay();?>" min="<?php echo $today->format('Y-m-d');?>" max="2019-12-31" required>   
                   </td>
                   <td >
                     <select name="time" style="margin-right:3px;height:43px;width:240px;" required><!--HORARIO FORZADO; FALTA TABLA!!-->
@@ -59,15 +45,13 @@ include_once('nav-bar.php');
                     </select>
                   </td>
                   <td>
-                    <select name="idMovie" style="margin-right:3px;height:43px;width:240px;" required>
+                    <select name="idMovie" style="margin-right:auto;height:43px;width:500px;" required>
                     <?php foreach ($movieList as $movie){ ?>
                       <option <?php if($function->getMovie()->getId()==$movie->getId())echo "selected";?> value="<?php echo $movie->getId()?>"><?php echo $movie->getTitle();?></option>
                     <?php } ?>      
-                    </select>
-                    
-                    <input type="hidden" name="idroom" value="<?php echo $function->getId()?>">    
-                  
-                  </td>      
+                    </select>    
+                  </td> 
+                  <input type="hidden" name="idFunction" value="<?php echo $function->getId()?>">     
                 </tr>
                 </tbody>
             </table>

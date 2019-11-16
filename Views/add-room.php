@@ -16,14 +16,13 @@ require_once('validate-admin.php');
       <!-- main body -->
       <div class="content" > 
         <div id="comments" style="align-items:center;">
-          <h2>Ingresar Sala</h2>
+          <h2>Ingresar Sala: Cine <?php echo $cinema->getName();?></h2>
           <form action="<?php echo FRONT_ROOT ?>Room/Add" method="post"  style="padding: 2rem !important;">
             <table> 
               <thead class="center">
                 <tr>
                   <th>Nombre</th>
                   <th>Capacidad</th>
-                  <th>Cines disponibles</th>
                 </tr>
               </thead>
               <tbody allign="center">
@@ -34,11 +33,9 @@ require_once('validate-admin.php');
                   <td style="width: 205px;">
                     <input type="number" name="capacity" min="1" max="999" size="10" required>
                   </td>
-                  <td>
-                    <select name="idCinema" style="margin-right:3px;height:43px;width:420px;" required>
-                      <option value="<?php echo $cinema->getId()?>"><?php echo $cinema->getName();?></option>      
-                    </select>
-                  </td>      
+
+                  <input type="hidden" name="idCinema" value="<?php echo $cinema->getId()?>">
+     
                 </tr>
                 </tbody>
             </table>

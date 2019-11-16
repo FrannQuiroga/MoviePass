@@ -8,7 +8,7 @@
         private $capacity;
         private $address;
         private $price;
-        //private $roomList=array();            
+                  
 
         public function getId()
         {
@@ -65,15 +65,6 @@
             return $this;
         }
 
-        /*public function getRoomList()
-        {
-            return $this->roomList;
-        }
-
-        public function setRoomList($roomList)
-        {
-            $this->roomList = $roomList;
-            return $this;
-        }*/
+        
     }
 ?>

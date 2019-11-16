@@ -20,7 +20,6 @@ include_once('nav-bar.php');
                 <tr>
                     <th>Nombre</th>
                     <th>Capacidad</th>
-                    <th>Cine</th>
                 </tr>
                 </thead>
                 <tbody allign="center">
@@ -31,12 +30,10 @@ include_once('nav-bar.php');
                     <td style="width: 205px;">
                     <input type="number" name="capacity" value="<?php echo $room->GetCapacity()?>" placeholder= "<?php echo $room->getCapacity()?>" min="1" max="999" size="10" required>
                     </td>
-                    <td>
-                    <select name="idCinema" style="margin-right:3px;height:43px;width:420px;" required>
-                        <option value="<?php echo $room->getCinema()->getId()?>"><?php echo $room->getCinema()->getName();?></option>      
-                    </select>
-                    </td>
-                    <input type="hidden" name="id" value="<?php echo $room->getId()?>">     
+
+                    <input type="hidden" name="idCinema" value="<?php echo $room->getCinema()->getId()?>">  
+                    <input type="hidden" name="idRoom" value="<?php echo $room->getId()?>"> 
+
                 </tr>
                 </tbody>
             </table>

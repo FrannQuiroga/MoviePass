@@ -4,7 +4,7 @@
   <div class="wrapper">
     <header id="header" class="hoc clear" > 
       <div id="logo" class="fl_left">
-        <h1><a href="<?php echo FRONT_ROOT ?>User/ShowLoggedView">movie<strong>pass</strong></a></h1>
+        <h1><a href="<?php echo FRONT_ROOT ?>">movie<strong>pass</strong></a></h1>
       </div>
       <?php if(isset($_SESSION["loggedUser"])) { 
                 $loggedUser = $_SESSION["loggedUser"]; 
@@ -74,6 +74,12 @@
       <?php } } else { //No hay session iniciada, navbar solo con login registro?>
       <nav id="mainav" class="fl_right">
         <ul class="clear">
+          <li> 
+            <a class="drop" ><i class="fa fa-film"></i></a>
+            <ul>
+              <li><a href="<?php echo FRONT_ROOT ?>Movie/ShowPlayingView">Ver Cartelera</a></li>
+            </ul>
+          </li>
           <li>
             <a class="drop "><i class="fa fa-user"></i></a>
             <ul>
