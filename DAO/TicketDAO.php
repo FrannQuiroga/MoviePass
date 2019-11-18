@@ -7,7 +7,7 @@
     use DAO\Connection as Connection;
     use DAO\BaseDAO as BaseDAO;
 
-    class RoomDAO extends BaseDAO /*implements IRoomDAO*/
+    class TicketDAO extends BaseDAO /*implements IRoomDAO*/
     {
         private $connection;
         private $tableName = "tickets";

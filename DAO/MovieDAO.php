@@ -207,12 +207,25 @@
             try
             {
                 $playingList = array();
-
-                $query = "SELECT m.id,m.poster_path,m.title,m.vote_average,m.overview,m.backdrop_path FROM functions f
+                if($orderedBy=="date"){
+                    $query = "SELECT m.id,m.poster_path,m.title,m.vote_average,m.overview,m.backdrop_path FROM functions f
                         INNER JOIN ".$this->tableName." m on m.id = f.movie_id
                         WHERE m.isAvailable = 1 AND f.isAvailable = 1
                         GROUP BY m.id
-                        ORDER BY m.".$orderedBy;
+                        ORDER BY f.".$orderedBy;
+                }
+                else { 
+                $query = "SELECT m.id,m.poster_path,m.title,m.vote_average,m.overview,m.backdrop_path, g.name 
+                         FROM functions f
+                        
+                        INNER JOIN ".$this->tableName." m	on m.id 		= f.movie_id
+                        INNER JOIN genre_by_movie gxm 		on gxm.movie_id = m.id
+                        INNER JOIN genres g 				on g.id 		= gxm.genre_id
+                        
+                        WHERE m.isAvailable = 1 AND f.isAvailable = 1
+                        GROUP BY m.id
+                        ORDER BY g.name";
+                    }
                 
                 $this->connection = Connection::GetInstance();
 

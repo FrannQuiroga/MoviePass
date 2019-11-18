@@ -34,9 +34,9 @@
             require_once(VIEWS_PATH."movie-list.php");
         } 
 
-        public function ShowPlayingView($orderedBy = "title")
+        public function ShowPlayingView($orderedBy = "day")
         {
-            $playingList = $this->functionDAO->GetPlayingList($orderedBy);
+            $playingList = $this->movieDAO->GetPlayingList($orderedBy);
             
             require_once(VIEWS_PATH."playing-list.php");
         }

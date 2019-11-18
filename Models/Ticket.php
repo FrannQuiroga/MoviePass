@@ -8,46 +8,52 @@
         private $qrCode;
         private $function; //objeto entero, con sala, cine y pelicula!
 
-        public private getId() 
+        public function getId()
         {
-            return this.$id;
+                return $this->id;
         }
 
-        public void setId($id) 
+        public function setId($id)
         {
-            this.$id = $id;
+                $this->id = $id;
+
+                return $this;
         }
 
-        public private getSeatNumber() 
+        public function getSeatNumber()
         {
-            return this.$seatNumber;
+                return $this->seatNumber;
         }
 
-        public void setSeatNumber($seatNumber) 
+        public function setSeatNumber($seatNumber)
         {
-            this.$seatNumber = $seatNumber;
+                $this->seatNumber = $seatNumber;
+
+                return $this;
         }
 
-        public private getQrCode() 
+        public function getQrCode()
         {
-            return this.$qrCode;
+                return $this->qrCode;
         }
 
-        public void setQrCode($qrCode) 
+        public function setQrCode($qrCode)
         {
-            this.$qrCode = $qrCode;
+                $this->qrCode = $qrCode;
+
+                return $this;
         }
 
-        public private getFunction() 
+        public function getFunction()
         {
-            return this.$function;
+                return $this->function;
         }
 
-        public void setFunction($function) 
+        public function setFunction($function)
         {
-            this.$function = $function;
+                $this->function = $function;
+
+                return $this;
         }
-
-
     }
 ?>

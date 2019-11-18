@@ -52,8 +52,13 @@ require_once('validate-session.php');
                     <?php  } if($day != $function->getDay()){ 
                                 $day = $function->getDay(); ?>
                             <br><br><strong class="text-primary" style="margin-left:-220px">><u><?php echo $day; //VER POR QUE ES UN STRING (no puedo formatear!!) ?></u></strong><br> 
-                    <?php } ?><?php echo "|".$function->getTime()."|";} }
-                else {?><br><br><strong> <?php echo "No hay funciones disponibles";}?></strong>
+                    <?php } ?><?php echo "|".$function->getTime()."|";?>
+                                    
+                                    <form action=<?php echo FRONT_ROOT."Function/AvailableSeats";?> method="post">
+                                        <button class="btn" type="submit" name="idfunction" style="background-color:GREEN;color:white;" value="<?php echo $function->getId()?>"> Seleccionar </button>                               
+                                    </form>
+                     <?php } }
+                            else {?><br><br><strong> <?php echo "No hay funciones disponibles";}?></strong>
                         
             </p>
         </div>

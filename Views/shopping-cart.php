@@ -2,6 +2,7 @@
 include_once('header.php');
 include_once('nav-bar.php');
 require_once('validate-session.php');
+
 ?>
     <div id="breadcrumb" class="hoc clear"> 
         <h6 class="heading">Mi carrito</h6>
@@ -26,13 +27,19 @@ require_once('validate-session.php');
                     <tbody>
                         <tr>
                             <td>
-                                <figure class="itemside align-items-center">
-                                    <div class="aside"><img src="bootstrap-ecommerce-html/images/items/1.jpg" class="img-sm"></div>
-                                    <figcaption class="info">
-                                        <a href="#" class="title text-dark">Camera Canon EOS M50 Kit</a>
-                                        <p class="text-muted small">Matrix: 25 Mpx <br> Brand: Canon</p>
-                                    </figcaption>
-                                </figure>
+                                <?php foreach($ticketList as $ticket){?>
+                                        
+                                        <figure class="itemside align-items-center">
+                                            <div src="<?php //echo IMAGE_URL . $ticket->getFunction()->getMovie()->getPosterPath();?>" class="img-sm"></div>
+                                            <figcaption class="info">
+                                                <a href="#" class="title text-dark"><?php echo $ticket->getFunction()->getMovie()->getTitle();?></a>
+                                                <p class="text-muted small">Cine: <?php echo $ticket->getFunction()->getRoom()->getCinema()->getName();?> <br> Sala: <?php echo $ticket->getFunction()->getRoom()->getName();?> <br> </p>
+                                                <p class="text-muted small">Fecha: <?php echo $ticket->getFunction()->getDay();?> <br> Hora: <?php echo $ticket->getFunction()->getTime();?></p>
+                                           
+                                            </figcaption>
+                                        </figure>
+                                        <?php
+                                }?>
                             </td>
                             <td>
                                 <select class="form-control">

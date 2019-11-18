@@ -58,7 +58,7 @@
             <li>
               <a class="drop"><i class="fa fa-shopping-cart"></i></a>
               <ul>
-                <li><a href="">Ver carrito</a></li>
+                <li><a href="<?php echo FRONT_ROOT ?>Shopping/ShowShoppingView">Ver carrito</a></li>
                 <li><a href="">Checkout</a></li>
               </ul>
             </li>

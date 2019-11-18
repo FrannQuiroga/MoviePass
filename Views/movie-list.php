@@ -13,9 +13,9 @@ require_once('validate-admin.php');
   <div class="center card shadow-sm ">   
     <div class="form-group nospace inline  ">
       <h6 class= "mb-1 text-muted small"><br>Ordenar por</h6>
-      <form action="<?php echo FRONT_ROOT ?>Movie/ShowListView" method="get">
-        <input type="radio" name="orderedBy" value="title" onclick="this.form.submit()" <?php if($orderedBy =="title") {echo "checked";}?>><h6 class= "mb-1 text-muted small">Titulo</h6>
-        <input type="radio" name="orderedBy" value="vote_average desc" onclick="this.form.submit()"<?php if($orderedBy =="vote_average desc") {echo "checked";}?>><h6 class= "mb-1 text-muted small">Puntuacion</h6>
+      <form action="<?php echo FRONT_ROOT ?>Movie/ShowPlayingView" method="get">
+        <input type="radio" name="orderedBy" value="title" onclick="this.form.submit()" <?php if($orderedBy =="title") {echo "checked";}?>><h6 class= "mb-1 text-muted small">Categoria</h6>
+        <input type="radio" name="orderedBy" value="vote_average desc" onclick="this.form.submit()"<?php if($orderedBy =="vote_average desc") {echo "checked";}?>><h6 class= "mb-1 text-muted small">Fecha</h6>
       </form>  
     </div>
   </div>

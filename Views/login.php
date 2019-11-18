@@ -2,6 +2,11 @@
 <?php 
 include_once('header.php');
 include_once('nav-bar.php');
+
+//require_once('controllers/login-facebook/config.php');
+//$redirectTo = "http://localhost/moviepass/controller/login-facebook/callback.php";
+//$data = ['email'];
+//$fullURL = $handler->getLoginUrl($redirectTo, $data);
 ?>
 
   
@@ -11,7 +16,7 @@ include_once('nav-bar.php');
       <a href="<?php echo FRONT_ROOT?>User/ShowAddView" class="float-right btn btn-outline-primary">Registrarse</a>
       <h4 class="card-title mb-4 mt-1"style="color:black">Login</h4><br>
       <p class="text-center"style="color:grey">Ingrese con Facebook</p>
-      <a href="" class="btn btn-block btn-facebook" style="background-color:#3B5998;color:white;"> <i class="fab fa-facebook-f"></i> &nbsp; facebook</a>
+      <a href="<?php //echo $fullURL ?>" class="btn btn-block btn-facebook" style="background-color:#3B5998;color:white;"> <i class="fab fa-facebook-f"></i> &nbsp; facebook</a>
       <hr><p class="divider-text text-center" style="color:black;">
         Ó
       </p><hr>

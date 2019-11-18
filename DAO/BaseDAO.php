@@ -5,7 +5,8 @@
     use Models\Function_ as Function_;
     use Models\Room as Room;
     use Models\Movie as Movie; 
-    use Models\Cinema as Cinema;  
+    use Models\Cinema as Cinema;
+    use Models\Ticket as Ticket;  
     use DAO\Connection as Connection;
     use DAO\IBaseDAO as IBaseDAO;
 
@@ -202,6 +203,38 @@
             {
                 throw $ex;
             }
+        }
+
+        public function GetTicket($idFunction) //LISTA DE GENEROS POR PELICULA
+        {
+            try
+            {
+                $ticketList = array();
+                
+                $query = "SELECT t.id,t.seatNumber,t.qrCode,t.function_id FROM tickets t
+                          WHERE t.function_id = ".$idFunction;
+
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->Execute($query);
+                
+                foreach ($resultSet as $row)
+                {                
+                    $ticket = new Ticket();
+                    $ticket->setId($row["id"]);
+                    $ticket->setSeatNumber($row["seatNumber"]);
+                    $ticket->setQrCode($row["qrCode"]);
+                    $ticket->setFunction($this->GetFunction($idFunction));
+
+                    array_push($ticketList, $ticket);
+                }
+                return $ticketList;
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+            
         }
 
         

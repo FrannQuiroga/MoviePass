@@ -69,7 +69,17 @@ CREATE table users(
     user_profile_id int,
     constraint fk_user_profile_id foreign key (user_profile_id) references user_profiles (id)
 );
+create table tickets(
+    id int primary key auto_increment,
+    seatNumber int,
+    qrCode int,
+    function_Id int,
+    constraint fk_function_id foreign key (function_Id) references functions (id)
+);
 
 --Para crear administrador!
 --INSERT INTO if not exists user_profiles (id,name,surname,document) VALUES (0,'Admin','Istrador',1);
 --INSERT INTO if not exists users (email,password,isAdmin,user_profile_id) VALUES (admin@admin.com,admin,1,0);
+
+
+                        

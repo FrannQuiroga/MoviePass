@@ -4,16 +4,20 @@
     use DAO\FunctionDAO as FunctionDAO;
     use DAO\MovieDAO as MovieDAO;
     use Models\Function_ as Function_;
+    use DAO\TicketDAO as TicketDAO;
+    
 
     class FunctionController
     {
         private $movieDAO;
         private $functionDAO;
+        private $ticketDAO;
 
         public function __construct()
         {
             $this->functionDAO = new FunctionDAO();
             $this->movieDAO = new MovieDAO();
+            $this->ticketDAO = new TicketDAO();
         }
 
         public function ShowAddView($idRoom)
@@ -108,6 +112,13 @@
             echo "<script> if(confirm('Funcion Eliminada con Exito!!'));
                     </script>";
             $this->ShowListView($function->getRoom()->getId());
+        }
+
+        public function AvailableSeats($idFunction){
+
+            $function = $this->functionDAO->GetFunction($idFunction);
+            $ticketList= $this->ticketDAO->GetTicket($idFunction);
+            require_once(VIEWS_PATH."available-seats.php");
         }
     }
 ?>
