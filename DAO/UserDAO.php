@@ -6,8 +6,9 @@
     use Models\User as User;
     use Models\UserProfile as UserProfile;
     use DAO\Connection as Connection;
+    use DAO\BaseDAO as BaseDAO;
 
-    class UserDAO implements IUserDAO
+    class UserDAO extends BaseDAO implements IUserDAO
     {
         private $connection;
         private $tableName = "users";
@@ -37,7 +38,7 @@
         {
             try
             {
-                $user= null;;
+                $user= null;
                 
 
                 $query = "SELECT * FROM ".$this->tableName." WHERE email LIKE '%" .$email."' AND isAvailable = 1";
@@ -65,27 +66,6 @@
                 throw $ex;
             }
         }
-
-        private function GetProfile($profileId)
-        {
-            $userProfile = null;
-            $query = "SELECT * FROM user_profiles WHERE id = " .$profileId;
-            $this->connection = Connection::GetInstance();
-
-            $resultSet = $this->connection->Execute($query);
-
-            foreach($resultSet as $row)
-            {
-                $userProfile = new UserProfile();
-                $userProfile->setId($row["id"]);
-                $userProfile->setName($row["name"]);
-                $userProfile->setSurname($row["surname"]);
-                $userProfile->setDocument($row["document"]);
-            }
-
-            return $userProfile;
-        }
-
 
         public function Get($orderedBy)
         {

@@ -15,6 +15,10 @@
 
         //FUNCTION
         public function GetFunction($idFunction);
+
+        //USER
+        public function GetUser($idUser);
+        public function GetProfile($idProfile);
         
     }
 

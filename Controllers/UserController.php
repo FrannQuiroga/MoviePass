@@ -42,6 +42,8 @@
         public function ShowProfileView()
         {
             $user = $_SESSION["loggedUser"];
+            $ticketList = $this->userDAO->GetBuyTickets($user);
+            
             require_once(VIEWS_PATH."profile-view.php");
         }
 

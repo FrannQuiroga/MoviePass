@@ -4,7 +4,7 @@
     use Models\Ticket as Ticket;
 
     interface ITicketDAO{
-        //COMPLETAR
+        public function Add(Ticket $ticket);
     }
 
 ?>

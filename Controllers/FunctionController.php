@@ -3,17 +3,20 @@
 
     use DAO\FunctionDAO as FunctionDAO;
     use DAO\MovieDAO as MovieDAO;
+    use DAO\TicketDAO as TicketDAO;
     use Models\Function_ as Function_;
 
     class FunctionController
     {
         private $movieDAO;
         private $functionDAO;
+        private $ticketDAO;
 
         public function __construct()
         {
             $this->functionDAO = new FunctionDAO();
             $this->movieDAO = new MovieDAO();
+            $this->ticketDAO = new TicketDAO();
         }
 
         public function ShowAddView($idRoom)
@@ -103,10 +106,19 @@
         public function Remove($idFunction)
         {
             $function = $this->functionDAO->GetFunction($idFunction);
-            $this->functionDAO->Remove($idFunction);
-            //VER LUEGO VALIDACIONES RESPECTO A LAS ENTRADAS VENDIDAS!!
-            echo "<script> if(confirm('Funcion Eliminada con Exito!!'));
+            if(empty($this->ticketDAO->Get($function)))
+            {
+                $this->functionDAO->Remove($idFunction);
+                //VER LUEGO VALIDACIONES RESPECTO A LAS ENTRADAS VENDIDAS!!
+                echo "<script> if(confirm('Funcion Eliminada con Exito!!'));
+                        </script>";
+            }
+            else
+            {
+                echo "<script> if(confirm('Error. No se puede borrar una funcion con entradas asociadas!!'));
                     </script>";
+            }
+            
             $this->ShowListView($function->getRoom()->getId());
         }
     }

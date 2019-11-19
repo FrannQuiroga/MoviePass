@@ -38,13 +38,8 @@
             {
                 $this->genreDAO->Truncate(); //AGREGO ESTA FUNCION PARA VACIAR LA TABLA ANTES DE ACTUALIZAR!! (en prueba)
 
-                foreach($array['genres'] as $row)
+                foreach($array as $genre)
                 {
-                    $genre = new Genre();
-    
-                    $genre->setId($row["id"]);
-                    $genre->setName($row["name"]);
-    
                     $this->genreDAO->Add($genre);
                 }
                 $this->ShowSuccessfulView();

@@ -5,7 +5,10 @@
     use Models\Function_ as Function_;
     use Models\Room as Room;
     use Models\Movie as Movie; 
-    use Models\Cinema as Cinema;  
+    use Models\Cinema as Cinema;
+    use Models\User as User;
+    use Models\UserProfile as UserProfile;
+    use Models\Ticket as Ticket;  
     use DAO\Connection as Connection;
     use DAO\IBaseDAO as IBaseDAO;
 
@@ -80,7 +83,7 @@
         }
 
         //CINEMA!!
-        public function GetCinema($idCinema) //DEVUELVE EL CINE COMPLETO (OBJETO)
+        public function GetCinema($idCinema) //get a cinema complete object by id
         {
             try
             {
@@ -110,7 +113,7 @@
         }
 
         //ROOM
-        public function GetRoom($idRoom) //DEVUELVE EL OBJETO ENTERO YA CON EL CINE!!
+        public function GetRoom($idRoom) //get a room complete object by id
         {
             try
             {
@@ -137,7 +140,7 @@
             }
         }
         //FUNCTION
-        public function GetFunction($idFunction)//DEVUELVE LA FUNCION COMPLETA, CON OBJ MOVIE Y ROOM(CON CINE DENTRO).
+        public function GetFunction($idFunction) //get a function complete object by id
         {
             try
             {
@@ -153,8 +156,8 @@
                     $function->setId($row["id"]);
                     $function->setDay($row["day"]);
                     $function->setTime($row["time"]);
-                    $function->setRoom($this->GetRoom($row["room_id"])); //DE BASEDAO!!
-                    $function->setMovie($this->GetMovie($row["movie_id"])); //DE BASEDAO!!
+                    $function->setRoom($this->GetRoom($row["room_id"])); 
+                    $function->setMovie($this->GetMovie($row["movie_id"]));
                 }
 
                 return $function;
@@ -165,9 +168,9 @@
             }
         }
 
-        public function GetFunctionsByMovie($movie)
-        //Todas las funciones de la pelicula en todos los cines!!
-        //Ordenado por cine --> sala --> dia --> hora (en ese orden)
+        public function GetFunctionsByMovie($movie) //get all the functions that a movie have in every cinema
+        
+        //Order by cinema --> room --> day --> time
         {
             try
             {
@@ -179,7 +182,6 @@
                           INNER JOIN cinemas c on r.cinema_id = c.id
                           WHERE f.isAvailable = 1 AND m.isAvailable = 1 AND movie_id =" .$movie->getId().
                           " ORDER BY c.name,r.name,f.day,f.time;";
-                    //TIENEN QUE ESTAR VIGENTES TANTO LA FUNCION COMO LA PELICULA EN BD!!
 
                 $this->connection = Connection::GetInstance();
 
@@ -204,6 +206,85 @@
             }
         }
 
+        //USER!!
+        public function GetUser($idUser) //get user complete object by id
+        {
+            try
+            {
+                $user= null;
+                
+
+                $query = "SELECT * FROM users WHERE id = " .$idUser." AND isAvailable = 1";
+
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->Execute($query);
+        
+                foreach($resultSet as $row)
+                {                
+                    $user = new User();
+                    $user->setId($row["id"]);
+                    $user->setEmail($row["email"]);
+                    $user->setPassword($row["password"]);
+                    $user->setIsAdmin($row["isAdmin"]);
+
+                    $user->setUserProfile($this->GetProfile($row["user_profile_id"]));
+                }
+                return $user;
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+        }
+
+        public function GetProfile($idProfile) //get user profile by id
+        {
+            $userProfile = null;
+            $query = "SELECT * FROM user_profiles WHERE id = " .$idProfile;
+            $this->connection = Connection::GetInstance();
+
+            $resultSet = $this->connection->Execute($query);
+
+            foreach($resultSet as $row)
+            {
+                $userProfile = new UserProfile();
+                $userProfile->setId($row["id"]);
+                $userProfile->setName($row["name"]);
+                $userProfile->setSurname($row["surname"]);
+                $userProfile->setDocument($row["document"]);
+            }
+
+            return $userProfile;
+        }
+
+        public function GetBuyTickets($user) //function to get the buy tickets per user.
+        {
+            $ticketList = array();
+
+            $query = "select t.id,t.seat_number,t.function_id,t.user_id from tickets t
+                        inner join functions f on t.function_id = f.id
+                        inner join movies m on f.movie_id = m.id
+                        where f.isAvailable = 1 AND m.isAvailable = 1 AND t.user_id = ".$user->getId().
+                        " order by f.day, f.time";
+
+            $this->connection = Connection::GetInstance();
+
+            $resultSet = $this->connection->Execute($query);
+
+            foreach($resultSet as $row)
+            {
+                $ticket = new Ticket();
+                $ticket->setId($row["id"]);
+                $ticket->setSeatNumber($row["seat_number"]);
+                $ticket->setFunction($this->GetFunction($row["function_id"]));
+                $ticket->setUser($this->GetUser($row["user_id"]));
+
+                array_push($ticketList, $ticket);
+            }
+
+            return $ticketList;
+        }
         
     }
 ?>

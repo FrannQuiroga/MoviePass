@@ -36,15 +36,15 @@
 
         public function ShowPlayingView($orderedBy = "title")
         {
-            $playingList = $this->functionDAO->GetPlayingList($orderedBy);
+            $playingList = $this->movieDAO->GetPlayingList($orderedBy);
             
             require_once(VIEWS_PATH."playing-list.php");
         }
 
-        public function ShowMovieView($id)//MODIFICADO PARA PRUEBA!
+        public function ShowMovieView($id)
         {
             $movie = $this->movieDAO->GetMovie($id);
-            $functionList = $this->movieDAO->GetFunctionsByMovie($movie);//PROBANDO!!!
+            $functionList = $this->movieDAO->GetFunctionsByMovie($movie);
             require_once(VIEWS_PATH."movie-details.php");
         }
 
@@ -56,49 +56,35 @@
 
         public function Update()
         {
-            $array = $this->apiDAO->UpdateMovies();
+            $movieList = $this->apiDAO->UpdateMovies();
          
-            //DEBERIA VERIFICAR PREVIO A VACIAR LA TABLA QUE ESTE TRAYENDO AL MENOS UNA PELICULA NUEVA DE LA API!!
-            if($array != null)
+            //I am verifying that i am getting at least one movie from the Api
+            if($movieList != null)
             {
                 $this->movieDAO->Truncate(); //Esta funcion me pone todas las peliculas como no disponibles(dsp voy actualizando)
                 //$this->genreByMovieDAO->Truncate(); //VACIO LA TABLA RELACIONAL DE GENEROS POR PELICULA!!
 
-                foreach($array['results'] as $row)
+                foreach($movieList as $movie)
                 {
-                    if($this->movieDAO->ExistsMovie($row["id"]))//Si la pelicula esta el la bd, la vuelvo a dar de alta
+                    if($this->movieDAO->ExistsMovie($movie->getId()))//If the movie exists in our DB
                     {
-                        $this->movieDAO->EditMovie($row["id"]);//setea isAvailable en 1.
+                        $this->movieDAO->EditMovie($movie->getId());//Set this movie as available (isAvailable=1);
                     }
-                    else //Si es la primera vez, la agrego a la base de datos y guardo sus generos en la tabla relacional
+                    else //If is the first time of the movie, I have to persist it in my DB of movies
                     {
-                        $movie = new Movie();
-
-                        $movie->setPosterPath($row["poster_path"]);
-                        $movie->setId($row["id"]);
-                        $movie->setTitle($row["title"]);
-                        $movie->setVoteAverage($row["vote_average"]);
-                        $movie->setOverview($row["overview"]);
-                        $movie->setBackdropPath($row["backdrop_path"]);
-    
                         $this->movieDAO->Add($movie);
-                        
-                        // AGREGAR GENEROS CON TABLA INTERMEDIA GENEROS X PELICULA!!
-                        foreach($row["genre_ids"] as $id){
-                            $genreByMovie = new GenreByMovie();
-                            $genreByMovie->setMovieId($movie->getId());
-                            $genreByMovie->setGenreId($id);
-    
-                            $this->genreByMovieDAO->Add($genreByMovie);
-                    }
                     
+                        foreach($movie->getGenres() as $genreByMovie)//I have to agregate the genres of the movie too to the DB of genreByMovie
+                        {
+                            $this->genreByMovieDAO->Add($genreByMovie);
+                        }
                     }
                 }
-                $this->ShowSuccessfulView(); //Muestro vista de exito
+                $this->ShowSuccessfulView(); //Show successful view
             }
             else
             {
-                //Mostrar mensaje de error en Update peliculas!!
+                //Unsuccessful. I have to show an error message!!
                 
             }
             

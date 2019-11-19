@@ -34,7 +34,7 @@
                     <th style="width: 100px;">Dia</th>
                     <th style="width: 100px;">Hora</th>
                     <th style="width: 600px;">Pelicula</th>
-                    <th style="width: 100px;" colspan=2>Acccion </th>
+                    <th style="width: 100px;" colspan=3>Acccion </th>
                   </tr>
                 </thead>
                 <tbody>
@@ -44,6 +44,11 @@
                       <td><?php echo $function->getDay(); ?></td>
                       <td><?php echo $function->getTime(); ?></td>
                       <td><?php echo $function->getMovie()->getTitle(); ?></td>
+                      <td>
+                        <form action="<?php echo FRONT_ROOT ?>Ticket/ShowListView" method="get">
+                        <button type="submit" class="btn" name="idFunction" style="background-color:GREEN;color:white;" value="<?php echo $function->getId();?>">Entradas</button>
+                        </form>
+                      </td>
                       <td>
                         <form action="<?php echo FRONT_ROOT ?>Function/ShowEditView" method="post">
                         <button type="submit" class="btn" name="idFunction" style="background-color:#DC8E47;color:white;" value="<?php echo $function->getId();?>">Editar</button>

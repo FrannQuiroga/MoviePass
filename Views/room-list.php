@@ -34,9 +34,8 @@
                 <tr>
                   <th style="width: 300px;">Nombre</th>
                   <th style="width: 100px;">Capacidad</th>
-                  <th style="width: 300px;">Cine</th>
-                  <th style="width: 200px;" colspan=3>Acccion </th>
-                  <!--<th style="width: 100px;">Acccion </th>-->
+                  <th style="width: 400px;">Cine</th>
+                  <th style="width: 100px;" colspan=3>Acccion </th>
                 </tr>
               </thead>
               <tbody>

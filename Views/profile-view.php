@@ -26,21 +26,39 @@ include_once('nav-bar.php');
     </div>
     <!--Tabla de entradas compradas-->
     <?php if(!$user->getIsAdmin()){ ?> <!--Validacion, si es admin no tiene entradas compradas!!-->
-    <div class="scrollable">
+    <div class="scrollable" style="margin-left:auto;margin-right:auto;">
           <h6 class="heading" style="float:left"><br><br>Mis entradas</h6>
               <table style="text-align:center;">
                 <thead>
                   <tr>
-                    <th style="width: 150px;">Dia</th>
-                    <th style="width: 150px;">Hora</th>
+                    <th style="width: 100px;">Dia</th>
+                    <th style="width: 100px;">Hora</th>
                     <th style="width: 400px;">Pelicula</th>
-                    <th style="width: 400px;">Cine</th>
-                    <th style="width: 100px;" colspan=2>Detalles </th>
+                    <th style="width: 200px;">Cine</th>
+                    <th style="width: 200px;">Sala</th>
+                    <th style="width: 100px;">N° de Asiento</th>
+                    <th style="width: 80px;" >Detalles </th>
                     <!--<th style="width: 100px;">Acccion </th>-->
                   </tr>
                 </thead>
                 <tbody>
-                    <tr><td colspan=6;><?php echo "No dispone de entradas adquiridas al momento.";?></td></tr>
+                <?php if(!empty($ticketList)) { foreach($ticketList as $ticket) { ?>
+                  <tr>
+                    <td><?php echo $ticket->getFunction()->getDay(); ?></td>
+                    <td><?php echo $ticket->getFunction()->getTime(); ?></td>
+                    <td><?php echo $ticket->getFunction()->getMovie()->getTitle(); ?></td>
+                    <td><?php echo $ticket->getFunction()->getRoom()->getCinema()->getName(); ?></td>
+                    <td><?php echo $ticket->getFunction()->getRoom()->getName(); ?></td>
+                    <td><?php echo $ticket->getSeatNumber(); ?></td>
+                    
+                    
+                    <td>
+                      <form action="<?php echo FRONT_ROOT;?>" method="get">
+                        <button type="submit" class="btn" name="idTicket" style="background-color:GREEN;color:white;" value="<?php echo $ticket->getId();?>">Ver</button>
+                      </form>
+                    </td>
+                  </tr>
+                <?php } } else {?><tr><td colspan=7;><?php echo "No dispone de entradas adquiridas al momento";}?></td></tr>
                 </tbody>
             </table>
     </div>

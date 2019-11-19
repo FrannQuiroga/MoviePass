@@ -68,7 +68,7 @@
             $room = $this->roomDAO->GetRoom($idRoom);//To get the idRoom to show list view
             //Logic remove to continue having past information
             
-            if(empty($this->functionDAO->Get($room)))//If the room is empty I can remove
+            if(empty($this->functionDAO->Get($room)))//If the room is empty I can remove it
             {
                 $this->roomDAO->Remove($idRoom);
                 
