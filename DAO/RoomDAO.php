@@ -118,5 +118,28 @@
                 throw $ex;
             }
         }
+
+        public function EditableRoom($name,$idCinema,$idRoom)//To verify that the cinema doesn´t have another room with this name
+        {
+            try
+            {
+
+                $query = "SELECT * FROM ". $this->tableName.
+                " WHERE isAvailable = 1 AND cinema_id = ".$idCinema." AND name LIKE '%" .$name. "' AND NOT id =".$idRoom;
+                
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->Execute($query);
+                
+                if(empty($resultSet))
+                    return false;
+
+                return true;
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+        }
     }
 ?>

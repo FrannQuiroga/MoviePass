@@ -117,5 +117,28 @@
                 throw $ex;
             }
         }
+
+        public function EditableCinema($name,$idCinema)
+        {
+            try
+            {
+
+                $query = "SELECT * FROM ". $this->tableName.
+                " WHERE isAvailable = 1 AND name LIKE '%" .$name. "' AND NOT id =".$idCinema;
+                
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->Execute($query);
+                
+                if(empty($resultSet))
+                    return false;
+
+                return true;
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+        }
     }
 ?>

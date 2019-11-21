@@ -5,7 +5,7 @@
 ?>
 
   <div id="breadcrumb" class="hoc clear" > 
-    <h6 class="heading">Funcion</h6>
+    <h6 class="heading">Funcion: <?php echo $function->getMovie()->getTitle()."(".$function->getDay().", ".$function->getTime().")";?> </h6>
     <?php if(empty($ticketList)) { ?>
     <form action="<?php echo FRONT_ROOT ?>Ticket/GenerateTickets" method="post">
               <button type="submit" class="btn" style="background-color:GREEN;color:white;" name="idFunction" value="<?php echo $function->getId();?>">Generar entradas</button>

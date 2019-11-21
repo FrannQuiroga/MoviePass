@@ -27,7 +27,7 @@ require_once('validate-session.php');
 
     <div  class=" card flex-md-row mb-4 shadow-sm h-md-250" style="align-items:center;width:400px;margin-left:auto;margin-right:150px;" >
         <div class="card-body align-items-start center" > 
-        <form action="<?php echo FRONT_ROOT ?>" method="post">
+        <form action="<?php echo FRONT_ROOT ?>Ticket/ShowCartView" method="post">
             <p><strong style="text-align:center"><u class="text-primary">Funciones:</u></strong>
             <?php if(!empty($functionList)) {?>
                 
@@ -55,7 +55,7 @@ require_once('validate-session.php');
                            
             </p>
         <?php if(!empty($functionList)){?>
-            <button type="submit" class="btn" name="idFunction" style="background-color:GREEN;color:white;">Comprar</button>
+            <button type="submit" class="btn" style="background-color:GREEN;color:white;">Comprar</button>
         <?php } ?>
         </form>
         </div>

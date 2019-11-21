@@ -77,7 +77,6 @@
                 $movieList = array();
 
                 $query = "SELECT * FROM ".$this->tableName." WHERE isAvailable = 1 ORDER BY ".$orderedBy;
-
                 $this->connection = Connection::GetInstance();
 
                 $resultSet = $this->connection->Execute($query);
@@ -106,48 +105,13 @@
             }
         }
 
-        /*public function GetSearchList($searched) //YA ESTA ANDANDO JOYA!!
+        public function GetSearchList($searched) 
         {
             try
             {
                 $searchList = array();
 
-                $query = "SELECT * FROM ".$this->tableName." WHERE title LIKE '%" .$searched."%';";
                 
-                $this->connection = Connection::GetInstance();
-
-                $resultSet = $this->connection->Execute($query);
-                
-                foreach ($resultSet as $row)
-                {                
-                    $movie = new Movie();
-                    
-                    $movie->setId($row["id"]);
-                    $movie->setPosterPath($row["poster_path"]);
-                    $movie->setTitle($row["title"]);
-                    $movie->setVoteAverage($row["vote_average"]);
-                    $movie->setOverview($row["overview"]);
-                    $movie->setBackdropPath($row["backdrop_path"]);
-                    //funcion auxiliar para cargar los generos de la pelicula a un arreglo
-                    $movie->setGenres($this->GetGenreListByMovie($movie->getId()));
-
-                    array_push($searchList, $movie);
-                }
-                return $searchList;
-            }
-            catch(Exception $ex)
-            {
-                throw $ex;
-            }
-        }*/
-
-        public function GetSearchList($searched) //YA ESTA ANDANDO JOYA!!
-        {
-            try
-            {
-                $searchList = array();
-
-                /*$query = "SELECT * FROM ".$this->tableName." WHERE title LIKE '%" .$searched."%';";*/
                 $query = "SELECT m.id,m.poster_path,m.title,m.vote_average,m.overview,m.backdrop_path FROM functions f
                         INNER JOIN ".$this->tableName." m on m.id = f.movie_id
                         WHERE m.isAvailable = 1 AND f.isAvailable = 1 AND title LIKE '%".$searched."%'
@@ -180,7 +144,7 @@
             }
         }
 
-        public function ExistsMovie($idMovie) //TESTEADA!
+        public function ExistsMovie($idMovie) 
         {
             try
             {
@@ -202,17 +166,27 @@
             }
         }
 
-        public function GetPlayingList($orderedBy)
+        public function GetPlayingList($orderedBy, $filterGenre, $filterDay)
         {
             try
             {
                 $playingList = array();
 
                 $query = "SELECT m.id,m.poster_path,m.title,m.vote_average,m.overview,m.backdrop_path FROM functions f
-                        INNER JOIN ".$this->tableName." m on m.id = f.movie_id
-                        WHERE m.isAvailable = 1 AND f.isAvailable = 1
-                        GROUP BY m.id
-                        ORDER BY m.".$orderedBy;
+                            INNER JOIN ".$this->tableName." m on m.id = f.movie_id
+                            inner join genre_by_movie gm on m.id = gm.movie_id
+                            WHERE m.isAvailable = 1 AND f.isAvailable = 1";
+                
+                if($filterGenre != "null")
+                {
+                    $query .= " AND gm.genre_id = ".$filterGenre;
+                }
+                if(!empty($filterDay))
+                {
+                    $query .= " AND f.day LIKE '%".$filterDay."'";
+                }
+                                       
+                $query .= " GROUP BY m.id ORDER BY m.".$orderedBy;
                 
                 $this->connection = Connection::GetInstance();
 
@@ -240,9 +214,6 @@
                 throw $ex;
             }
         }
-
-
-        
 
     }
 ?>

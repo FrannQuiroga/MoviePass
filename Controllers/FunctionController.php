@@ -19,7 +19,7 @@
             $this->ticketDAO = new TicketDAO();
         }
 
-        public function ShowAddView($idRoom)
+        public function ShowAddView($idRoom,$day=null,$time=null,$idMovie=null)
         {
             /*Necesito el cine para cargar la sala*/
             /*Traer sala*/
@@ -73,7 +73,7 @@
             }
             
             
-            $this->ShowAddView($idRoom);
+            $this->ShowAddView($idRoom,$day,$time,$idMovie);
         }
 
         public function Edit($idRoom,$day,$time,$idMovie,$idFunction)
@@ -120,6 +120,11 @@
             }
             
             $this->ShowListView($function->getRoom()->getId());
+        }
+
+        public function VerifyCart()
+        {
+
         }
     }
 ?>

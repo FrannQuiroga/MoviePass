@@ -43,8 +43,15 @@
         {
             $user = $_SESSION["loggedUser"];
             $ticketList = $this->userDAO->GetBuyTickets($user);
-            
+
             require_once(VIEWS_PATH."profile-view.php");
+        }
+
+        public function ShowEditPasswordView()
+        {
+            $user = $_SESSION["loggedUser"];
+
+            require_once(VIEWS_PATH."edit-password.php");
         }
 
         public function Add($name,$surname,$document,$email,$password)
@@ -94,9 +101,9 @@
             $loginUser=$this->userDAO->GetByEmail($email);
 
             if(empty($loginUser)){
-                echo "<script> if(confirm('Datos incorrectos, vuelva a intentarlo !'));";  
-                echo "window.location = './login.php'; </script>";
-                //$this->ShowLoginView(); 
+                echo "<script> if(confirm('Datos incorrectos, vuelva a intentarlo !'));  
+                </script>";
+                $this->ShowLoginView(); 
             }
             else
             {
@@ -137,10 +144,43 @@
             $this->ShowListView();
         }
 
-        /*public function Edit($id)
+        /*public function EditProfile($name,$surname,$document)
         {
-            //Deberia mostrarme una vista con los campos que tengo actualmente y la opcion de modificar cuantos quiera
 
         }*/
+
+        public function EditPassword($password1,$password2)
+        {
+            $user = $_SESSION["loggedUser"];
+
+            if($password1 != $user->getPassword())
+            {
+                if($password1 == $password2)
+                {
+                    $user->setPassword($password1);
+                    $this->userDAO->EditPassword($user);
+                    //SCRIPT EXITO!!
+                    echo "<script> if(confirm('Contraseña modificada con éxito, por favor vuelva a ingresar!!'));
+                    </script>";
+                    session_destroy();
+                    $this->ShowLoginView();
+                    
+                }
+                else
+                {
+                    //if password dont match ERROR
+                    echo "<script> if(confirm('Las contraseñas ingresadas no coinciden, vuelva a intentralo!!'));
+                    </script>";
+                    $this->ShowEditPasswordView();
+                }
+            }
+            else
+            {
+                //if new password equals actuve password DONT MODIFY IT
+                echo "<script> if(confirm('No ha modificado ningun dato, sera redirigido a su perfil!!'));
+                    </script>";
+            }
+            $this->ShowProfileView();
+        }
     }
 ?>

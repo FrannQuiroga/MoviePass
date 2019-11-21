@@ -1,11 +1,12 @@
 <?php 
 include_once('header.php');
 include_once('nav-bar.php');
+require_once('validate-session.php');
 ?>
 
     <div id="breadcrumb" class="hoc clear"> 
     <h6 class="heading">Mi perfil</h6>
-    <!--<a href="<?php echo FRONT_ROOT ?>"  class="btn" style="background-color:GREEN;color:white;" >Volver</a>-->
+    
     </div>
 </div> 
 
@@ -20,8 +21,8 @@ include_once('nav-bar.php');
                 <strong class="d-inline-block mb-2 text-primary"><?php echo $user->getUserProfile()->getName(). " " .$user->getUserProfile()->getSurname(); ?></strong>
                 <div class="mb-1 text-muted small">DNI: <?php echo $user->getUserProfile()->getDocument();?></div>
                 <div class="mb-1 text-muted small">Usuario: <?php echo $user->getEmail();?></div>
-                <div class="mb-1 text-muted small">Contraseña: **********</div><br><br>
-                <a href=""  class="btn" style="background-color:GREEN;color:white;" >Editar Información</a>
+                <div class="mb-1 text-muted small"></div><br><br>
+                <a href="<?php echo FRONT_ROOT;?>User/ShowEditPasswordView"  class="btn" style="background-color:GREEN;color:white;" >Cambiar contraseña</a>
             </div>     
     </div>
     <!--Tabla de entradas compradas-->
@@ -37,8 +38,8 @@ include_once('nav-bar.php');
                     <th style="width: 200px;">Cine</th>
                     <th style="width: 200px;">Sala</th>
                     <th style="width: 100px;">N° de Asiento</th>
-                    <th style="width: 80px;" >Detalles </th>
-                    <!--<th style="width: 100px;">Acccion </th>-->
+                    <!--<th style="width: 80px;" >Detalles </th>-->
+                    
                   </tr>
                 </thead>
                 <tbody>
@@ -52,11 +53,11 @@ include_once('nav-bar.php');
                     <td><?php echo $ticket->getSeatNumber(); ?></td>
                     
                     
-                    <td>
-                      <form action="<?php echo FRONT_ROOT;?>" method="get">
+                    <!--<td>
+                      <form action="" method="get">
                         <button type="submit" class="btn" name="idTicket" style="background-color:GREEN;color:white;" value="<?php echo $ticket->getId();?>">Ver</button>
                       </form>
-                    </td>
+                    </td>-->
                   </tr>
                 <?php } } else {?><tr><td colspan=7;><?php echo "No dispone de entradas adquiridas al momento";}?></td></tr>
                 </tbody>

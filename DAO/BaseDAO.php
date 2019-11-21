@@ -206,6 +206,21 @@
             }
         }
 
+        public function UpdateFunctions() //Updates the functions db regarding the current date
+        {
+            try
+            {
+                $query = "UPDATE functions SET  isAvailable = 0 where day < CURRENT_DATE";
+                
+                $this->connection = Connection::GetInstance();
+                $this->connection->ExecuteNonQuery($query);
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+        }
+
         //USER!!
         public function GetUser($idUser) //get user complete object by id
         {
@@ -240,50 +255,90 @@
 
         public function GetProfile($idProfile) //get user profile by id
         {
-            $userProfile = null;
-            $query = "SELECT * FROM user_profiles WHERE id = " .$idProfile;
-            $this->connection = Connection::GetInstance();
-
-            $resultSet = $this->connection->Execute($query);
-
-            foreach($resultSet as $row)
+            try
             {
-                $userProfile = new UserProfile();
-                $userProfile->setId($row["id"]);
-                $userProfile->setName($row["name"]);
-                $userProfile->setSurname($row["surname"]);
-                $userProfile->setDocument($row["document"]);
-            }
+                $userProfile = null;
+                $query = "SELECT * FROM user_profiles WHERE id = " .$idProfile;
+                $this->connection = Connection::GetInstance();
 
-            return $userProfile;
+                $resultSet = $this->connection->Execute($query);
+
+                foreach($resultSet as $row)
+                {
+                    $userProfile = new UserProfile();
+                    $userProfile->setId($row["id"]);
+                    $userProfile->setName($row["name"]);
+                    $userProfile->setSurname($row["surname"]);
+                    $userProfile->setDocument($row["document"]);
+                }
+
+                return $userProfile;
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
         }
 
         public function GetBuyTickets($user) //function to get the buy tickets per user.
         {
-            $ticketList = array();
-
-            $query = "select t.id,t.seat_number,t.function_id,t.user_id from tickets t
-                        inner join functions f on t.function_id = f.id
-                        inner join movies m on f.movie_id = m.id
-                        where f.isAvailable = 1 AND m.isAvailable = 1 AND t.user_id = ".$user->getId().
-                        " order by f.day, f.time";
-
-            $this->connection = Connection::GetInstance();
-
-            $resultSet = $this->connection->Execute($query);
-
-            foreach($resultSet as $row)
+            try
             {
-                $ticket = new Ticket();
-                $ticket->setId($row["id"]);
-                $ticket->setSeatNumber($row["seat_number"]);
-                $ticket->setFunction($this->GetFunction($row["function_id"]));
-                $ticket->setUser($this->GetUser($row["user_id"]));
+                $ticketList = array();
 
-                array_push($ticketList, $ticket);
+                $query = "select t.id,t.seat_number,t.function_id,t.user_id from tickets t
+                            inner join functions f on t.function_id = f.id
+                            inner join movies m on f.movie_id = m.id
+                            where f.isAvailable = 1 AND m.isAvailable = 1 AND t.user_id = ".$user->getId().
+                            " order by f.day, f.time";
+
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->Execute($query);
+
+                foreach($resultSet as $row)
+                {
+                    $ticket = new Ticket();
+                    $ticket->setId($row["id"]);
+                    $ticket->setSeatNumber($row["seat_number"]);
+                    $ticket->setFunction($this->GetFunction($row["function_id"]));
+                    $ticket->setUser($this->GetUser($row["user_id"]));
+
+                    array_push($ticketList, $ticket);
+                }
+
+                return $ticketList;
             }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+        }
 
-            return $ticketList;
+        public function getAvailableTickets($function)
+        {
+            try
+            {
+                
+
+                $query = "SELECT count(*) FROM tickets 
+                            WHERE user_id = 0 AND function_id = ".$function->getId(). 
+                            " group by function_id";
+
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->Execute($query);
+
+                foreach($resultSet as $row)
+                {
+                    return $row[0];
+                }
+                    return 0;
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
         }
         
     }

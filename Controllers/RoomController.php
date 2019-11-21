@@ -87,7 +87,7 @@
         public function Edit($name,$capacity,$idCinema,$idRoom)
         {
             //Validator. The name of the cinema must not exists in our database.
-            if(!$this->roomDAO->existsRoomName($name,$idCinema)) //If the name doesn't exists we can change it
+            if(!$this->roomDAO->EditableRoom($name,$idCinema,$idRoom)) //If the name doesn't exists we can change it
             {
                 $room = new Room();
             

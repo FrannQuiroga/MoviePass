@@ -42,7 +42,7 @@
 
                 $query= "select * from ". $this->tableName." f 
                         inner join movies m on f.movie_id=m.id 
-                        where m.isAvailable = 1 AND f.isAvailable = 1 AND f.day>=now() AND f.room_id = ".$room->getId().
+                        where m.isAvailable = 1 AND f.isAvailable = 1 AND f.day >= CURRENT_DATE AND f.room_id = ".$room->getId().
                         " order by f.day,f.time";
 
                 $this->connection = Connection::GetInstance();
@@ -146,8 +146,38 @@
             }
         }
 
-        
+        public function lastFunctionInsert()
+        {
+            try
+            {
+                $function = null;
+
+                $query = "SELECT * FROM ". $this->tableName.
+                " WHERE isAvailable = 1 ORDER BY id desc LIMIT 1";
+                
+                $this->connection = Connection::GetInstance();
+
+                $resultSet = $this->connection->Execute($query);
+                
+                foreach ($resultSet as $row)
+                {                
+                    $function = new Function_();
+                    $function->setId($row["id"]);
+                    $function->setDay($row["day"]);
+                    $function->setTime($row["time"]);
+                    $function->setRoom($this->GetRoom($row["room_id"])); 
+                    $function->setMovie($this->GetMovie($row["movie_id"]));
+                }
+
+                return $function;
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+        }
 
         
     }
+
 ?>

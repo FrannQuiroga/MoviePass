@@ -33,20 +33,20 @@ require_once('validate-admin.php');
                   <?php $today= new \DateTime();?>
 
                   <td >
-                    <input type="date" name="day"  style="width:240px;" value="<?php echo $today->format('Y-m-d');?>" min="<?php echo $today->format('Y-m-d');?>" max="2019-12-31" required>   
+                    <input type="date" name="day"  style="width:240px;" value="<?php if($day!=null) {echo $day;}else{echo $today->format('Y-m-d');}?>" min="<?php echo $today->format('Y-m-d');?>" max="2019-12-31" required>   
                   </td>
                   <td >
                     <select name="time" style="margin-right:3px;height:43px;width:240px;"  required>
-                      <option value="16:00">16:00</option>
-                      <option value="18:30">18:30</option>
-                      <option value="21:00">21:00</option>
-                      <option value="23:30">23:30</option>    
+                      <option <?php if($time == "16:00") echo "selected"?> value="16:00">16:00</option>
+                      <option <?php if($time == "18:30") echo "selected"?> value="18:30">18:30</option>
+                      <option <?php if($time == "21:00") echo "selected"?> value="21:00">21:00</option>
+                      <option <?php if($time == "23:30") echo "selected"?> value="23:30">23:30</option>    
                     </select>
                   </td>
                   <td>
                     <select name="idMovie" style="margin-right:auto;height:43px;width:500px;"  required>
                     <?php foreach ($movieList as $movie){ ?>
-                      <option value="<?php echo $movie->getId()?>"><?php echo $movie->getTitle();?></option>
+                      <option <?php if($idMovie == $movie->getId()) echo "selected";?> value="<?php echo $movie->getId()?>"><?php echo $movie->getTitle();?></option>
                     <?php } ?>      
                     </select>
                   </td>      

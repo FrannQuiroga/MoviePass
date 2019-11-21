@@ -72,5 +72,26 @@
                 throw $ex;
             }
         }
+
+        public function BuyTickets($idFunction,$quantity)
+        {
+            try
+            {
+                $loggedUser = $_SESSION["loggedUser"];
+                
+
+                $query = "UPDATE ".$this->tableName." SET user_id = ".$loggedUser->getId().
+                            " WHERE function_id = ".$idFunction.
+                            " AND user_id = 0 LIMIT ".$quantity;
+
+                $this->connection = Connection::GetInstance();
+
+                $this->connection->ExecuteNonQuery($query);
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+        }
     }
 ?>

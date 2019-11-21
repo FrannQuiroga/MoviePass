@@ -9,11 +9,27 @@ include_once('nav-bar.php');
 
 
   <div class="center card shadow-sm ">   
-    <div class="form-group nospace inline  ">
-      <h6 class= "mb-1 text-muted small"><br>Ordenar por</h6>
-      <form action="<?php echo FRONT_ROOT ?>Movie/ShowPlayingView" method="get">
-        <input type="radio" name="orderedBy" value="title" onclick="this.form.submit()" <?php if($orderedBy =="title") {echo "checked";}?>><h6 class= "mb-1 text-muted small">Titulo</h6>
-        <input type="radio" name="orderedBy" value="vote_average desc" onclick="this.form.submit()"<?php if($orderedBy =="vote_average desc") {echo "checked";}?>><h6 class= "mb-1 text-muted small">Puntuacion</h6>
+    <div class="form-group nospace inline " >
+      
+      <form action="<?php echo FRONT_ROOT ?>Movie/ShowPlayingView" method="get" >
+        <div>
+          <h6 class= "mb-1 text-muted small"><br>Ordenar por</h6>
+          <input type="radio" name="orderedBy" value="title" onclick="this.form.submit()" <?php if($orderedBy =="title") {echo "checked";}?>><h6 class= "mb-1 text-muted small">Titulo</h6>
+          <input type="radio" name="orderedBy" value="vote_average desc" onclick="this.form.submit()"<?php if($orderedBy =="vote_average desc") {echo "checked";}?>><h6 class= "mb-1 text-muted small">Puntuacion</h6>
+        </div>
+        <div>
+          <h6 class= "mb-1 text-muted small" style="margin-left:300px;"><br>Filtrar por</h6>
+          <select name="filterGenre" class= "text-muted small dropdown" style="margin-left:50px;height:25px;width:150px;">
+          <option <?php if($filterGenre == null) echo "selected";?> value="null">Todas las categorias</option>
+            <?php foreach ($genreList as $genre){ ?>
+              <option <?php if($filterGenre == $genre->getId()) echo "selected";?> value="<?php echo $genre->getId()?>"><?php echo $genre->getName();?></option>
+            <?php } ?>      
+          </select>
+          <input type="date" name="day" class= " center text-muted small dropdown" style="width:120px;margin-left=40px;height:25px;" value="<?php if($filterDay==null) {echo "disabled";}?>" min="<?php echo $today?>" max="2019-12-31">
+        </div>
+        <div>
+          <button class="btn mb btn-outline-success " style="margin-right=0px" type="submit">Filtrar</button>
+        </div>
       </form>  
     </div>
   </div>

@@ -71,8 +71,8 @@ CREATE table users(
 );
 
 --Para crear administrador!
---INSERT INTO if not exists user_profiles (id,name,surname,document) VALUES (0,'Admin','Istrador',1);
---INSERT INTO if not exists users (email,password,isAdmin,user_profile_id) VALUES (admin@admin.com,admin,1,0);
+INSERT INTO user_profiles (id,name,surname,document) VALUES (0,'Admin','Istrador',1);
+INSERT INTO users (email,password,isAdmin,user_profile_id) VALUES ('admin@admin.com','admin',1,0);
 
 CREATE table tickets(
     id int primary key auto_increment,

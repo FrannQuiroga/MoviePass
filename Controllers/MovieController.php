@@ -4,6 +4,7 @@
     use DAO\MovieDAO as MovieDAO;
     use DAO\ApiDAO as ApiDAO;
     use DAO\GenreByMovieDAO as GenreByMovieDAO;
+    use DAO\GenreDAO as GenreDAO;
     use Models\Movie as Movie;
     use Models\GenreByMovie as GenreByMovie;
     
@@ -13,12 +14,14 @@
         private $movieDAO;
         private $apiDAO;
         private $genreByMovieDAO;
+        private $genreDAO;
 
         public function __construct()
         {
             $this->movieDAO = new MovieDAO();
             $this->apiDAO = new ApiDAO();
             $this->genreByMovieDAO = new GenreByMovieDAO();
+            $this->genreDAO = new GenreDAO();
 
         }
 
@@ -34,15 +37,19 @@
             require_once(VIEWS_PATH."movie-list.php");
         } 
 
-        public function ShowPlayingView($orderedBy = "title")
+        public function ShowPlayingView($orderedBy = "title", $filterGenre = "null", $filterDay = "")
         {
-            $playingList = $this->movieDAO->GetPlayingList($orderedBy);
+            $today= date('Y-m-d');
+            $this->movieDAO->UpdateFunctions();
+            $playingList = $this->movieDAO->GetPlayingList($orderedBy,$filterGenre,$filterDay);
+            $genreList = $this->genreDAO->Get("name");
             
             require_once(VIEWS_PATH."playing-list.php");
         }
 
         public function ShowMovieView($id)
         {
+            $this->movieDAO->UpdateFunctions();
             $movie = $this->movieDAO->GetMovie($id);
             $functionList = $this->movieDAO->GetFunctionsByMovie($movie);
             require_once(VIEWS_PATH."movie-details.php");
@@ -50,6 +57,7 @@
 
         public function ShowSearchView($searched)
         {
+            $this->movieDAO->UpdateFunctions();
             $searchList = $this->movieDAO->GetSearchList($searched);
             require_once(VIEWS_PATH."search-list.php");
         }

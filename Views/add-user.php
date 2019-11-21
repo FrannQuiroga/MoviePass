@@ -42,7 +42,7 @@ include_once('nav-bar.php');
           <div class="input-group-prepend">
             <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
           </div>
-          <input name="password" class="form-control" placeholder="************" type="password" required>
+          <input name="password" class="form-control" placeholder="************" type="password" size="10" required>
         </div> <!-- form-group// -->
         <br>                                    
         <input type="submit" class="btn btn-block" value="Crear cuenta" style="background-color:#DC8E47;color:white;"/><br>

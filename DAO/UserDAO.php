@@ -115,5 +115,21 @@
                 throw $ex;
             }
         }
+
+        public function EditPassword($user)
+        {
+            try
+            {
+                $query = "UPDATE ".$this->tableName." SET password = '".$user->getPassword()."' WHERE id =".$user->getId();
+
+                $this->connection = Connection::GetInstance();
+
+                $this->connection->ExecuteNonQuery($query);
+            }
+            catch(Exception $ex)
+            {
+                throw $ex;
+            }
+        }
     }
 ?>

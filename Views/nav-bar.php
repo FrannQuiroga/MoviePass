@@ -8,7 +8,7 @@
       </div>
       <?php if(isset($_SESSION["loggedUser"])) { 
                 $loggedUser = $_SESSION["loggedUser"]; 
-                if($loggedUser->getIsAdmin() == 1) { //Si es ADMIN muestro una navbar
+                if($loggedUser->getIsAdmin() == 1) { //If is Admin you will see a navbar
                   ?>
       <nav id="mainav" class="fl_right">
         <ul class="clear">
@@ -32,13 +32,12 @@
             <li>
               <a class="drop "><i class="fa fa-user"></i></a>
               <ul>
-                <li><a href="<?php echo FRONT_ROOT ?>User/ShowProfileView">Ver mi perfil</a></li>
                 <li><a href="<?php echo FRONT_ROOT ?>User/Logout">Salir</a></li>
               </ul>
             </li>
         </ul>
         </nav>
-      <?php } else { //Muestro navbar de usuario normal?> 
+      <?php } else { //navbar for common user?> 
         <nav id="mainav" class="fl_right">
         <ul class="clear">
             <li>
@@ -55,13 +54,13 @@
                 <li><a href="<?php echo FRONT_ROOT ?>Movie/ShowPlayingView">Ver Cartelera</a></li>
               </ul>
             </li>
-            <li>
+            <!--<li>
               <a class="drop"><i class="fa fa-shopping-cart"></i></a>
               <ul>
-                <li><a href="">Ver carrito</a></li>
+                <li><a href="<?php echo FRONT_ROOT ?>User/ShowCartView">Ver carrito</a></li>
                 <li><a href="">Checkout</a></li>
               </ul>
-            </li>
+            </li>-->
             <li>
               <a class="drop "><i class="fa fa-user"></i></a>
               <ul>
@@ -71,7 +70,7 @@
             </li>
         </ul>
         </nav> 
-      <?php } } else { //No hay session iniciada, navbar solo con login registro?>
+      <?php } } else { //if session if not set, default navbar?>
       <nav id="mainav" class="fl_right">
         <ul class="clear">
           <li> 

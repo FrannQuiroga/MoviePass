@@ -82,7 +82,7 @@
         public function Edit($name,$capacity,$address,$price,$id)
         {
             //Validator. The name of the cinema must not exists in our database.
-            if(!$this->cinemaDAO->existsCinemaName($name)) //If the name doesn't exists we can add it
+            if(!$this->cinemaDAO->EditableCinema($name,$id)) //Verifying not to repeat the name.
             {
                 $cinema = new Cinema();
                 

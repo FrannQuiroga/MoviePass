@@ -15,6 +15,8 @@
 
 	session_start();
 
+	date_default_timezone_set("America/Buenos_Aires");
+
 	require_once(VIEWS_PATH."header.php");
 
 	Router::Route(new Request());
